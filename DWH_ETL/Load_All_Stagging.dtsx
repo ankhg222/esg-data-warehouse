@@ -1,0 +1,2623 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="9/29/2026 11:40:36 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DUONGHAO-LOQ"
+  DTS:CreatorName="DUONGHAO-LOQ\DuongHao"
+  DTS:DTSID="{CACB0EF9-9B34-4398-8D47-84C52A653A99}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="17.0.1016.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Load_All_Stagging"
+  DTS:PackageType="5"
+  DTS:VersionBuild="18"
+  DTS:VersionGUID="{DF8AF7F4-324A-4966-9373-CF45ED249061}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[CSV_ESGCountry]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{0776D734-772D-4DE0-B79A-77DFC2EE87A5}"
+      DTS:ObjectName="CSV_ESGCountry">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="D:\DWH\FinalProject\dataset\new_data\esg\ESG_CSV\ESGCountry.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1000"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Country Code"
+              DTS:DTSID="{01E8100E-90FC-4476-A4A1-E7A46EFB267F}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1000"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Short Name"
+              DTS:DTSID="{B39CA651-05A5-47A5-9E36-D2F1452E84D0}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1000"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Table Name"
+              DTS:DTSID="{13F19508-1D93-4FD2-87C6-412BC3807B6F}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1000"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Long Name"
+              DTS:DTSID="{832892CF-EE2C-48F3-9116-76F0C89256FF}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1000"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="2-alpha code"
+              DTS:DTSID="{47781084-8C0A-4B1B-A04B-39508733D74E}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1000"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Currency Unit"
+              DTS:DTSID="{2239400C-77BB-45A3-8CA9-B645DFDB37A9}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1000"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Special Notes"
+              DTS:DTSID="{36C3A0F6-7D14-49DD-B530-FA9F8E3B2F0F}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1000"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Region"
+              DTS:DTSID="{B99DBC8D-E776-4DB1-8BA0-3770530A6B69}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1000"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Income Group"
+              DTS:DTSID="{F7B616EC-3EC7-4549-92D7-E964E9874142}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1000"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="WB-2 code"
+              DTS:DTSID="{0242A949-4F1F-4DEA-9B48-A5581AF9204C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1000"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="National accounts base year"
+              DTS:DTSID="{FDADF6AD-0EF8-4D5C-8983-7D90889EF6EF}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1000"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="National accounts reference year"
+              DTS:DTSID="{E6BB1628-6419-4733-8C86-975AB7C915EE}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1000"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SNA price valuation"
+              DTS:DTSID="{5B1B19A3-9B76-482D-BBC6-4E6DF0B54A65}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1000"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Lending category"
+              DTS:DTSID="{41E003BB-F27D-409F-9CA7-C825EE5C41E6}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1000"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Other groups"
+              DTS:DTSID="{268F045A-C324-4A24-819B-CC1A976E9B7B}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1000"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="System of National Accounts"
+              DTS:DTSID="{229C5403-970B-4E0A-A4DF-000030F0A954}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1000"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Alternative conversion factor"
+              DTS:DTSID="{D50C7B7F-8222-42AF-80C4-0CC1C620EDA4}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1000"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PPP survey year"
+              DTS:DTSID="{673F11B0-AB0B-4DF9-A7E3-A2C9F52A38BD}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1000"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Balance of Payments Manual in use"
+              DTS:DTSID="{6231AE64-09AA-4474-8C7E-9E5CCDC49078}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1000"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="External debt Reporting status"
+              DTS:DTSID="{BE96F14B-035D-4807-A2FD-356C623FC8EF}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1000"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="System of trade"
+              DTS:DTSID="{7232AC40-08FB-41D8-825C-65DE78A23C02}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1000"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Government Accounting concept"
+              DTS:DTSID="{AD22233B-C923-492D-B9F8-7F83E93FFC4E}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1000"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="IMF data dissemination standard"
+              DTS:DTSID="{5BCEA77B-E75B-4118-BDF1-F73F47E5A6B0}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1000"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Latest population census"
+              DTS:DTSID="{FDC0C118-A43B-470C-AC84-3C6F431EDFA5}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1000"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Latest household survey"
+              DTS:DTSID="{565E4440-C450-4104-83FF-B7264F4D80BB}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1000"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Source of most recent Income and expenditure data"
+              DTS:DTSID="{28D5D8BC-D320-4AFF-A606-DCE610B86DD9}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1000"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Vital registration complete"
+              DTS:DTSID="{97CE379B-D85F-4E44-B4F8-65B7BA59BB50}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1000"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Latest agricultural census"
+              DTS:DTSID="{232425B1-D84B-46E4-AEEA-19C0815F960D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1000"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Latest industrial data"
+              DTS:DTSID="{531B727D-BDD9-42BE-AB52-40A2EFC603F6}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1000"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Latest trade data"
+              DTS:DTSID="{C77BCCDE-F315-4D66-B97F-AA5010D18D8A}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="1000"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Latest water withdrawal data"
+              DTS:DTSID="{11B55235-5F0A-445D-A032-1D22C879E1C3}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[localhost]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{B43EF373-F2EB-441D-BF82-44E179CA9F9F}"
+      DTS:ObjectName="localhost">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=DW_TRAIN;Provider=SQLOLEDB.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-01_Load_Shared_Dimension-{B43EF373-F2EB-441D-BF82-44E179CA9F9F}localhost;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[spx-sustainalytics-esg-scores(Real_Historical_ESG)]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{B810F622-47F7-4F9D-8811-4E42FC79A6B7}"
+      DTS:ObjectName="spx-sustainalytics-esg-scores(Real_Historical_ESG)">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="D:\DWH\FinalProject\dataset\old_data\spx-sustainalytics-esg-scores(Real_Historical_ESG).csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Date"
+              DTS:DTSID="{0864430A-F9C8-45C9-A5D5-2498ACA1E5E7}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Ticker"
+              DTS:DTSID="{1A04135B-FF48-40C8-ABAC-E32D08A35BB7}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Company"
+              DTS:DTSID="{6FD942DF-778C-4C50-8592-CC860EE8AF56}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Peer_group_root"
+              DTS:DTSID="{1CF42DBB-9023-41FC-9103-B67438F0D4F4}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Region"
+              DTS:DTSID="{751E36E3-9234-42BE-ADF3-C4406349E308}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Country"
+              DTS:DTSID="{596796C4-F1D2-4E0F-BAC4-6C0D02D38EA7}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="total_esg_score"
+              DTS:DTSID="{72F88CBC-F85A-4FE7-A129-4FDF5939D253}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="environment_score"
+              DTS:DTSID="{35105850-1361-4439-9E38-FAE1A4C9F993}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="social_score"
+              DTS:DTSID="{0AFE8D02-0B81-4411-920C-DFFBBED8DFA7}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="governance_score"
+              DTS:DTSID="{6752BE8C-8159-4BE3-AEAA-BD49374D008B}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="scl_environment_score"
+              DTS:DTSID="{B5A8F294-2E81-496D-A294-CB953B7C2A3D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="scl_social_score"
+              DTS:DTSID="{997DA760-CA0A-4A2D-8800-18743ABD9BF1}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="scl_governance_score"
+              DTS:DTSID="{D8BB2546-CE1B-47B3-8FD8-FF999BA55273}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="wght_environment_score"
+              DTS:DTSID="{05906721-4EA8-4E59-B573-9D4A594FFD9F}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="wght_social_score"
+              DTS:DTSID="{EE0F2C95-025A-493C-96E8-4B9A11770F36}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="wght_governance_score"
+              DTS:DTSID="{CA6ED5C0-A6E6-43E9-B916-24E2CA240799}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="test"
+              DTS:DTSID="{FE5B895D-D981-4F7E-9FA0-69A27E7C9039}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Data Flow Task Load Company"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{F3A544F2-D4A8-4E0F-BFBF-2C671C842356}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Flow Task Load Company"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG)"
+              componentClassID="Microsoft.FlatFileSource"
+              contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Flat File Source"
+              localeId="1033"
+              name="spx-sustainalytics-esg-scores(Real_Historical_ESG)"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether zero-length columns are treated as null."
+                  name="RetainNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+                  name="FileNameColumnName"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[spx-sustainalytics-esg-scores(Real_Historical_ESG)]"
+                  connectionManagerRefId="Package.ConnectionManagers[spx-sustainalytics-esg-scores(Real_Historical_ESG)]"
+                  name="FlatFileConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output]"
+                  name="Flat File Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].Columns[Date]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].ExternalColumns[Date]"
+                      length="50"
+                      lineageId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].Columns[Date]"
+                      name="Date"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].Columns[Ticker]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].ExternalColumns[Ticker]"
+                      length="50"
+                      lineageId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].Columns[Ticker]"
+                      name="Ticker"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].Columns[Company]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].ExternalColumns[Company]"
+                      length="50"
+                      lineageId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].Columns[Company]"
+                      name="Company"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].Columns[Peer_group_root]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].ExternalColumns[Peer_group_root]"
+                      length="50"
+                      lineageId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].Columns[Peer_group_root]"
+                      name="Peer_group_root"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].Columns[Region]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].ExternalColumns[Region]"
+                      length="50"
+                      lineageId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].Columns[Region]"
+                      name="Region"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].Columns[Country]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].ExternalColumns[Country]"
+                      length="50"
+                      lineageId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].Columns[Country]"
+                      name="Country"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].Columns[total_esg_score]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].ExternalColumns[total_esg_score]"
+                      length="50"
+                      lineageId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].Columns[total_esg_score]"
+                      name="total_esg_score"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].Columns[environment_score]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].ExternalColumns[environment_score]"
+                      length="50"
+                      lineageId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].Columns[environment_score]"
+                      name="environment_score"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].Columns[social_score]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].ExternalColumns[social_score]"
+                      length="50"
+                      lineageId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].Columns[social_score]"
+                      name="social_score"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].Columns[governance_score]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].ExternalColumns[governance_score]"
+                      length="50"
+                      lineageId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].Columns[governance_score]"
+                      name="governance_score"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].Columns[scl_environment_score]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].ExternalColumns[scl_environment_score]"
+                      length="50"
+                      lineageId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].Columns[scl_environment_score]"
+                      name="scl_environment_score"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].Columns[scl_social_score]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].ExternalColumns[scl_social_score]"
+                      length="50"
+                      lineageId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].Columns[scl_social_score]"
+                      name="scl_social_score"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].Columns[scl_governance_score]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].ExternalColumns[scl_governance_score]"
+                      length="50"
+                      lineageId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].Columns[scl_governance_score]"
+                      name="scl_governance_score"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].Columns[wght_environment_score]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].ExternalColumns[wght_environment_score]"
+                      length="50"
+                      lineageId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].Columns[wght_environment_score]"
+                      name="wght_environment_score"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].Columns[wght_social_score]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].ExternalColumns[wght_social_score]"
+                      length="50"
+                      lineageId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].Columns[wght_social_score]"
+                      name="wght_social_score"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].Columns[wght_governance_score]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].ExternalColumns[wght_governance_score]"
+                      length="50"
+                      lineageId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].Columns[wght_governance_score]"
+                      name="wght_governance_score"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].ExternalColumns[Date]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Date" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].ExternalColumns[Ticker]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Ticker" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].ExternalColumns[Company]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Company" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].ExternalColumns[Peer_group_root]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Peer_group_root" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].ExternalColumns[Region]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Region" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].ExternalColumns[Country]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Country" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].ExternalColumns[total_esg_score]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="total_esg_score" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].ExternalColumns[environment_score]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="environment_score" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].ExternalColumns[social_score]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="social_score" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].ExternalColumns[governance_score]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="governance_score" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].ExternalColumns[scl_environment_score]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="scl_environment_score" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].ExternalColumns[scl_social_score]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="scl_social_score" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].ExternalColumns[scl_governance_score]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="scl_governance_score" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].ExternalColumns[wght_environment_score]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="wght_environment_score" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].ExternalColumns[wght_social_score]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="wght_social_score" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].ExternalColumns[wght_governance_score]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="wght_governance_score" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].ExternalColumns[test]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="test" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Error Output]"
+                  isErrorOut="true"
+                  name="Flat File Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      codePage="1252"
+                      dataType="text"
+                      description="Flat File Source Error Output Column"
+                      lineageId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      name="Flat File Source Error Output Column" />
+                    <outputColumn
+                      refId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task Load Company\stagging_sustainalytics_esg"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="stagging_sustainalytics_esg"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[stg_sustainalytics_esg]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">true</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task Load Company\stagging_sustainalytics_esg.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task Load Company\stagging_sustainalytics_esg.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task Load Company\stagging_sustainalytics_esg.Inputs[OLE DB Destination Input].Columns[Date]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Date"
+                      externalMetadataColumnId="Package\Data Flow Task Load Company\stagging_sustainalytics_esg.Inputs[OLE DB Destination Input].ExternalColumns[raw_date]"
+                      lineageId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].Columns[Date]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task Load Company\stagging_sustainalytics_esg.Inputs[OLE DB Destination Input].Columns[Ticker]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Ticker"
+                      externalMetadataColumnId="Package\Data Flow Task Load Company\stagging_sustainalytics_esg.Inputs[OLE DB Destination Input].ExternalColumns[raw_ticker]"
+                      lineageId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].Columns[Ticker]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task Load Company\stagging_sustainalytics_esg.Inputs[OLE DB Destination Input].Columns[Company]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Company"
+                      externalMetadataColumnId="Package\Data Flow Task Load Company\stagging_sustainalytics_esg.Inputs[OLE DB Destination Input].ExternalColumns[raw_company_name]"
+                      lineageId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].Columns[Company]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task Load Company\stagging_sustainalytics_esg.Inputs[OLE DB Destination Input].Columns[total_esg_score]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="total_esg_score"
+                      externalMetadataColumnId="Package\Data Flow Task Load Company\stagging_sustainalytics_esg.Inputs[OLE DB Destination Input].ExternalColumns[raw_total_esg_score]"
+                      lineageId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].Columns[total_esg_score]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task Load Company\stagging_sustainalytics_esg.Inputs[OLE DB Destination Input].Columns[environment_score]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="environment_score"
+                      externalMetadataColumnId="Package\Data Flow Task Load Company\stagging_sustainalytics_esg.Inputs[OLE DB Destination Input].ExternalColumns[raw_environment_score]"
+                      lineageId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].Columns[environment_score]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task Load Company\stagging_sustainalytics_esg.Inputs[OLE DB Destination Input].Columns[social_score]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="social_score"
+                      externalMetadataColumnId="Package\Data Flow Task Load Company\stagging_sustainalytics_esg.Inputs[OLE DB Destination Input].ExternalColumns[raw_social_score]"
+                      lineageId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].Columns[social_score]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task Load Company\stagging_sustainalytics_esg.Inputs[OLE DB Destination Input].Columns[governance_score]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="governance_score"
+                      externalMetadataColumnId="Package\Data Flow Task Load Company\stagging_sustainalytics_esg.Inputs[OLE DB Destination Input].ExternalColumns[raw_governance_score]"
+                      lineageId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].Columns[governance_score]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task Load Company\stagging_sustainalytics_esg.Inputs[OLE DB Destination Input].Columns[Peer_group_root]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Peer_group_root"
+                      externalMetadataColumnId="Package\Data Flow Task Load Company\stagging_sustainalytics_esg.Inputs[OLE DB Destination Input].ExternalColumns[raw_peer_group]"
+                      lineageId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].Columns[Peer_group_root]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task Load Company\stagging_sustainalytics_esg.Inputs[OLE DB Destination Input].Columns[Region]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Region"
+                      externalMetadataColumnId="Package\Data Flow Task Load Company\stagging_sustainalytics_esg.Inputs[OLE DB Destination Input].ExternalColumns[raw_region]"
+                      lineageId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].Columns[Region]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task Load Company\stagging_sustainalytics_esg.Inputs[OLE DB Destination Input].Columns[Country]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Country"
+                      externalMetadataColumnId="Package\Data Flow Task Load Company\stagging_sustainalytics_esg.Inputs[OLE DB Destination Input].ExternalColumns[raw_country]"
+                      lineageId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output].Columns[Country]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task Load Company\stagging_sustainalytics_esg.Inputs[OLE DB Destination Input].ExternalColumns[raw_date]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="raw_date" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task Load Company\stagging_sustainalytics_esg.Inputs[OLE DB Destination Input].ExternalColumns[raw_ticker]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="raw_ticker" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task Load Company\stagging_sustainalytics_esg.Inputs[OLE DB Destination Input].ExternalColumns[raw_company_name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="250"
+                      name="raw_company_name" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task Load Company\stagging_sustainalytics_esg.Inputs[OLE DB Destination Input].ExternalColumns[raw_total_esg_score]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="raw_total_esg_score" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task Load Company\stagging_sustainalytics_esg.Inputs[OLE DB Destination Input].ExternalColumns[raw_environment_score]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="raw_environment_score" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task Load Company\stagging_sustainalytics_esg.Inputs[OLE DB Destination Input].ExternalColumns[raw_social_score]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="raw_social_score" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task Load Company\stagging_sustainalytics_esg.Inputs[OLE DB Destination Input].ExternalColumns[raw_governance_score]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="raw_governance_score" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task Load Company\stagging_sustainalytics_esg.Inputs[OLE DB Destination Input].ExternalColumns[raw_peer_group]"
+                      codePage="1252"
+                      dataType="str"
+                      length="150"
+                      name="raw_peer_group" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task Load Company\stagging_sustainalytics_esg.Inputs[OLE DB Destination Input].ExternalColumns[raw_region]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="raw_region" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task Load Company\stagging_sustainalytics_esg.Inputs[OLE DB Destination Input].ExternalColumns[raw_country]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="raw_country" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task Load Company\stagging_sustainalytics_esg.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Data Flow Task Load Company\stagging_sustainalytics_esg.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task Load Company\stagging_sustainalytics_esg.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task Load Company\stagging_sustainalytics_esg.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task Load Company\stagging_sustainalytics_esg.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task Load Company\stagging_sustainalytics_esg.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Data Flow Task Load Company.Paths[Flat File Source Output]"
+              endId="Package\Data Flow Task Load Company\stagging_sustainalytics_esg.Inputs[OLE DB Destination Input]"
+              name="Flat File Source Output"
+              startId="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG).Outputs[Flat File Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Data Flow Task Load Country"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{9226CE84-6E60-4423-8BE5-69CC2DE9853F}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Flow Task Load Country"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Data Flow Task Load Country\CSV_ESGCountry"
+              componentClassID="Microsoft.FlatFileSource"
+              contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Flat File Source"
+              localeId="1033"
+              name="CSV_ESGCountry"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether zero-length columns are treated as null."
+                  name="RetainNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+                  name="FileNameColumnName"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[CSV_ESGCountry]"
+                  connectionManagerRefId="Package.ConnectionManagers[CSV_ESGCountry]"
+                  name="FlatFileConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output]"
+                  name="Flat File Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[Country Code]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].ExternalColumns[Country Code]"
+                      length="1000"
+                      lineageId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[Country Code]"
+                      name="Country Code"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[Short Name]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].ExternalColumns[Short Name]"
+                      length="1000"
+                      lineageId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[Short Name]"
+                      name="Short Name"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[Table Name]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].ExternalColumns[Table Name]"
+                      length="1000"
+                      lineageId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[Table Name]"
+                      name="Table Name"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[Long Name]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].ExternalColumns[Long Name]"
+                      length="1000"
+                      lineageId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[Long Name]"
+                      name="Long Name"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[2-alpha code]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].ExternalColumns[2-alpha code]"
+                      length="1000"
+                      lineageId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[2-alpha code]"
+                      name="2-alpha code"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[Currency Unit]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].ExternalColumns[Currency Unit]"
+                      length="1000"
+                      lineageId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[Currency Unit]"
+                      name="Currency Unit"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[Special Notes]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].ExternalColumns[Special Notes]"
+                      length="1000"
+                      lineageId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[Special Notes]"
+                      name="Special Notes"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[Region]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].ExternalColumns[Region]"
+                      length="1000"
+                      lineageId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[Region]"
+                      name="Region"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[Income Group]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].ExternalColumns[Income Group]"
+                      length="1000"
+                      lineageId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[Income Group]"
+                      name="Income Group"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[WB-2 code]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].ExternalColumns[WB-2 code]"
+                      length="1000"
+                      lineageId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[WB-2 code]"
+                      name="WB-2 code"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[National accounts base year]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].ExternalColumns[National accounts base year]"
+                      length="1000"
+                      lineageId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[National accounts base year]"
+                      name="National accounts base year"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[National accounts reference year]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].ExternalColumns[National accounts reference year]"
+                      length="1000"
+                      lineageId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[National accounts reference year]"
+                      name="National accounts reference year"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[SNA price valuation]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].ExternalColumns[SNA price valuation]"
+                      length="1000"
+                      lineageId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[SNA price valuation]"
+                      name="SNA price valuation"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[Lending category]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].ExternalColumns[Lending category]"
+                      length="1000"
+                      lineageId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[Lending category]"
+                      name="Lending category"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[Other groups]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].ExternalColumns[Other groups]"
+                      length="1000"
+                      lineageId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[Other groups]"
+                      name="Other groups"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[System of National Accounts]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].ExternalColumns[System of National Accounts]"
+                      length="1000"
+                      lineageId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[System of National Accounts]"
+                      name="System of National Accounts"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[Alternative conversion factor]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].ExternalColumns[Alternative conversion factor]"
+                      length="1000"
+                      lineageId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[Alternative conversion factor]"
+                      name="Alternative conversion factor"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[PPP survey year]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].ExternalColumns[PPP survey year]"
+                      length="1000"
+                      lineageId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[PPP survey year]"
+                      name="PPP survey year"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[Balance of Payments Manual in use]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].ExternalColumns[Balance of Payments Manual in use]"
+                      length="1000"
+                      lineageId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[Balance of Payments Manual in use]"
+                      name="Balance of Payments Manual in use"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[External debt Reporting status]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].ExternalColumns[External debt Reporting status]"
+                      length="1000"
+                      lineageId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[External debt Reporting status]"
+                      name="External debt Reporting status"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[System of trade]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].ExternalColumns[System of trade]"
+                      length="1000"
+                      lineageId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[System of trade]"
+                      name="System of trade"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[Government Accounting concept]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].ExternalColumns[Government Accounting concept]"
+                      length="1000"
+                      lineageId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[Government Accounting concept]"
+                      name="Government Accounting concept"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[IMF data dissemination standard]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].ExternalColumns[IMF data dissemination standard]"
+                      length="1000"
+                      lineageId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[IMF data dissemination standard]"
+                      name="IMF data dissemination standard"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[Latest population census]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].ExternalColumns[Latest population census]"
+                      length="1000"
+                      lineageId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[Latest population census]"
+                      name="Latest population census"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[Latest household survey]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].ExternalColumns[Latest household survey]"
+                      length="1000"
+                      lineageId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[Latest household survey]"
+                      name="Latest household survey"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[Source of most recent Income and expenditure data]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].ExternalColumns[Source of most recent Income and expenditure data]"
+                      length="1000"
+                      lineageId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[Source of most recent Income and expenditure data]"
+                      name="Source of most recent Income and expenditure data"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[Vital registration complete]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].ExternalColumns[Vital registration complete]"
+                      length="1000"
+                      lineageId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[Vital registration complete]"
+                      name="Vital registration complete"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[Latest agricultural census]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].ExternalColumns[Latest agricultural census]"
+                      length="1000"
+                      lineageId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[Latest agricultural census]"
+                      name="Latest agricultural census"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[Latest industrial data]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].ExternalColumns[Latest industrial data]"
+                      length="1000"
+                      lineageId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[Latest industrial data]"
+                      name="Latest industrial data"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[Latest trade data]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].ExternalColumns[Latest trade data]"
+                      length="1000"
+                      lineageId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[Latest trade data]"
+                      name="Latest trade data"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[Latest water withdrawal data]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].ExternalColumns[Latest water withdrawal data]"
+                      length="1000"
+                      lineageId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[Latest water withdrawal data]"
+                      name="Latest water withdrawal data"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].ExternalColumns[Country Code]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="Country Code" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].ExternalColumns[Short Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="Short Name" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].ExternalColumns[Table Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="Table Name" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].ExternalColumns[Long Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="Long Name" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].ExternalColumns[2-alpha code]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="2-alpha code" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].ExternalColumns[Currency Unit]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="Currency Unit" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].ExternalColumns[Special Notes]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="Special Notes" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].ExternalColumns[Region]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="Region" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].ExternalColumns[Income Group]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="Income Group" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].ExternalColumns[WB-2 code]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="WB-2 code" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].ExternalColumns[National accounts base year]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="National accounts base year" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].ExternalColumns[National accounts reference year]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="National accounts reference year" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].ExternalColumns[SNA price valuation]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="SNA price valuation" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].ExternalColumns[Lending category]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="Lending category" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].ExternalColumns[Other groups]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="Other groups" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].ExternalColumns[System of National Accounts]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="System of National Accounts" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].ExternalColumns[Alternative conversion factor]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="Alternative conversion factor" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].ExternalColumns[PPP survey year]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="PPP survey year" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].ExternalColumns[Balance of Payments Manual in use]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="Balance of Payments Manual in use" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].ExternalColumns[External debt Reporting status]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="External debt Reporting status" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].ExternalColumns[System of trade]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="System of trade" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].ExternalColumns[Government Accounting concept]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="Government Accounting concept" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].ExternalColumns[IMF data dissemination standard]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="IMF data dissemination standard" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].ExternalColumns[Latest population census]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="Latest population census" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].ExternalColumns[Latest household survey]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="Latest household survey" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].ExternalColumns[Source of most recent Income and expenditure data]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="Source of most recent Income and expenditure data" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].ExternalColumns[Vital registration complete]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="Vital registration complete" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].ExternalColumns[Latest agricultural census]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="Latest agricultural census" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].ExternalColumns[Latest industrial data]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="Latest industrial data" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].ExternalColumns[Latest trade data]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="Latest trade data" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].ExternalColumns[Latest water withdrawal data]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="Latest water withdrawal data" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Error Output]"
+                  isErrorOut="true"
+                  name="Flat File Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      codePage="65001"
+                      dataType="text"
+                      description="Flat File Source Error Output Column"
+                      lineageId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      name="Flat File Source Error Output Column" />
+                    <outputColumn
+                      refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task Load Country\stagging_esg_country"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="stagging_esg_country"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[stg_esg_country]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">true</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task Load Country\stagging_esg_country.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task Load Country\stagging_esg_country.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task Load Country\stagging_esg_country.Inputs[OLE DB Destination Input].Columns[Country Code]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1000"
+                      cachedName="Country Code"
+                      externalMetadataColumnId="Package\Data Flow Task Load Country\stagging_esg_country.Inputs[OLE DB Destination Input].ExternalColumns[raw_country_code]"
+                      lineageId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[Country Code]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task Load Country\stagging_esg_country.Inputs[OLE DB Destination Input].Columns[Short Name]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1000"
+                      cachedName="Short Name"
+                      externalMetadataColumnId="Package\Data Flow Task Load Country\stagging_esg_country.Inputs[OLE DB Destination Input].ExternalColumns[raw_short_name]"
+                      lineageId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[Short Name]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task Load Country\stagging_esg_country.Inputs[OLE DB Destination Input].Columns[Table Name]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1000"
+                      cachedName="Table Name"
+                      externalMetadataColumnId="Package\Data Flow Task Load Country\stagging_esg_country.Inputs[OLE DB Destination Input].ExternalColumns[raw_table_name]"
+                      lineageId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[Table Name]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task Load Country\stagging_esg_country.Inputs[OLE DB Destination Input].Columns[Long Name]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1000"
+                      cachedName="Long Name"
+                      externalMetadataColumnId="Package\Data Flow Task Load Country\stagging_esg_country.Inputs[OLE DB Destination Input].ExternalColumns[raw_long_name]"
+                      lineageId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[Long Name]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task Load Country\stagging_esg_country.Inputs[OLE DB Destination Input].Columns[Region]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1000"
+                      cachedName="Region"
+                      externalMetadataColumnId="Package\Data Flow Task Load Country\stagging_esg_country.Inputs[OLE DB Destination Input].ExternalColumns[raw_region]"
+                      lineageId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[Region]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task Load Country\stagging_esg_country.Inputs[OLE DB Destination Input].Columns[Income Group]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1000"
+                      cachedName="Income Group"
+                      externalMetadataColumnId="Package\Data Flow Task Load Country\stagging_esg_country.Inputs[OLE DB Destination Input].ExternalColumns[raw_income_group]"
+                      lineageId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[Income Group]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task Load Country\stagging_esg_country.Inputs[OLE DB Destination Input].Columns[Currency Unit]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1000"
+                      cachedName="Currency Unit"
+                      externalMetadataColumnId="Package\Data Flow Task Load Country\stagging_esg_country.Inputs[OLE DB Destination Input].ExternalColumns[raw_currency_unit]"
+                      lineageId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output].Columns[Currency Unit]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task Load Country\stagging_esg_country.Inputs[OLE DB Destination Input].ExternalColumns[raw_country_code]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="raw_country_code" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task Load Country\stagging_esg_country.Inputs[OLE DB Destination Input].ExternalColumns[raw_short_name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="250"
+                      name="raw_short_name" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task Load Country\stagging_esg_country.Inputs[OLE DB Destination Input].ExternalColumns[raw_table_name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="250"
+                      name="raw_table_name" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task Load Country\stagging_esg_country.Inputs[OLE DB Destination Input].ExternalColumns[raw_long_name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="raw_long_name" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task Load Country\stagging_esg_country.Inputs[OLE DB Destination Input].ExternalColumns[raw_region]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="raw_region" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task Load Country\stagging_esg_country.Inputs[OLE DB Destination Input].ExternalColumns[raw_income_group]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="raw_income_group" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task Load Country\stagging_esg_country.Inputs[OLE DB Destination Input].ExternalColumns[raw_currency_unit]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="raw_currency_unit" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task Load Country\stagging_esg_country.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Data Flow Task Load Country\stagging_esg_country.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task Load Country\stagging_esg_country.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task Load Country\stagging_esg_country.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task Load Country\stagging_esg_country.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task Load Country\stagging_esg_country.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Data Flow Task Load Country.Paths[Flat File Source Output]"
+              endId="Package\Data Flow Task Load Country\stagging_esg_country.Inputs[OLE DB Destination Input]"
+              name="Flat File Source Output"
+              startId="Package\Data Flow Task Load Country\CSV_ESGCountry.Outputs[Flat File Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{28976AF7-8D93-44AC-BE29-052363030C45}"
+      DTS:From="Package\Data Flow Task Load Country"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Data Flow Task Load Company" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="217,42"
+          Id="Package\Data Flow Task Load Country"
+          TopLeft="18.5,5.5" />
+        <NodeLayout
+          Size="224,42"
+          Id="Package\Data Flow Task Load Company"
+          TopLeft="26,100" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="127,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="11,52.5"
+              Start="0,0"
+              End="11,45">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.25" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,22.25"
+                    Point2="0,26.25"
+                    Point3="4,26.25" />
+                  <mssgle:LineSegment
+                    End="7,26.25" />
+                  <mssgle:CubicBezierSegment
+                    Point1="7,26.25"
+                    Point2="11,26.25"
+                    Point3="11,30.25" />
+                  <mssgle:LineSegment
+                    End="11,45" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Data Flow Task Load Country">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="182,42"
+          Id="Package\Data Flow Task Load Country\stagging_esg_country"
+          TopLeft="361.5,22.5" />
+        <NodeLayout
+          Size="159,42"
+          Id="Package\Data Flow Task Load Country\CSV_ESGCountry"
+          TopLeft="58.5,19.5" />
+        <EdgeLayout
+          Id="Package\Data Flow Task Load Country.Paths[Flat File Source Output]"
+          TopLeft="217.5,42">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="144,0"
+              Start="0,0"
+              End="136.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="136.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task Load Country\stagging_esg_country">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Data Flow Task Load Company">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="317,42"
+          Id="Package\Data Flow Task Load Company\spx-sustainalytics-esg-scores(Real_Historical_ESG)"
+          TopLeft="112,79" />
+        <NodeLayout
+          Size="209,42"
+          Id="Package\Data Flow Task Load Company\stagging_sustainalytics_esg"
+          TopLeft="490,75" />
+        <EdgeLayout
+          Id="Package\Data Flow Task Load Company.Paths[Flat File Source Output]"
+          TopLeft="429,98">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="61,0"
+              Start="0,0"
+              End="53.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="53.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task Load Company\stagging_sustainalytics_esg">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
