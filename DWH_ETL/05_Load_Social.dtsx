@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="05_Load_Social"
   DTS:PackageType="5"
-  DTS:VersionBuild="19"
-  DTS:VersionGUID="{4991AE86-510F-489A-BDA2-3FBD46F76B54}">
+  DTS:VersionBuild="29"
+  DTS:VersionGUID="{AD504C96-9764-43CD-9AD1-148D2FFF2C72}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -44,13 +44,30 @@
   <DTS:Variables />
   <DTS:Executables>
     <DTS:Executable
-      DTS:refId="Package\Data Flow Task"
+      DTS:refId="Package\Clean Social Facts Before Load"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{772E330B-AA3C-4864-81E1-F19936DBAD48}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Clean Social Facts Before Load"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{FE71D1CE-6C8B-4D83-A8AF-7FB156010ED4}"
+          SQLTask:SqlStatementSource="DELETE FROM dbo.fact_utility_sales_annual;&#xA;DELETE FROM dbo.fact_utility_reliability_annual;&#xA;DELETE FROM dbo.fact_country_social_annual;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\DFT - Load fact_country_social_annual"
       DTS:CreationName="Microsoft.Pipeline"
       DTS:Description="Data Flow Task"
-      DTS:DTSID="{1E50A74C-4372-475F-9B05-2741D56C6A29}"
+      DTS:DTSID="{5CDB9E8E-CC1B-4860-9D6E-CC6B61C7C096}"
       DTS:ExecutableType="Microsoft.Pipeline"
       DTS:LocaleID="-1"
-      DTS:ObjectName="Data Flow Task"
+      DTS:ObjectName="DFT - Load fact_country_social_annual"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
       <DTS:ObjectData>
@@ -58,245 +75,11 @@
           version="1">
           <components>
             <component
-              refId="Package\Data Flow Task\Data Conversion"
-              componentClassID="Microsoft.DataConvert"
-              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
-              description="Data Conversion"
-              name="Data Conversion"
-              usesDispositions="true">
-              <inputs>
-                <input
-                  refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input]"
-                  name="Data Conversion Input">
-                  <inputColumns>
-                    <inputColumn
-                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[sector_code]"
-                      cachedDataType="wstr"
-                      cachedLength="255"
-                      cachedName="sector_code"
-                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[sector_code]" />
-                    <inputColumn
-                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[sector_name]"
-                      cachedDataType="wstr"
-                      cachedLength="255"
-                      cachedName="sector_name"
-                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[sector_name]" />
-                  </inputColumns>
-                  <externalMetadataColumns />
-                </input>
-              </inputs>
-              <outputs>
-                <output
-                  refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output]"
-                  exclusionGroup="1"
-                  name="Data Conversion Output"
-                  synchronousInputId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input]">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of sector_code]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      length="15"
-                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of sector_code]"
-                      name="Copy of sector_code"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Specifies the input column used as the source of data for the conversion."
-                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[sector_code]}</property>
-                        <property
-                          dataType="System.Boolean"
-                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
-                          name="FastParse">false</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of sector_name]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      length="40"
-                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of sector_name]"
-                      name="Copy of sector_name"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Specifies the input column used as the source of data for the conversion."
-                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[sector_name]}</property>
-                        <property
-                          dataType="System.Boolean"
-                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
-                          name="FastParse">false</property>
-                      </properties>
-                    </outputColumn>
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-                <output
-                  refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Error Output]"
-                  exclusionGroup="1"
-                  isErrorOut="true"
-                  name="Data Conversion Error Output"
-                  synchronousInputId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input]">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
-                      dataType="i4"
-                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
-                      name="ErrorCode"
-                      specialFlags="1" />
-                    <outputColumn
-                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
-                      dataType="i4"
-                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
-                      name="ErrorColumn"
-                      specialFlags="2" />
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-              </outputs>
-            </component>
-            <component
-              refId="Package\Data Flow Task\Excel Source"
-              componentClassID="Microsoft.ExcelSource"
-              contactInfo="Excel Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
-              description="Excel Source"
-              name="Excel Source"
-              usesDispositions="true"
-              version="1">
-              <properties>
-                <property
-                  dataType="System.Int32"
-                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
-                  name="CommandTimeout">0</property>
-                <property
-                  dataType="System.String"
-                  description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset"></property>
-                <property
-                  dataType="System.String"
-                  description="Specifies the variable that contains the name of the database object used to open a rowset."
-                  name="OpenRowsetVariable"></property>
-                <property
-                  dataType="System.String"
-                  description="The SQL command to be executed."
-                  name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT DISTINCT 'RES' AS sector_code, 'Residential' AS sector_name FROM [States$]
-UNION
-SELECT DISTINCT 'COM' AS sector_code, 'Commercial' AS sector_name FROM [States$]
-UNION
-SELECT DISTINCT 'IND' AS sector_code, 'Industrial' AS sector_name FROM [States$]
-UNION
-SELECT DISTINCT 'TOT' AS sector_code, 'Total' AS sector_name FROM [States$]</property>
-                <property
-                  dataType="System.String"
-                  description="The variable that contains the SQL command to be executed."
-                  name="SqlCommandVariable"></property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the mode used to access the database."
-                  name="AccessMode"
-                  typeConverter="AccessMode">2</property>
-                <property
-                  dataType="System.String"
-                  description="The mapping from parameters in the SQL command to variables."
-                  name="ParameterMapping"></property>
-              </properties>
-              <connections>
-                <connection
-                  refId="Package\Data Flow Task\Excel Source.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[Excel Connection Manager]"
-                  connectionManagerRefId="Package.ConnectionManagers[Excel Connection Manager]"
-                  description="The OLE DB runtime connection used to access the database."
-                  name="OleDbConnection" />
-              </connections>
-              <outputs>
-                <output
-                  refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output]"
-                  name="Excel Source Output">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[sector_code]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[sector_code]"
-                      length="255"
-                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[sector_code]"
-                      name="sector_code"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[sector_name]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[sector_name]"
-                      length="255"
-                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[sector_name]"
-                      name="sector_name"
-                      truncationRowDisposition="FailComponent" />
-                  </outputColumns>
-                  <externalMetadataColumns
-                    isUsed="True">
-                    <externalMetadataColumn
-                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[sector_code]"
-                      dataType="wstr"
-                      length="255"
-                      name="sector_code" />
-                    <externalMetadataColumn
-                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[sector_name]"
-                      dataType="wstr"
-                      length="255"
-                      name="sector_name" />
-                  </externalMetadataColumns>
-                </output>
-                <output
-                  refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output]"
-                  isErrorOut="true"
-                  name="Excel Source Error Output">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[sector_code]"
-                      dataType="wstr"
-                      length="255"
-                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[sector_code]"
-                      name="sector_code" />
-                    <outputColumn
-                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[sector_name]"
-                      dataType="wstr"
-                      length="255"
-                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[sector_name]"
-                      name="sector_name" />
-                    <outputColumn
-                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorCode]"
-                      dataType="i4"
-                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorCode]"
-                      name="ErrorCode"
-                      specialFlags="1" />
-                    <outputColumn
-                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
-                      dataType="i4"
-                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
-                      name="ErrorColumn"
-                      specialFlags="2" />
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-              </outputs>
-            </component>
-            <component
-              refId="Package\Data Flow Task\OLE DB Destination"
+              refId="Package\DFT - Load fact_country_social_annual\DST - fact_country_social_annual"
               componentClassID="Microsoft.OLEDBDestination"
               contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
               description="OLE DB Destination"
-              name="OLE DB Destination"
+              name="DST - fact_country_social_annual"
               usesDispositions="true"
               version="4">
               <properties>
@@ -307,7 +90,7 @@ SELECT DISTINCT 'TOT' AS sector_code, 'Total' AS sector_name FROM [States$]</pro
                 <property
                   dataType="System.String"
                   description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[dbo].[dim_customer_sector]</property>
+                  name="OpenRowset">[dbo].[fact_country_social_annual]</property>
                 <property
                   dataType="System.String"
                   description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -337,7 +120,7 @@ SELECT DISTINCT 'TOT' AS sector_code, 'Total' AS sector_name FROM [States$]</pro
                 <property
                   dataType="System.Boolean"
                   description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
-                  name="FastLoadKeepNulls">true</property>
+                  name="FastLoadKeepNulls">false</property>
                 <property
                   dataType="System.String"
                   description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
@@ -349,7 +132,7 @@ SELECT DISTINCT 'TOT' AS sector_code, 'Total' AS sector_name FROM [States$]</pro
               </properties>
               <connections>
                 <connection
-                  refId="Package\Data Flow Task\OLE DB Destination.Connections[OleDbConnection]"
+                  refId="Package\DFT - Load fact_country_social_annual\DST - fact_country_social_annual.Connections[OleDbConnection]"
                   connectionManagerID="Package.ConnectionManagers[localhost]"
                   connectionManagerRefId="Package.ConnectionManagers[localhost]"
                   description="The OLE DB runtime connection used to access the database."
@@ -357,68 +140,264 @@ SELECT DISTINCT 'TOT' AS sector_code, 'Total' AS sector_name FROM [States$]</pro
               </connections>
               <inputs>
                 <input
-                  refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  refId="Package\DFT - Load fact_country_social_annual\DST - fact_country_social_annual.Inputs[OLE DB Destination Input]"
                   errorOrTruncationOperation="Insert"
                   errorRowDisposition="FailComponent"
                   hasSideEffects="true"
                   name="OLE DB Destination Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of sector_code]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="15"
-                      cachedName="Copy of sector_code"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[sector_code]"
-                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of sector_code]" />
+                      refId="Package\DFT - Load fact_country_social_annual\DST - fact_country_social_annual.Inputs[OLE DB Destination Input].Columns[year_key]"
+                      cachedDataType="i4"
+                      cachedName="year_key"
+                      externalMetadataColumnId="Package\DFT - Load fact_country_social_annual\DST - fact_country_social_annual.Inputs[OLE DB Destination Input].ExternalColumns[year_key]"
+                      lineageId="Package\DFT - Load fact_country_social_annual\SRC - stg_wb_social Cleaned.Outputs[OLE DB Source Output].Columns[year_key]" />
                     <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of sector_name]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="40"
-                      cachedName="Copy of sector_name"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[sector_name]"
-                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of sector_name]" />
+                      refId="Package\DFT - Load fact_country_social_annual\DST - fact_country_social_annual.Inputs[OLE DB Destination Input].Columns[country_key]"
+                      cachedDataType="i4"
+                      cachedName="country_key"
+                      externalMetadataColumnId="Package\DFT - Load fact_country_social_annual\DST - fact_country_social_annual.Inputs[OLE DB Destination Input].ExternalColumns[country_key]"
+                      lineageId="Package\DFT - Load fact_country_social_annual\SRC - stg_wb_social Cleaned.Outputs[OLE DB Source Output].Columns[country_key]" />
+                    <inputColumn
+                      refId="Package\DFT - Load fact_country_social_annual\DST - fact_country_social_annual.Inputs[OLE DB Destination Input].Columns[access_to_electricity_pct]"
+                      cachedDataType="numeric"
+                      cachedName="access_to_electricity_pct"
+                      cachedPrecision="6"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\DFT - Load fact_country_social_annual\DST - fact_country_social_annual.Inputs[OLE DB Destination Input].ExternalColumns[access_to_electricity_pct]"
+                      lineageId="Package\DFT - Load fact_country_social_annual\SRC - stg_wb_social Cleaned.Outputs[OLE DB Source Output].Columns[access_to_electricity_pct]" />
+                    <inputColumn
+                      refId="Package\DFT - Load fact_country_social_annual\DST - fact_country_social_annual.Inputs[OLE DB Destination Input].Columns[access_to_clean_cooking_pct]"
+                      cachedDataType="numeric"
+                      cachedName="access_to_clean_cooking_pct"
+                      cachedPrecision="6"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\DFT - Load fact_country_social_annual\DST - fact_country_social_annual.Inputs[OLE DB Destination Input].ExternalColumns[access_to_clean_cooking_pct]"
+                      lineageId="Package\DFT - Load fact_country_social_annual\SRC - stg_wb_social Cleaned.Outputs[OLE DB Source Output].Columns[access_to_clean_cooking_pct]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[sector_key]"
+                      refId="Package\DFT - Load fact_country_social_annual\DST - fact_country_social_annual.Inputs[OLE DB Destination Input].ExternalColumns[year_key]"
                       dataType="i4"
-                      name="sector_key" />
+                      name="year_key" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[sector_code]"
-                      codePage="1252"
-                      dataType="str"
-                      length="15"
-                      name="sector_code" />
+                      refId="Package\DFT - Load fact_country_social_annual\DST - fact_country_social_annual.Inputs[OLE DB Destination Input].ExternalColumns[country_key]"
+                      dataType="i4"
+                      name="country_key" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[sector_name]"
-                      codePage="1252"
-                      dataType="str"
-                      length="40"
-                      name="sector_name" />
+                      refId="Package\DFT - Load fact_country_social_annual\DST - fact_country_social_annual.Inputs[OLE DB Destination Input].ExternalColumns[access_to_electricity_pct]"
+                      dataType="numeric"
+                      name="access_to_electricity_pct"
+                      precision="6"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_country_social_annual\DST - fact_country_social_annual.Inputs[OLE DB Destination Input].ExternalColumns[access_to_clean_cooking_pct]"
+                      dataType="numeric"
+                      name="access_to_clean_cooking_pct"
+                      precision="6"
+                      scale="2" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
               <outputs>
                 <output
-                  refId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  refId="Package\DFT - Load fact_country_social_annual\DST - fact_country_social_annual.Outputs[OLE DB Destination Error Output]"
                   exclusionGroup="1"
                   isErrorOut="true"
                   name="OLE DB Destination Error Output"
-                  synchronousInputId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  synchronousInputId="Package\DFT - Load fact_country_social_annual\DST - fact_country_social_annual.Inputs[OLE DB Destination Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      refId="Package\DFT - Load fact_country_social_annual\DST - fact_country_social_annual.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      lineageId="Package\DFT - Load fact_country_social_annual\DST - fact_country_social_annual.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      refId="Package\DFT - Load fact_country_social_annual\DST - fact_country_social_annual.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\DFT - Load fact_country_social_annual\DST - fact_country_social_annual.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT - Load fact_country_social_annual\SRC - stg_wb_social Cleaned"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="SRC - stg_wb_social Cleaned"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT 
+    TRY_CAST(s.raw_year AS INT) * 10000 + 101 AS year_key,
+    c.country_key,
+    TRY_CAST(s.raw_access_electricity AS DECIMAL(6,2)) AS access_to_electricity_pct,
+    TRY_CAST(s.raw_clean_cooking AS DECIMAL(6,2)) AS access_to_clean_cooking_pct
+FROM dbo.stg_wb_social s
+INNER JOIN dbo.dim_country c 
+    ON s.raw_country_code = c.country_code
+WHERE TRY_CAST(s.raw_year AS INT) IS NOT NULL;</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT - Load fact_country_social_annual\SRC - stg_wb_social Cleaned.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DFT - Load fact_country_social_annual\SRC - stg_wb_social Cleaned.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load fact_country_social_annual\SRC - stg_wb_social Cleaned.Outputs[OLE DB Source Output].Columns[year_key]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load fact_country_social_annual\SRC - stg_wb_social Cleaned.Outputs[OLE DB Source Output].ExternalColumns[year_key]"
+                      lineageId="Package\DFT - Load fact_country_social_annual\SRC - stg_wb_social Cleaned.Outputs[OLE DB Source Output].Columns[year_key]"
+                      name="year_key"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_country_social_annual\SRC - stg_wb_social Cleaned.Outputs[OLE DB Source Output].Columns[country_key]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load fact_country_social_annual\SRC - stg_wb_social Cleaned.Outputs[OLE DB Source Output].ExternalColumns[country_key]"
+                      lineageId="Package\DFT - Load fact_country_social_annual\SRC - stg_wb_social Cleaned.Outputs[OLE DB Source Output].Columns[country_key]"
+                      name="country_key"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_country_social_annual\SRC - stg_wb_social Cleaned.Outputs[OLE DB Source Output].Columns[access_to_electricity_pct]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load fact_country_social_annual\SRC - stg_wb_social Cleaned.Outputs[OLE DB Source Output].ExternalColumns[access_to_electricity_pct]"
+                      lineageId="Package\DFT - Load fact_country_social_annual\SRC - stg_wb_social Cleaned.Outputs[OLE DB Source Output].Columns[access_to_electricity_pct]"
+                      name="access_to_electricity_pct"
+                      precision="6"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_country_social_annual\SRC - stg_wb_social Cleaned.Outputs[OLE DB Source Output].Columns[access_to_clean_cooking_pct]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load fact_country_social_annual\SRC - stg_wb_social Cleaned.Outputs[OLE DB Source Output].ExternalColumns[access_to_clean_cooking_pct]"
+                      lineageId="Package\DFT - Load fact_country_social_annual\SRC - stg_wb_social Cleaned.Outputs[OLE DB Source Output].Columns[access_to_clean_cooking_pct]"
+                      name="access_to_clean_cooking_pct"
+                      precision="6"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_country_social_annual\SRC - stg_wb_social Cleaned.Outputs[OLE DB Source Output].ExternalColumns[year_key]"
+                      dataType="i4"
+                      name="year_key" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_country_social_annual\SRC - stg_wb_social Cleaned.Outputs[OLE DB Source Output].ExternalColumns[country_key]"
+                      dataType="i4"
+                      name="country_key" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_country_social_annual\SRC - stg_wb_social Cleaned.Outputs[OLE DB Source Output].ExternalColumns[access_to_electricity_pct]"
+                      dataType="numeric"
+                      name="access_to_electricity_pct"
+                      precision="6"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_country_social_annual\SRC - stg_wb_social Cleaned.Outputs[OLE DB Source Output].ExternalColumns[access_to_clean_cooking_pct]"
+                      dataType="numeric"
+                      name="access_to_clean_cooking_pct"
+                      precision="6"
+                      scale="2" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DFT - Load fact_country_social_annual\SRC - stg_wb_social Cleaned.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load fact_country_social_annual\SRC - stg_wb_social Cleaned.Outputs[OLE DB Source Error Output].Columns[year_key]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_country_social_annual\SRC - stg_wb_social Cleaned.Outputs[OLE DB Source Error Output].Columns[year_key]"
+                      name="year_key" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_country_social_annual\SRC - stg_wb_social Cleaned.Outputs[OLE DB Source Error Output].Columns[country_key]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_country_social_annual\SRC - stg_wb_social Cleaned.Outputs[OLE DB Source Error Output].Columns[country_key]"
+                      name="country_key" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_country_social_annual\SRC - stg_wb_social Cleaned.Outputs[OLE DB Source Error Output].Columns[access_to_electricity_pct]"
+                      dataType="numeric"
+                      lineageId="Package\DFT - Load fact_country_social_annual\SRC - stg_wb_social Cleaned.Outputs[OLE DB Source Error Output].Columns[access_to_electricity_pct]"
+                      name="access_to_electricity_pct"
+                      precision="6"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_country_social_annual\SRC - stg_wb_social Cleaned.Outputs[OLE DB Source Error Output].Columns[access_to_clean_cooking_pct]"
+                      dataType="numeric"
+                      lineageId="Package\DFT - Load fact_country_social_annual\SRC - stg_wb_social Cleaned.Outputs[OLE DB Source Error Output].Columns[access_to_clean_cooking_pct]"
+                      name="access_to_clean_cooking_pct"
+                      precision="6"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_country_social_annual\SRC - stg_wb_social Cleaned.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_country_social_annual\SRC - stg_wb_social Cleaned.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_country_social_annual\SRC - stg_wb_social Cleaned.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_country_social_annual\SRC - stg_wb_social Cleaned.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -429,20 +408,882 @@ SELECT DISTINCT 'TOT' AS sector_code, 'Total' AS sector_name FROM [States$]</pro
           </components>
           <paths>
             <path
-              refId="Package\Data Flow Task.Paths[Data Conversion Output]"
-              endId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input]"
-              name="Data Conversion Output"
-              startId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output]" />
+              refId="Package\DFT - Load fact_country_social_annual.Paths[OLE DB Source Output]"
+              endId="Package\DFT - Load fact_country_social_annual\DST - fact_country_social_annual.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\DFT - Load fact_country_social_annual\SRC - stg_wb_social Cleaned.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\DFT - Load fact_utility_reliability_annual"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{09CE676E-A057-41A8-B5C8-E96CF07AE86A}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DFT - Load fact_utility_reliability_annual"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\DFT - Load fact_utility_reliability_annual\DST - fact_utility_reliability_annual"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="DST - fact_utility_reliability_annual"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[fact_utility_reliability_annual]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT - Load fact_utility_reliability_annual\DST - fact_utility_reliability_annual.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT - Load fact_utility_reliability_annual\DST - fact_utility_reliability_annual.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_utility_reliability_annual\DST - fact_utility_reliability_annual.Inputs[OLE DB Destination Input].Columns[year_key]"
+                      cachedDataType="i4"
+                      cachedName="year_key"
+                      externalMetadataColumnId="Package\DFT - Load fact_utility_reliability_annual\DST - fact_utility_reliability_annual.Inputs[OLE DB Destination Input].ExternalColumns[year_key]"
+                      lineageId="Package\DFT - Load fact_utility_reliability_annual\SRC - stg_eia861_reliability Cleaned.Outputs[OLE DB Source Output].Columns[year_key]" />
+                    <inputColumn
+                      refId="Package\DFT - Load fact_utility_reliability_annual\DST - fact_utility_reliability_annual.Inputs[OLE DB Destination Input].Columns[utility_key]"
+                      cachedDataType="i4"
+                      cachedName="utility_key"
+                      externalMetadataColumnId="Package\DFT - Load fact_utility_reliability_annual\DST - fact_utility_reliability_annual.Inputs[OLE DB Destination Input].ExternalColumns[utility_key]"
+                      lineageId="Package\DFT - Load fact_utility_reliability_annual\SRC - stg_eia861_reliability Cleaned.Outputs[OLE DB Source Output].Columns[utility_key]" />
+                    <inputColumn
+                      refId="Package\DFT - Load fact_utility_reliability_annual\DST - fact_utility_reliability_annual.Inputs[OLE DB Destination Input].Columns[state_key]"
+                      cachedDataType="i4"
+                      cachedName="state_key"
+                      externalMetadataColumnId="Package\DFT - Load fact_utility_reliability_annual\DST - fact_utility_reliability_annual.Inputs[OLE DB Destination Input].ExternalColumns[state_key]"
+                      lineageId="Package\DFT - Load fact_utility_reliability_annual\SRC - stg_eia861_reliability Cleaned.Outputs[OLE DB Source Output].Columns[state_key]" />
+                    <inputColumn
+                      refId="Package\DFT - Load fact_utility_reliability_annual\DST - fact_utility_reliability_annual.Inputs[OLE DB Destination Input].Columns[saidi_minutes]"
+                      cachedDataType="numeric"
+                      cachedName="saidi_minutes"
+                      cachedPrecision="12"
+                      cachedScale="3"
+                      externalMetadataColumnId="Package\DFT - Load fact_utility_reliability_annual\DST - fact_utility_reliability_annual.Inputs[OLE DB Destination Input].ExternalColumns[saidi_minutes]"
+                      lineageId="Package\DFT - Load fact_utility_reliability_annual\SRC - stg_eia861_reliability Cleaned.Outputs[OLE DB Source Output].Columns[saidi_minutes]" />
+                    <inputColumn
+                      refId="Package\DFT - Load fact_utility_reliability_annual\DST - fact_utility_reliability_annual.Inputs[OLE DB Destination Input].Columns[saifi_interruptions]"
+                      cachedDataType="numeric"
+                      cachedName="saifi_interruptions"
+                      cachedPrecision="12"
+                      cachedScale="4"
+                      externalMetadataColumnId="Package\DFT - Load fact_utility_reliability_annual\DST - fact_utility_reliability_annual.Inputs[OLE DB Destination Input].ExternalColumns[saifi_interruptions]"
+                      lineageId="Package\DFT - Load fact_utility_reliability_annual\SRC - stg_eia861_reliability Cleaned.Outputs[OLE DB Source Output].Columns[saifi_interruptions]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_utility_reliability_annual\DST - fact_utility_reliability_annual.Inputs[OLE DB Destination Input].ExternalColumns[year_key]"
+                      dataType="i4"
+                      name="year_key" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_utility_reliability_annual\DST - fact_utility_reliability_annual.Inputs[OLE DB Destination Input].ExternalColumns[utility_key]"
+                      dataType="i4"
+                      name="utility_key" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_utility_reliability_annual\DST - fact_utility_reliability_annual.Inputs[OLE DB Destination Input].ExternalColumns[state_key]"
+                      dataType="i4"
+                      name="state_key" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_utility_reliability_annual\DST - fact_utility_reliability_annual.Inputs[OLE DB Destination Input].ExternalColumns[saidi_minutes]"
+                      dataType="numeric"
+                      name="saidi_minutes"
+                      precision="12"
+                      scale="3" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_utility_reliability_annual\DST - fact_utility_reliability_annual.Inputs[OLE DB Destination Input].ExternalColumns[saifi_interruptions]"
+                      dataType="numeric"
+                      name="saifi_interruptions"
+                      precision="12"
+                      scale="4" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT - Load fact_utility_reliability_annual\DST - fact_utility_reliability_annual.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\DFT - Load fact_utility_reliability_annual\DST - fact_utility_reliability_annual.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load fact_utility_reliability_annual\DST - fact_utility_reliability_annual.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_utility_reliability_annual\DST - fact_utility_reliability_annual.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_utility_reliability_annual\DST - fact_utility_reliability_annual.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_utility_reliability_annual\DST - fact_utility_reliability_annual.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT - Load fact_utility_reliability_annual\SRC - stg_eia861_reliability Cleaned"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="SRC - stg_eia861_reliability Cleaned"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT 
+    TRY_CAST(r.raw_year AS INT) * 10000 + 101 AS year_key,
+    u.utility_key,
+    st.state_key,
+    TRY_CAST(REPLACE(NULLIF(LTRIM(RTRIM(r.raw_saidi_minutes)), '.'), ',', '.') AS DECIMAL(12,3)) AS saidi_minutes,
+    TRY_CAST(REPLACE(NULLIF(LTRIM(RTRIM(r.raw_saifi_count)), '.'), ',', '.') AS DECIMAL(12,4)) AS saifi_interruptions
+FROM dbo.stg_eia861_reliability r
+INNER JOIN dbo.dim_utility u 
+    ON TRY_CAST(r.raw_utility_id AS INT) = u.eia_utility_id 
+    AND u.is_current = 1
+INNER JOIN dbo.dim_state st 
+    ON r.raw_state = st.state_code
+WHERE TRY_CAST(r.raw_year AS INT) IS NOT NULL;</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT - Load fact_utility_reliability_annual\SRC - stg_eia861_reliability Cleaned.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DFT - Load fact_utility_reliability_annual\SRC - stg_eia861_reliability Cleaned.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load fact_utility_reliability_annual\SRC - stg_eia861_reliability Cleaned.Outputs[OLE DB Source Output].Columns[year_key]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load fact_utility_reliability_annual\SRC - stg_eia861_reliability Cleaned.Outputs[OLE DB Source Output].ExternalColumns[year_key]"
+                      lineageId="Package\DFT - Load fact_utility_reliability_annual\SRC - stg_eia861_reliability Cleaned.Outputs[OLE DB Source Output].Columns[year_key]"
+                      name="year_key"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_utility_reliability_annual\SRC - stg_eia861_reliability Cleaned.Outputs[OLE DB Source Output].Columns[utility_key]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load fact_utility_reliability_annual\SRC - stg_eia861_reliability Cleaned.Outputs[OLE DB Source Output].ExternalColumns[utility_key]"
+                      lineageId="Package\DFT - Load fact_utility_reliability_annual\SRC - stg_eia861_reliability Cleaned.Outputs[OLE DB Source Output].Columns[utility_key]"
+                      name="utility_key"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_utility_reliability_annual\SRC - stg_eia861_reliability Cleaned.Outputs[OLE DB Source Output].Columns[state_key]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load fact_utility_reliability_annual\SRC - stg_eia861_reliability Cleaned.Outputs[OLE DB Source Output].ExternalColumns[state_key]"
+                      lineageId="Package\DFT - Load fact_utility_reliability_annual\SRC - stg_eia861_reliability Cleaned.Outputs[OLE DB Source Output].Columns[state_key]"
+                      name="state_key"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_utility_reliability_annual\SRC - stg_eia861_reliability Cleaned.Outputs[OLE DB Source Output].Columns[saidi_minutes]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load fact_utility_reliability_annual\SRC - stg_eia861_reliability Cleaned.Outputs[OLE DB Source Output].ExternalColumns[saidi_minutes]"
+                      lineageId="Package\DFT - Load fact_utility_reliability_annual\SRC - stg_eia861_reliability Cleaned.Outputs[OLE DB Source Output].Columns[saidi_minutes]"
+                      name="saidi_minutes"
+                      precision="12"
+                      scale="3"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_utility_reliability_annual\SRC - stg_eia861_reliability Cleaned.Outputs[OLE DB Source Output].Columns[saifi_interruptions]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load fact_utility_reliability_annual\SRC - stg_eia861_reliability Cleaned.Outputs[OLE DB Source Output].ExternalColumns[saifi_interruptions]"
+                      lineageId="Package\DFT - Load fact_utility_reliability_annual\SRC - stg_eia861_reliability Cleaned.Outputs[OLE DB Source Output].Columns[saifi_interruptions]"
+                      name="saifi_interruptions"
+                      precision="12"
+                      scale="4"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_utility_reliability_annual\SRC - stg_eia861_reliability Cleaned.Outputs[OLE DB Source Output].ExternalColumns[year_key]"
+                      dataType="i4"
+                      name="year_key" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_utility_reliability_annual\SRC - stg_eia861_reliability Cleaned.Outputs[OLE DB Source Output].ExternalColumns[utility_key]"
+                      dataType="i4"
+                      name="utility_key" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_utility_reliability_annual\SRC - stg_eia861_reliability Cleaned.Outputs[OLE DB Source Output].ExternalColumns[state_key]"
+                      dataType="i4"
+                      name="state_key" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_utility_reliability_annual\SRC - stg_eia861_reliability Cleaned.Outputs[OLE DB Source Output].ExternalColumns[saidi_minutes]"
+                      dataType="numeric"
+                      name="saidi_minutes"
+                      precision="12"
+                      scale="3" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_utility_reliability_annual\SRC - stg_eia861_reliability Cleaned.Outputs[OLE DB Source Output].ExternalColumns[saifi_interruptions]"
+                      dataType="numeric"
+                      name="saifi_interruptions"
+                      precision="12"
+                      scale="4" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DFT - Load fact_utility_reliability_annual\SRC - stg_eia861_reliability Cleaned.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load fact_utility_reliability_annual\SRC - stg_eia861_reliability Cleaned.Outputs[OLE DB Source Error Output].Columns[year_key]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_utility_reliability_annual\SRC - stg_eia861_reliability Cleaned.Outputs[OLE DB Source Error Output].Columns[year_key]"
+                      name="year_key" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_utility_reliability_annual\SRC - stg_eia861_reliability Cleaned.Outputs[OLE DB Source Error Output].Columns[utility_key]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_utility_reliability_annual\SRC - stg_eia861_reliability Cleaned.Outputs[OLE DB Source Error Output].Columns[utility_key]"
+                      name="utility_key" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_utility_reliability_annual\SRC - stg_eia861_reliability Cleaned.Outputs[OLE DB Source Error Output].Columns[state_key]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_utility_reliability_annual\SRC - stg_eia861_reliability Cleaned.Outputs[OLE DB Source Error Output].Columns[state_key]"
+                      name="state_key" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_utility_reliability_annual\SRC - stg_eia861_reliability Cleaned.Outputs[OLE DB Source Error Output].Columns[saidi_minutes]"
+                      dataType="numeric"
+                      lineageId="Package\DFT - Load fact_utility_reliability_annual\SRC - stg_eia861_reliability Cleaned.Outputs[OLE DB Source Error Output].Columns[saidi_minutes]"
+                      name="saidi_minutes"
+                      precision="12"
+                      scale="3" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_utility_reliability_annual\SRC - stg_eia861_reliability Cleaned.Outputs[OLE DB Source Error Output].Columns[saifi_interruptions]"
+                      dataType="numeric"
+                      lineageId="Package\DFT - Load fact_utility_reliability_annual\SRC - stg_eia861_reliability Cleaned.Outputs[OLE DB Source Error Output].Columns[saifi_interruptions]"
+                      name="saifi_interruptions"
+                      precision="12"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_utility_reliability_annual\SRC - stg_eia861_reliability Cleaned.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_utility_reliability_annual\SRC - stg_eia861_reliability Cleaned.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_utility_reliability_annual\SRC - stg_eia861_reliability Cleaned.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_utility_reliability_annual\SRC - stg_eia861_reliability Cleaned.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
             <path
-              refId="Package\Data Flow Task.Paths[Excel Source Output]"
-              endId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input]"
-              name="Excel Source Output"
-              startId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output]" />
+              refId="Package\DFT - Load fact_utility_reliability_annual.Paths[OLE DB Source Output]"
+              endId="Package\DFT - Load fact_utility_reliability_annual\DST - fact_utility_reliability_annual.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\DFT - Load fact_utility_reliability_annual\SRC - stg_eia861_reliability Cleaned.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\DFT - Load fact_utility_sales_annual"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{96645BFE-0ECD-4C3C-97B3-0BA7BCFECF1F}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DFT - Load fact_utility_sales_annual"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\DFT - Load fact_utility_sales_annual\DST - fact_utility_sales_annua"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="DST - fact_utility_sales_annua"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[fact_utility_sales_annual]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT - Load fact_utility_sales_annual\DST - fact_utility_sales_annua.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT - Load fact_utility_sales_annual\DST - fact_utility_sales_annua.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_utility_sales_annual\DST - fact_utility_sales_annua.Inputs[OLE DB Destination Input].Columns[year_key]"
+                      cachedDataType="i4"
+                      cachedName="year_key"
+                      externalMetadataColumnId="Package\DFT - Load fact_utility_sales_annual\DST - fact_utility_sales_annua.Inputs[OLE DB Destination Input].ExternalColumns[year_key]"
+                      lineageId="Package\DFT - Load fact_utility_sales_annual\SRC - stg_eia861_sales Aggregated.Outputs[OLE DB Source Output].Columns[year_key]" />
+                    <inputColumn
+                      refId="Package\DFT - Load fact_utility_sales_annual\DST - fact_utility_sales_annua.Inputs[OLE DB Destination Input].Columns[utility_key]"
+                      cachedDataType="i4"
+                      cachedName="utility_key"
+                      externalMetadataColumnId="Package\DFT - Load fact_utility_sales_annual\DST - fact_utility_sales_annua.Inputs[OLE DB Destination Input].ExternalColumns[utility_key]"
+                      lineageId="Package\DFT - Load fact_utility_sales_annual\SRC - stg_eia861_sales Aggregated.Outputs[OLE DB Source Output].Columns[utility_key]" />
+                    <inputColumn
+                      refId="Package\DFT - Load fact_utility_sales_annual\DST - fact_utility_sales_annua.Inputs[OLE DB Destination Input].Columns[state_key]"
+                      cachedDataType="i4"
+                      cachedName="state_key"
+                      externalMetadataColumnId="Package\DFT - Load fact_utility_sales_annual\DST - fact_utility_sales_annua.Inputs[OLE DB Destination Input].ExternalColumns[state_key]"
+                      lineageId="Package\DFT - Load fact_utility_sales_annual\SRC - stg_eia861_sales Aggregated.Outputs[OLE DB Source Output].Columns[state_key]" />
+                    <inputColumn
+                      refId="Package\DFT - Load fact_utility_sales_annual\DST - fact_utility_sales_annua.Inputs[OLE DB Destination Input].Columns[sector_key]"
+                      cachedDataType="i4"
+                      cachedName="sector_key"
+                      externalMetadataColumnId="Package\DFT - Load fact_utility_sales_annual\DST - fact_utility_sales_annua.Inputs[OLE DB Destination Input].ExternalColumns[sector_key]"
+                      lineageId="Package\DFT - Load fact_utility_sales_annual\SRC - stg_eia861_sales Aggregated.Outputs[OLE DB Source Output].Columns[sector_key]" />
+                    <inputColumn
+                      refId="Package\DFT - Load fact_utility_sales_annual\DST - fact_utility_sales_annua.Inputs[OLE DB Destination Input].Columns[revenue_kusd]"
+                      cachedDataType="numeric"
+                      cachedName="revenue_kusd"
+                      cachedPrecision="38"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\DFT - Load fact_utility_sales_annual\DST - fact_utility_sales_annua.Inputs[OLE DB Destination Input].ExternalColumns[revenue_kusd]"
+                      lineageId="Package\DFT - Load fact_utility_sales_annual\SRC - stg_eia861_sales Aggregated.Outputs[OLE DB Source Output].Columns[revenue_kusd]" />
+                    <inputColumn
+                      refId="Package\DFT - Load fact_utility_sales_annual\DST - fact_utility_sales_annua.Inputs[OLE DB Destination Input].Columns[sales_mwh]"
+                      cachedDataType="numeric"
+                      cachedName="sales_mwh"
+                      cachedPrecision="38"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\DFT - Load fact_utility_sales_annual\DST - fact_utility_sales_annua.Inputs[OLE DB Destination Input].ExternalColumns[sales_mwh]"
+                      lineageId="Package\DFT - Load fact_utility_sales_annual\SRC - stg_eia861_sales Aggregated.Outputs[OLE DB Source Output].Columns[sales_mwh]" />
+                    <inputColumn
+                      refId="Package\DFT - Load fact_utility_sales_annual\DST - fact_utility_sales_annua.Inputs[OLE DB Destination Input].Columns[customer_count]"
+                      cachedDataType="i4"
+                      cachedName="customer_count"
+                      externalMetadataColumnId="Package\DFT - Load fact_utility_sales_annual\DST - fact_utility_sales_annua.Inputs[OLE DB Destination Input].ExternalColumns[customer_count]"
+                      lineageId="Package\DFT - Load fact_utility_sales_annual\SRC - stg_eia861_sales Aggregated.Outputs[OLE DB Source Output].Columns[customer_count]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_utility_sales_annual\DST - fact_utility_sales_annua.Inputs[OLE DB Destination Input].ExternalColumns[year_key]"
+                      dataType="i4"
+                      name="year_key" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_utility_sales_annual\DST - fact_utility_sales_annua.Inputs[OLE DB Destination Input].ExternalColumns[utility_key]"
+                      dataType="i4"
+                      name="utility_key" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_utility_sales_annual\DST - fact_utility_sales_annua.Inputs[OLE DB Destination Input].ExternalColumns[state_key]"
+                      dataType="i4"
+                      name="state_key" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_utility_sales_annual\DST - fact_utility_sales_annua.Inputs[OLE DB Destination Input].ExternalColumns[sector_key]"
+                      dataType="i4"
+                      name="sector_key" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_utility_sales_annual\DST - fact_utility_sales_annua.Inputs[OLE DB Destination Input].ExternalColumns[revenue_kusd]"
+                      dataType="numeric"
+                      name="revenue_kusd"
+                      precision="18"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_utility_sales_annual\DST - fact_utility_sales_annua.Inputs[OLE DB Destination Input].ExternalColumns[sales_mwh]"
+                      dataType="numeric"
+                      name="sales_mwh"
+                      precision="18"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_utility_sales_annual\DST - fact_utility_sales_annua.Inputs[OLE DB Destination Input].ExternalColumns[customer_count]"
+                      dataType="i4"
+                      name="customer_count" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT - Load fact_utility_sales_annual\DST - fact_utility_sales_annua.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\DFT - Load fact_utility_sales_annual\DST - fact_utility_sales_annua.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load fact_utility_sales_annual\DST - fact_utility_sales_annua.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_utility_sales_annual\DST - fact_utility_sales_annua.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_utility_sales_annual\DST - fact_utility_sales_annua.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_utility_sales_annual\DST - fact_utility_sales_annua.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT - Load fact_utility_sales_annual\SRC - stg_eia861_sales Aggregated"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="SRC - stg_eia861_sales Aggregated"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT 
+    TRY_CAST(s.raw_year AS INT) * 10000 + 101 AS year_key,
+    u.utility_key,
+    st.state_key,
+    sec.sector_key,
+    SUM(TRY_CAST(s.raw_revenue_kusd AS DECIMAL(18,2))) AS revenue_kusd,
+    SUM(TRY_CAST(s.raw_sales_mwh AS DECIMAL(18,2))) AS sales_mwh,
+    SUM(TRY_CAST(s.raw_customer_count AS INT)) AS customer_count
+FROM dbo.stg_eia861_sales s
+INNER JOIN dbo.dim_utility u 
+    ON TRY_CAST(s.raw_utility_id AS INT) = u.eia_utility_id 
+    AND u.is_current = 1
+INNER JOIN dbo.dim_state st 
+    ON s.raw_state = st.state_code
+INNER JOIN dbo.dim_customer_sector sec 
+    ON s.raw_sector_code = sec.sector_code
+WHERE TRY_CAST(s.raw_year AS INT) IS NOT NULL
+GROUP BY 
+    TRY_CAST(s.raw_year AS INT) * 10000 + 101,
+    u.utility_key,
+    st.state_key,
+    sec.sector_key;</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT - Load fact_utility_sales_annual\SRC - stg_eia861_sales Aggregated.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DFT - Load fact_utility_sales_annual\SRC - stg_eia861_sales Aggregated.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load fact_utility_sales_annual\SRC - stg_eia861_sales Aggregated.Outputs[OLE DB Source Output].Columns[year_key]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load fact_utility_sales_annual\SRC - stg_eia861_sales Aggregated.Outputs[OLE DB Source Output].ExternalColumns[year_key]"
+                      lineageId="Package\DFT - Load fact_utility_sales_annual\SRC - stg_eia861_sales Aggregated.Outputs[OLE DB Source Output].Columns[year_key]"
+                      name="year_key"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_utility_sales_annual\SRC - stg_eia861_sales Aggregated.Outputs[OLE DB Source Output].Columns[utility_key]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load fact_utility_sales_annual\SRC - stg_eia861_sales Aggregated.Outputs[OLE DB Source Output].ExternalColumns[utility_key]"
+                      lineageId="Package\DFT - Load fact_utility_sales_annual\SRC - stg_eia861_sales Aggregated.Outputs[OLE DB Source Output].Columns[utility_key]"
+                      name="utility_key"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_utility_sales_annual\SRC - stg_eia861_sales Aggregated.Outputs[OLE DB Source Output].Columns[state_key]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load fact_utility_sales_annual\SRC - stg_eia861_sales Aggregated.Outputs[OLE DB Source Output].ExternalColumns[state_key]"
+                      lineageId="Package\DFT - Load fact_utility_sales_annual\SRC - stg_eia861_sales Aggregated.Outputs[OLE DB Source Output].Columns[state_key]"
+                      name="state_key"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_utility_sales_annual\SRC - stg_eia861_sales Aggregated.Outputs[OLE DB Source Output].Columns[sector_key]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load fact_utility_sales_annual\SRC - stg_eia861_sales Aggregated.Outputs[OLE DB Source Output].ExternalColumns[sector_key]"
+                      lineageId="Package\DFT - Load fact_utility_sales_annual\SRC - stg_eia861_sales Aggregated.Outputs[OLE DB Source Output].Columns[sector_key]"
+                      name="sector_key"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_utility_sales_annual\SRC - stg_eia861_sales Aggregated.Outputs[OLE DB Source Output].Columns[revenue_kusd]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load fact_utility_sales_annual\SRC - stg_eia861_sales Aggregated.Outputs[OLE DB Source Output].ExternalColumns[revenue_kusd]"
+                      lineageId="Package\DFT - Load fact_utility_sales_annual\SRC - stg_eia861_sales Aggregated.Outputs[OLE DB Source Output].Columns[revenue_kusd]"
+                      name="revenue_kusd"
+                      precision="38"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_utility_sales_annual\SRC - stg_eia861_sales Aggregated.Outputs[OLE DB Source Output].Columns[sales_mwh]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load fact_utility_sales_annual\SRC - stg_eia861_sales Aggregated.Outputs[OLE DB Source Output].ExternalColumns[sales_mwh]"
+                      lineageId="Package\DFT - Load fact_utility_sales_annual\SRC - stg_eia861_sales Aggregated.Outputs[OLE DB Source Output].Columns[sales_mwh]"
+                      name="sales_mwh"
+                      precision="38"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_utility_sales_annual\SRC - stg_eia861_sales Aggregated.Outputs[OLE DB Source Output].Columns[customer_count]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load fact_utility_sales_annual\SRC - stg_eia861_sales Aggregated.Outputs[OLE DB Source Output].ExternalColumns[customer_count]"
+                      lineageId="Package\DFT - Load fact_utility_sales_annual\SRC - stg_eia861_sales Aggregated.Outputs[OLE DB Source Output].Columns[customer_count]"
+                      name="customer_count"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_utility_sales_annual\SRC - stg_eia861_sales Aggregated.Outputs[OLE DB Source Output].ExternalColumns[year_key]"
+                      dataType="i4"
+                      name="year_key" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_utility_sales_annual\SRC - stg_eia861_sales Aggregated.Outputs[OLE DB Source Output].ExternalColumns[utility_key]"
+                      dataType="i4"
+                      name="utility_key" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_utility_sales_annual\SRC - stg_eia861_sales Aggregated.Outputs[OLE DB Source Output].ExternalColumns[state_key]"
+                      dataType="i4"
+                      name="state_key" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_utility_sales_annual\SRC - stg_eia861_sales Aggregated.Outputs[OLE DB Source Output].ExternalColumns[sector_key]"
+                      dataType="i4"
+                      name="sector_key" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_utility_sales_annual\SRC - stg_eia861_sales Aggregated.Outputs[OLE DB Source Output].ExternalColumns[revenue_kusd]"
+                      dataType="numeric"
+                      name="revenue_kusd"
+                      precision="38"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_utility_sales_annual\SRC - stg_eia861_sales Aggregated.Outputs[OLE DB Source Output].ExternalColumns[sales_mwh]"
+                      dataType="numeric"
+                      name="sales_mwh"
+                      precision="38"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_utility_sales_annual\SRC - stg_eia861_sales Aggregated.Outputs[OLE DB Source Output].ExternalColumns[customer_count]"
+                      dataType="i4"
+                      name="customer_count" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DFT - Load fact_utility_sales_annual\SRC - stg_eia861_sales Aggregated.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load fact_utility_sales_annual\SRC - stg_eia861_sales Aggregated.Outputs[OLE DB Source Error Output].Columns[year_key]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_utility_sales_annual\SRC - stg_eia861_sales Aggregated.Outputs[OLE DB Source Error Output].Columns[year_key]"
+                      name="year_key" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_utility_sales_annual\SRC - stg_eia861_sales Aggregated.Outputs[OLE DB Source Error Output].Columns[utility_key]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_utility_sales_annual\SRC - stg_eia861_sales Aggregated.Outputs[OLE DB Source Error Output].Columns[utility_key]"
+                      name="utility_key" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_utility_sales_annual\SRC - stg_eia861_sales Aggregated.Outputs[OLE DB Source Error Output].Columns[state_key]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_utility_sales_annual\SRC - stg_eia861_sales Aggregated.Outputs[OLE DB Source Error Output].Columns[state_key]"
+                      name="state_key" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_utility_sales_annual\SRC - stg_eia861_sales Aggregated.Outputs[OLE DB Source Error Output].Columns[sector_key]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_utility_sales_annual\SRC - stg_eia861_sales Aggregated.Outputs[OLE DB Source Error Output].Columns[sector_key]"
+                      name="sector_key" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_utility_sales_annual\SRC - stg_eia861_sales Aggregated.Outputs[OLE DB Source Error Output].Columns[revenue_kusd]"
+                      dataType="numeric"
+                      lineageId="Package\DFT - Load fact_utility_sales_annual\SRC - stg_eia861_sales Aggregated.Outputs[OLE DB Source Error Output].Columns[revenue_kusd]"
+                      name="revenue_kusd"
+                      precision="38"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_utility_sales_annual\SRC - stg_eia861_sales Aggregated.Outputs[OLE DB Source Error Output].Columns[sales_mwh]"
+                      dataType="numeric"
+                      lineageId="Package\DFT - Load fact_utility_sales_annual\SRC - stg_eia861_sales Aggregated.Outputs[OLE DB Source Error Output].Columns[sales_mwh]"
+                      name="sales_mwh"
+                      precision="38"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_utility_sales_annual\SRC - stg_eia861_sales Aggregated.Outputs[OLE DB Source Error Output].Columns[customer_count]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_utility_sales_annual\SRC - stg_eia861_sales Aggregated.Outputs[OLE DB Source Error Output].Columns[customer_count]"
+                      name="customer_count" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_utility_sales_annual\SRC - stg_eia861_sales Aggregated.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_utility_sales_annual\SRC - stg_eia861_sales Aggregated.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_utility_sales_annual\SRC - stg_eia861_sales Aggregated.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_utility_sales_annual\SRC - stg_eia861_sales Aggregated.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DFT - Load fact_utility_sales_annual.Paths[OLE DB Source Output]"
+              endId="Package\DFT - Load fact_utility_sales_annual\DST - fact_utility_sales_annua.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\DFT - Load fact_utility_sales_annual\SRC - stg_eia861_sales Aggregated.Outputs[OLE DB Source Output]" />
           </paths>
         </pipeline>
       </DTS:ObjectData>
     </DTS:Executable>
   </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{0481825B-7102-477D-937F-D61256E286D5}"
+      DTS:From="Package\Clean Social Facts Before Load"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\DFT - Load fact_utility_sales_annual" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{E4F027EC-0E7F-498B-BD24-55AC4F8FF944}"
+      DTS:From="Package\DFT - Load fact_utility_sales_annual"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\DFT - Load fact_utility_reliability_annual" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{4E7CE21E-6F08-4DDA-9291-A4B400A7ABF4}"
+      DTS:From="Package\DFT - Load fact_utility_reliability_annual"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\DFT - Load fact_country_social_annual" />
+  </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
 <!--If you manually edit this section and make a mistake, you can delete it. -->
@@ -454,57 +1295,45 @@ SELECT DISTINCT 'TOT' AS sector_code, 'Total' AS sector_name FROM [States$]</pro
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
-        <NodeLayout
-          Size="151,42"
-          Id="Package\Data Flow Task"
-          TopLeft="5.5,5.5" />
-      </GraphLayout>
-    </LayoutInfo>
-  </Package>
-  <TaskHost
-    design-time-name="Package\Data Flow Task">
-    <LayoutInfo>
-      <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="171,42"
-          Id="Package\Data Flow Task\OLE DB Destination"
-          TopLeft="453.5,175.5" />
+          Size="222.4,41.6"
+          Id="Package\Clean Social Facts Before Load"
+          TopLeft="201.42857185736,43.5882352559108" />
         <NodeLayout
-          Size="139,42"
-          Id="Package\Data Flow Task\Excel Source"
-          TopLeft="21.5,171.5" />
+          Size="249.6,41.6"
+          Id="Package\DFT - Load fact_utility_sales_annual"
+          TopLeft="17.1428571793497,179.705882195422" />
         <NodeLayout
-          Size="156,42"
-          Id="Package\Data Flow Task\Data Conversion"
-          TopLeft="182.5,170.5" />
+          Size="268,41.6"
+          Id="Package\DFT - Load fact_utility_reliability_annual"
+          TopLeft="375.000000798277,178.941176313739" />
         <EdgeLayout
-          Id="Package\Data Flow Task.Paths[Excel Source Output]"
-          TopLeft="91,213.5">
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="312.62857185736,85.1882352559108">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="169.5,-1"
+              EndConnector="-170.68571467801,94.5176469395112"
               Start="0,0"
-              End="169.5,6.5">
+              End="-170.68571467801,87.0176469395112">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,18.5" />
+                    End="0,43.2588234697556" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,18.5"
-                    Point2="0,22.5"
-                    Point3="4,22.5" />
+                    Point1="0,43.2588234697556"
+                    Point2="0,47.2588234697556"
+                    Point3="-4,47.2588234697556" />
                   <mssgle:LineSegment
-                    End="165.5,22.5" />
+                    End="-166.68571467801,47.2588234697556" />
                   <mssgle:CubicBezierSegment
-                    Point1="165.5,22.5"
-                    Point2="169.5,22.5"
-                    Point3="169.5,18.5" />
+                    Point1="-166.68571467801,47.2588234697556"
+                    Point2="-170.68571467801,47.2588234697556"
+                    Point3="-170.68571467801,51.2588234697556" />
                   <mssgle:LineSegment
-                    End="169.5,6.5" />
+                    End="-170.68571467801,87.0176469395112" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -514,19 +1343,133 @@ SELECT DISTINCT 'TOT' AS sector_code, 'Total' AS sector_name FROM [States$]</pro
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Data Flow Task.Paths[Data Conversion Output]"
-          TopLeft="338.5,194">
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="266.74285717935,200.123529254581">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="115,0"
+              EndConnector="108.257143618927,0"
               Start="0,0"
-              End="107.5,0">
+              End="100.757143618927,0">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="107.5,0" />
+                    End="100.757143618927,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="261.6,41.6"
+          Id="Package\DFT - Load fact_country_social_annual"
+          TopLeft="168.571428930273,292.882352684454" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="509.000000798277,220.541176313739">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-209.628571868004,72.3411763707143"
+              Start="0,0"
+              End="-209.628571868004,64.8411763707143">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,32.1705881853572" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,32.1705881853572"
+                    Point2="0,36.1705881853572"
+                    Point3="-4,36.1705881853572" />
+                  <mssgle:LineSegment
+                    End="-205.628571868004,36.1705881853572" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-205.628571868004,36.1705881853572"
+                    Point2="-209.628571868004,36.1705881853572"
+                    Point3="-209.628571868004,40.1705881853572" />
+                  <mssgle:LineSegment
+                    End="-209.628571868004,64.8411763707143" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\DFT - Load fact_utility_sales_annual">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="245.6,41.6"
+          Id="Package\DFT - Load fact_utility_sales_annual\SRC - stg_eia861_sales Aggregated"
+          TopLeft="27.4999995902181,53.3846145891226" />
+        <NodeLayout
+          Size="221.6,41.6"
+          Id="Package\DFT - Load fact_utility_sales_annual\DST - fact_utility_sales_annua"
+          TopLeft="33.0769225840385,175.384612771181" />
+        <EdgeLayout
+          Id="Package\DFT - Load fact_utility_sales_annual.Paths[OLE DB Source Output]"
+          TopLeft="147.088461087128,94.9846145891226">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,80.3999981820584"
+              Start="0,0"
+              End="0,72.8999981820584">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,72.8999981820584" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <TaskHost
+    design-time-name="Package\DFT - Load fact_utility_reliability_annual">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="248,41.6"
+          Id="Package\DFT - Load fact_utility_reliability_annual\SRC - stg_eia861_reliability Cleaned"
+          TopLeft="85.9999987185001,31.9999995231628" />
+        <NodeLayout
+          Size="242.4,41.6"
+          Id="Package\DFT - Load fact_utility_reliability_annual\DST - fact_utility_reliability_annual"
+          TopLeft="88.4999987632036,170.499997541308" />
+        <EdgeLayout
+          Id="Package\DFT - Load fact_utility_reliability_annual.Paths[OLE DB Source Output]"
+          TopLeft="209.849998740852,73.5999995231628">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,96.8999980181456"
+              Start="0,0"
+              End="0,89.3999980181456">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,89.3999980181456" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -539,7 +1482,15 @@ SELECT DISTINCT 'TOT' AS sector_code, 'Total' AS sector_name FROM [States$]</pro
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Data Flow Task\OLE DB Destination">
+    design-time-name="Package\DFT - Load fact_utility_sales_annual\SRC - stg_eia861_sales Aggregated">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT - Load fact_utility_sales_annual\DST - fact_utility_sales_annua">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -552,10 +1503,82 @@ SELECT DISTINCT 'TOT' AS sector_code, 'Total' AS sector_name FROM [States$]</pro
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Data Flow Task\Excel Source">
+    design-time-name="Package\DFT - Load fact_utility_reliability_annual\SRC - stg_eia861_reliability Cleaned">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT - Load fact_utility_reliability_annual\DST - fact_utility_reliability_annual">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\DFT - Load fact_country_social_annual">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="214.4,41.6"
+          Id="Package\DFT - Load fact_country_social_annual\SRC - stg_wb_social Cleaned"
+          TopLeft="353.999994724989,154.99999769032" />
+        <NodeLayout
+          Size="236,41.6"
+          Id="Package\DFT - Load fact_country_social_annual\DST - fact_country_social_annual"
+          TopLeft="347.499994903803,295.499995678663" />
+        <EdgeLayout
+          Id="Package\DFT - Load fact_country_social_annual.Paths[OLE DB Source Output]"
+          TopLeft="463.349994814396,196.59999769032">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,98.8999979883433"
+              Start="0,0"
+              End="0,91.3999979883433">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,91.3999979883433" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT - Load fact_country_social_annual\SRC - stg_wb_social Cleaned">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT - Load fact_country_social_annual\DST - fact_country_social_annual">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
