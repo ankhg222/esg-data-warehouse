@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0"?>
 <DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
   DTS:refId="Package"
   DTS:CreationDate="9/29/2026 11:52:35 PM"
@@ -11,9 +11,1080 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionGUID="{CD149368-633F-4DB5-B0FD-E4D9746C27FB}">
+  DTS:VersionBuild="7"
+  DTS:VersionGUID="{8B5B1CDD-8251-42E1-AC6F-3F3DB59B6633}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[localhost]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{B43EF373-F2EB-441D-BF82-44E179CA9F9F}"
+      DTS:ObjectName="localhost">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=localhost\MSSQLSERVER2022;Initial Catalog=DW_TRAIN;Provider=SQLOLEDB.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-01_Load_Shared_Dimension-{B43EF373-F2EB-441D-BF82-44E179CA9F9F}localhost;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
   <DTS:Variables />
-  <DTS:Executables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\DFT - Load fact_company_esg_rating"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{1D54E00F-7570-4FE9-87D1-18E12DFA558D}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DFT - Load fact_company_esg_rating"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\DFT - Load fact_company_esg_rating\DST - fact_company_esg_rating"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="DST - fact_company_esg_rating"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[fact_company_esg_rating]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT - Load fact_company_esg_rating\DST - fact_company_esg_rating.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT - Load fact_company_esg_rating\DST - fact_company_esg_rating.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_company_esg_rating\DST - fact_company_esg_rating.Inputs[OLE DB Destination Input].Columns[rating_date_key]"
+                      cachedDataType="i4"
+                      cachedName="rating_date_key"
+                      externalMetadataColumnId="Package\DFT - Load fact_company_esg_rating\DST - fact_company_esg_rating.Inputs[OLE DB Destination Input].ExternalColumns[rating_date_key]"
+                      lineageId="Package\DFT - Load fact_company_esg_rating\SRC - Sustainalytics ESG.Outputs[OLE DB Source Output].Columns[rating_date_key]" />
+                    <inputColumn
+                      refId="Package\DFT - Load fact_company_esg_rating\DST - fact_company_esg_rating.Inputs[OLE DB Destination Input].Columns[company_key]"
+                      cachedDataType="i4"
+                      cachedName="company_key"
+                      externalMetadataColumnId="Package\DFT - Load fact_company_esg_rating\DST - fact_company_esg_rating.Inputs[OLE DB Destination Input].ExternalColumns[company_key]"
+                      lineageId="Package\DFT - Load fact_company_esg_rating\SRC - Sustainalytics ESG.Outputs[OLE DB Source Output].Columns[company_key]" />
+                    <inputColumn
+                      refId="Package\DFT - Load fact_company_esg_rating\DST - fact_company_esg_rating.Inputs[OLE DB Destination Input].Columns[source_key]"
+                      cachedDataType="i4"
+                      cachedName="source_key"
+                      externalMetadataColumnId="Package\DFT - Load fact_company_esg_rating\DST - fact_company_esg_rating.Inputs[OLE DB Destination Input].ExternalColumns[source_key]"
+                      lineageId="Package\DFT - Load fact_company_esg_rating\SRC - Sustainalytics ESG.Outputs[OLE DB Source Output].Columns[source_key]" />
+                    <inputColumn
+                      refId="Package\DFT - Load fact_company_esg_rating\DST - fact_company_esg_rating.Inputs[OLE DB Destination Input].Columns[total_esg_score]"
+                      cachedDataType="numeric"
+                      cachedName="total_esg_score"
+                      cachedPrecision="38"
+                      cachedScale="6"
+                      externalMetadataColumnId="Package\DFT - Load fact_company_esg_rating\DST - fact_company_esg_rating.Inputs[OLE DB Destination Input].ExternalColumns[total_esg_score]"
+                      lineageId="Package\DFT - Load fact_company_esg_rating\SRC - Sustainalytics ESG.Outputs[OLE DB Source Output].Columns[total_esg_score]" />
+                    <inputColumn
+                      refId="Package\DFT - Load fact_company_esg_rating\DST - fact_company_esg_rating.Inputs[OLE DB Destination Input].Columns[environment_score]"
+                      cachedDataType="numeric"
+                      cachedName="environment_score"
+                      cachedPrecision="38"
+                      cachedScale="6"
+                      externalMetadataColumnId="Package\DFT - Load fact_company_esg_rating\DST - fact_company_esg_rating.Inputs[OLE DB Destination Input].ExternalColumns[environment_score]"
+                      lineageId="Package\DFT - Load fact_company_esg_rating\SRC - Sustainalytics ESG.Outputs[OLE DB Source Output].Columns[environment_score]" />
+                    <inputColumn
+                      refId="Package\DFT - Load fact_company_esg_rating\DST - fact_company_esg_rating.Inputs[OLE DB Destination Input].Columns[social_score]"
+                      cachedDataType="numeric"
+                      cachedName="social_score"
+                      cachedPrecision="38"
+                      cachedScale="6"
+                      externalMetadataColumnId="Package\DFT - Load fact_company_esg_rating\DST - fact_company_esg_rating.Inputs[OLE DB Destination Input].ExternalColumns[social_score]"
+                      lineageId="Package\DFT - Load fact_company_esg_rating\SRC - Sustainalytics ESG.Outputs[OLE DB Source Output].Columns[social_score]" />
+                    <inputColumn
+                      refId="Package\DFT - Load fact_company_esg_rating\DST - fact_company_esg_rating.Inputs[OLE DB Destination Input].Columns[governance_score]"
+                      cachedDataType="numeric"
+                      cachedName="governance_score"
+                      cachedPrecision="38"
+                      cachedScale="6"
+                      externalMetadataColumnId="Package\DFT - Load fact_company_esg_rating\DST - fact_company_esg_rating.Inputs[OLE DB Destination Input].ExternalColumns[governance_score]"
+                      lineageId="Package\DFT - Load fact_company_esg_rating\SRC - Sustainalytics ESG.Outputs[OLE DB Source Output].Columns[governance_score]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_company_esg_rating\DST - fact_company_esg_rating.Inputs[OLE DB Destination Input].ExternalColumns[rating_date_key]"
+                      dataType="i4"
+                      name="rating_date_key" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_company_esg_rating\DST - fact_company_esg_rating.Inputs[OLE DB Destination Input].ExternalColumns[company_key]"
+                      dataType="i4"
+                      name="company_key" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_company_esg_rating\DST - fact_company_esg_rating.Inputs[OLE DB Destination Input].ExternalColumns[source_key]"
+                      dataType="i4"
+                      name="source_key" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_company_esg_rating\DST - fact_company_esg_rating.Inputs[OLE DB Destination Input].ExternalColumns[total_esg_score]"
+                      dataType="numeric"
+                      name="total_esg_score"
+                      precision="6"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_company_esg_rating\DST - fact_company_esg_rating.Inputs[OLE DB Destination Input].ExternalColumns[environment_score]"
+                      dataType="numeric"
+                      name="environment_score"
+                      precision="6"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_company_esg_rating\DST - fact_company_esg_rating.Inputs[OLE DB Destination Input].ExternalColumns[social_score]"
+                      dataType="numeric"
+                      name="social_score"
+                      precision="6"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_company_esg_rating\DST - fact_company_esg_rating.Inputs[OLE DB Destination Input].ExternalColumns[governance_score]"
+                      dataType="numeric"
+                      name="governance_score"
+                      precision="6"
+                      scale="2" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT - Load fact_company_esg_rating\DST - fact_company_esg_rating.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\DFT - Load fact_company_esg_rating\DST - fact_company_esg_rating.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load fact_company_esg_rating\DST - fact_company_esg_rating.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_company_esg_rating\DST - fact_company_esg_rating.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_company_esg_rating\DST - fact_company_esg_rating.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_company_esg_rating\DST - fact_company_esg_rating.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT - Load fact_company_esg_rating\SRC - Sustainalytics ESG"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="SRC - Sustainalytics ESG"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">WITH CleanESG AS (
+    SELECT 
+        -- Xử lý an toàn cả định dạng YYYY-MM-DD và YYYYMMDD
+        COALESCE(
+            TRY_CAST(REPLACE(LTRIM(RTRIM(s.raw_date)), '"', '') AS INT),
+            TRY_CAST(REPLACE(CONVERT(VARCHAR(10), TRY_CAST(REPLACE(LTRIM(RTRIM(s.raw_date)), '"', '') AS DATE), 120), '-', '') AS INT)
+        ) AS r_date_key,
+        LEFT(UPPER(LTRIM(RTRIM(REPLACE(s.raw_company_name, '"', '')))), 200) AS r_company_name,
+        TRY_CAST(REPLACE(s.raw_total_esg_score, '"', '') AS DECIMAL(6,2)) AS r_total_esg,
+        TRY_CAST(REPLACE(s.raw_environment_score, '"', '') AS DECIMAL(6,2)) AS r_env,
+        TRY_CAST(REPLACE(s.raw_social_score, '"', '') AS DECIMAL(6,2)) AS r_soc,
+        TRY_CAST(REPLACE(s.raw_governance_score, '"', '') AS DECIMAL(6,2)) AS r_gov
+    FROM dbo.stg_sustainalytics_esg s
+    WHERE s.raw_date IS NOT NULL 
+      AND s.raw_company_name IS NOT NULL
+)
+SELECT 
+    d.date_key AS rating_date_key,
+    c.company_key,
+    (SELECT TOP 1 source_key FROM dbo.dim_data_source WHERE source_code = 'SUSTAINALYTICS') AS source_key,
+    ROUND(AVG(s.r_total_esg), 2) AS total_esg_score,
+    ROUND(AVG(s.r_env), 2) AS environment_score,
+    ROUND(AVG(s.r_soc), 2) AS social_score,
+    ROUND(AVG(s.r_gov), 2) AS governance_score
+FROM CleanESG s
+INNER JOIN dbo.dim_parent_company c 
+    ON s.r_company_name = c.company_name_std
+INNER JOIN dbo.dim_date d 
+    ON d.date_key = s.r_date_key
+WHERE s.r_date_key IS NOT NULL
+GROUP BY 
+    d.date_key,
+    c.company_key;</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT - Load fact_company_esg_rating\SRC - Sustainalytics ESG.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DFT - Load fact_company_esg_rating\SRC - Sustainalytics ESG.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load fact_company_esg_rating\SRC - Sustainalytics ESG.Outputs[OLE DB Source Output].Columns[rating_date_key]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load fact_company_esg_rating\SRC - Sustainalytics ESG.Outputs[OLE DB Source Output].ExternalColumns[rating_date_key]"
+                      lineageId="Package\DFT - Load fact_company_esg_rating\SRC - Sustainalytics ESG.Outputs[OLE DB Source Output].Columns[rating_date_key]"
+                      name="rating_date_key"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_company_esg_rating\SRC - Sustainalytics ESG.Outputs[OLE DB Source Output].Columns[company_key]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load fact_company_esg_rating\SRC - Sustainalytics ESG.Outputs[OLE DB Source Output].ExternalColumns[company_key]"
+                      lineageId="Package\DFT - Load fact_company_esg_rating\SRC - Sustainalytics ESG.Outputs[OLE DB Source Output].Columns[company_key]"
+                      name="company_key"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_company_esg_rating\SRC - Sustainalytics ESG.Outputs[OLE DB Source Output].Columns[source_key]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load fact_company_esg_rating\SRC - Sustainalytics ESG.Outputs[OLE DB Source Output].ExternalColumns[source_key]"
+                      lineageId="Package\DFT - Load fact_company_esg_rating\SRC - Sustainalytics ESG.Outputs[OLE DB Source Output].Columns[source_key]"
+                      name="source_key"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_company_esg_rating\SRC - Sustainalytics ESG.Outputs[OLE DB Source Output].Columns[total_esg_score]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load fact_company_esg_rating\SRC - Sustainalytics ESG.Outputs[OLE DB Source Output].ExternalColumns[total_esg_score]"
+                      lineageId="Package\DFT - Load fact_company_esg_rating\SRC - Sustainalytics ESG.Outputs[OLE DB Source Output].Columns[total_esg_score]"
+                      name="total_esg_score"
+                      precision="38"
+                      scale="6"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_company_esg_rating\SRC - Sustainalytics ESG.Outputs[OLE DB Source Output].Columns[environment_score]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load fact_company_esg_rating\SRC - Sustainalytics ESG.Outputs[OLE DB Source Output].ExternalColumns[environment_score]"
+                      lineageId="Package\DFT - Load fact_company_esg_rating\SRC - Sustainalytics ESG.Outputs[OLE DB Source Output].Columns[environment_score]"
+                      name="environment_score"
+                      precision="38"
+                      scale="6"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_company_esg_rating\SRC - Sustainalytics ESG.Outputs[OLE DB Source Output].Columns[social_score]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load fact_company_esg_rating\SRC - Sustainalytics ESG.Outputs[OLE DB Source Output].ExternalColumns[social_score]"
+                      lineageId="Package\DFT - Load fact_company_esg_rating\SRC - Sustainalytics ESG.Outputs[OLE DB Source Output].Columns[social_score]"
+                      name="social_score"
+                      precision="38"
+                      scale="6"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_company_esg_rating\SRC - Sustainalytics ESG.Outputs[OLE DB Source Output].Columns[governance_score]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load fact_company_esg_rating\SRC - Sustainalytics ESG.Outputs[OLE DB Source Output].ExternalColumns[governance_score]"
+                      lineageId="Package\DFT - Load fact_company_esg_rating\SRC - Sustainalytics ESG.Outputs[OLE DB Source Output].Columns[governance_score]"
+                      name="governance_score"
+                      precision="38"
+                      scale="6"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_company_esg_rating\SRC - Sustainalytics ESG.Outputs[OLE DB Source Output].ExternalColumns[rating_date_key]"
+                      dataType="i4"
+                      name="rating_date_key" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_company_esg_rating\SRC - Sustainalytics ESG.Outputs[OLE DB Source Output].ExternalColumns[company_key]"
+                      dataType="i4"
+                      name="company_key" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_company_esg_rating\SRC - Sustainalytics ESG.Outputs[OLE DB Source Output].ExternalColumns[source_key]"
+                      dataType="i4"
+                      name="source_key" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_company_esg_rating\SRC - Sustainalytics ESG.Outputs[OLE DB Source Output].ExternalColumns[total_esg_score]"
+                      dataType="numeric"
+                      name="total_esg_score"
+                      precision="38"
+                      scale="6" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_company_esg_rating\SRC - Sustainalytics ESG.Outputs[OLE DB Source Output].ExternalColumns[environment_score]"
+                      dataType="numeric"
+                      name="environment_score"
+                      precision="38"
+                      scale="6" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_company_esg_rating\SRC - Sustainalytics ESG.Outputs[OLE DB Source Output].ExternalColumns[social_score]"
+                      dataType="numeric"
+                      name="social_score"
+                      precision="38"
+                      scale="6" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_company_esg_rating\SRC - Sustainalytics ESG.Outputs[OLE DB Source Output].ExternalColumns[governance_score]"
+                      dataType="numeric"
+                      name="governance_score"
+                      precision="38"
+                      scale="6" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DFT - Load fact_company_esg_rating\SRC - Sustainalytics ESG.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load fact_company_esg_rating\SRC - Sustainalytics ESG.Outputs[OLE DB Source Error Output].Columns[rating_date_key]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_company_esg_rating\SRC - Sustainalytics ESG.Outputs[OLE DB Source Error Output].Columns[rating_date_key]"
+                      name="rating_date_key" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_company_esg_rating\SRC - Sustainalytics ESG.Outputs[OLE DB Source Error Output].Columns[company_key]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_company_esg_rating\SRC - Sustainalytics ESG.Outputs[OLE DB Source Error Output].Columns[company_key]"
+                      name="company_key" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_company_esg_rating\SRC - Sustainalytics ESG.Outputs[OLE DB Source Error Output].Columns[source_key]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_company_esg_rating\SRC - Sustainalytics ESG.Outputs[OLE DB Source Error Output].Columns[source_key]"
+                      name="source_key" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_company_esg_rating\SRC - Sustainalytics ESG.Outputs[OLE DB Source Error Output].Columns[total_esg_score]"
+                      dataType="numeric"
+                      lineageId="Package\DFT - Load fact_company_esg_rating\SRC - Sustainalytics ESG.Outputs[OLE DB Source Error Output].Columns[total_esg_score]"
+                      name="total_esg_score"
+                      precision="38"
+                      scale="6" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_company_esg_rating\SRC - Sustainalytics ESG.Outputs[OLE DB Source Error Output].Columns[environment_score]"
+                      dataType="numeric"
+                      lineageId="Package\DFT - Load fact_company_esg_rating\SRC - Sustainalytics ESG.Outputs[OLE DB Source Error Output].Columns[environment_score]"
+                      name="environment_score"
+                      precision="38"
+                      scale="6" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_company_esg_rating\SRC - Sustainalytics ESG.Outputs[OLE DB Source Error Output].Columns[social_score]"
+                      dataType="numeric"
+                      lineageId="Package\DFT - Load fact_company_esg_rating\SRC - Sustainalytics ESG.Outputs[OLE DB Source Error Output].Columns[social_score]"
+                      name="social_score"
+                      precision="38"
+                      scale="6" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_company_esg_rating\SRC - Sustainalytics ESG.Outputs[OLE DB Source Error Output].Columns[governance_score]"
+                      dataType="numeric"
+                      lineageId="Package\DFT - Load fact_company_esg_rating\SRC - Sustainalytics ESG.Outputs[OLE DB Source Error Output].Columns[governance_score]"
+                      name="governance_score"
+                      precision="38"
+                      scale="6" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_company_esg_rating\SRC - Sustainalytics ESG.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_company_esg_rating\SRC - Sustainalytics ESG.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_company_esg_rating\SRC - Sustainalytics ESG.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_company_esg_rating\SRC - Sustainalytics ESG.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DFT - Load fact_company_esg_rating.Paths[OLE DB Source Output]"
+              endId="Package\DFT - Load fact_company_esg_rating\DST - fact_company_esg_rating.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\DFT - Load fact_company_esg_rating\SRC - Sustainalytics ESG.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\DFT - Load fact_country_governance_annual"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{9B348CDE-ED5B-4903-B6ED-8E6F8CB4FA6E}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DFT - Load fact_country_governance_annual"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\DFT - Load fact_country_governance_annual\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[fact_country_governance_annual]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT - Load fact_country_governance_annual\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT - Load fact_country_governance_annual\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_country_governance_annual\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[year_key]"
+                      cachedDataType="i4"
+                      cachedName="year_key"
+                      externalMetadataColumnId="Package\DFT - Load fact_country_governance_annual\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[year_key]"
+                      lineageId="Package\DFT - Load fact_country_governance_annual\OLE DB Source.Outputs[OLE DB Source Output].Columns[year_key]" />
+                    <inputColumn
+                      refId="Package\DFT - Load fact_country_governance_annual\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[country_key]"
+                      cachedDataType="i4"
+                      cachedName="country_key"
+                      externalMetadataColumnId="Package\DFT - Load fact_country_governance_annual\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[country_key]"
+                      lineageId="Package\DFT - Load fact_country_governance_annual\OLE DB Source.Outputs[OLE DB Source Output].Columns[country_key]" />
+                    <inputColumn
+                      refId="Package\DFT - Load fact_country_governance_annual\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[rule_of_law]"
+                      cachedDataType="numeric"
+                      cachedName="rule_of_law"
+                      cachedPrecision="6"
+                      cachedScale="3"
+                      externalMetadataColumnId="Package\DFT - Load fact_country_governance_annual\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[rule_of_law]"
+                      lineageId="Package\DFT - Load fact_country_governance_annual\OLE DB Source.Outputs[OLE DB Source Output].Columns[rule_of_law]" />
+                    <inputColumn
+                      refId="Package\DFT - Load fact_country_governance_annual\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[control_of_corruption]"
+                      cachedDataType="numeric"
+                      cachedName="control_of_corruption"
+                      cachedPrecision="6"
+                      cachedScale="3"
+                      externalMetadataColumnId="Package\DFT - Load fact_country_governance_annual\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[control_of_corruption]"
+                      lineageId="Package\DFT - Load fact_country_governance_annual\OLE DB Source.Outputs[OLE DB Source Output].Columns[control_of_corruption]" />
+                    <inputColumn
+                      refId="Package\DFT - Load fact_country_governance_annual\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[regulatory_quality]"
+                      cachedDataType="numeric"
+                      cachedName="regulatory_quality"
+                      cachedPrecision="6"
+                      cachedScale="3"
+                      externalMetadataColumnId="Package\DFT - Load fact_country_governance_annual\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[regulatory_quality]"
+                      lineageId="Package\DFT - Load fact_country_governance_annual\OLE DB Source.Outputs[OLE DB Source Output].Columns[regulatory_quality]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_country_governance_annual\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[year_key]"
+                      dataType="i4"
+                      name="year_key" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_country_governance_annual\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[country_key]"
+                      dataType="i4"
+                      name="country_key" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_country_governance_annual\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[rule_of_law]"
+                      dataType="numeric"
+                      name="rule_of_law"
+                      precision="6"
+                      scale="3" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_country_governance_annual\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[control_of_corruption]"
+                      dataType="numeric"
+                      name="control_of_corruption"
+                      precision="6"
+                      scale="3" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_country_governance_annual\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[regulatory_quality]"
+                      dataType="numeric"
+                      name="regulatory_quality"
+                      precision="6"
+                      scale="3" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT - Load fact_country_governance_annual\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\DFT - Load fact_country_governance_annual\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load fact_country_governance_annual\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_country_governance_annual\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_country_governance_annual\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_country_governance_annual\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT - Load fact_country_governance_annual\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT 
+    TRY_CAST(s.raw_year AS INT) * 10000 + 101 AS year_key,
+    c.country_key,
+    TRY_CAST(s.raw_rule_of_law AS DECIMAL(6,3)) AS rule_of_law,
+    TRY_CAST(s.raw_control_of_corruption AS DECIMAL(6,3)) AS control_of_corruption,
+    TRY_CAST(s.raw_regulatory_quality AS DECIMAL(6,3)) AS regulatory_quality
+FROM dbo.stg_wb_governance s
+JOIN dbo.dim_country c 
+    ON c.country_code = LTRIM(RTRIM(s.raw_country_code))
+JOIN dbo.dim_date d 
+    ON d.date_key = TRY_CAST(s.raw_year AS INT) * 10000 + 101
+WHERE s.raw_year IS NOT NULL;</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT - Load fact_country_governance_annual\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DFT - Load fact_country_governance_annual\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load fact_country_governance_annual\OLE DB Source.Outputs[OLE DB Source Output].Columns[year_key]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load fact_country_governance_annual\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[year_key]"
+                      lineageId="Package\DFT - Load fact_country_governance_annual\OLE DB Source.Outputs[OLE DB Source Output].Columns[year_key]"
+                      name="year_key"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_country_governance_annual\OLE DB Source.Outputs[OLE DB Source Output].Columns[country_key]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load fact_country_governance_annual\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[country_key]"
+                      lineageId="Package\DFT - Load fact_country_governance_annual\OLE DB Source.Outputs[OLE DB Source Output].Columns[country_key]"
+                      name="country_key"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_country_governance_annual\OLE DB Source.Outputs[OLE DB Source Output].Columns[rule_of_law]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load fact_country_governance_annual\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[rule_of_law]"
+                      lineageId="Package\DFT - Load fact_country_governance_annual\OLE DB Source.Outputs[OLE DB Source Output].Columns[rule_of_law]"
+                      name="rule_of_law"
+                      precision="6"
+                      scale="3"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_country_governance_annual\OLE DB Source.Outputs[OLE DB Source Output].Columns[control_of_corruption]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load fact_country_governance_annual\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[control_of_corruption]"
+                      lineageId="Package\DFT - Load fact_country_governance_annual\OLE DB Source.Outputs[OLE DB Source Output].Columns[control_of_corruption]"
+                      name="control_of_corruption"
+                      precision="6"
+                      scale="3"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_country_governance_annual\OLE DB Source.Outputs[OLE DB Source Output].Columns[regulatory_quality]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load fact_country_governance_annual\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[regulatory_quality]"
+                      lineageId="Package\DFT - Load fact_country_governance_annual\OLE DB Source.Outputs[OLE DB Source Output].Columns[regulatory_quality]"
+                      name="regulatory_quality"
+                      precision="6"
+                      scale="3"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_country_governance_annual\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[year_key]"
+                      dataType="i4"
+                      name="year_key" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_country_governance_annual\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[country_key]"
+                      dataType="i4"
+                      name="country_key" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_country_governance_annual\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[rule_of_law]"
+                      dataType="numeric"
+                      name="rule_of_law"
+                      precision="6"
+                      scale="3" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_country_governance_annual\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[control_of_corruption]"
+                      dataType="numeric"
+                      name="control_of_corruption"
+                      precision="6"
+                      scale="3" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_country_governance_annual\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[regulatory_quality]"
+                      dataType="numeric"
+                      name="regulatory_quality"
+                      precision="6"
+                      scale="3" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DFT - Load fact_country_governance_annual\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load fact_country_governance_annual\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[year_key]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_country_governance_annual\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[year_key]"
+                      name="year_key" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_country_governance_annual\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[country_key]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_country_governance_annual\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[country_key]"
+                      name="country_key" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_country_governance_annual\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[rule_of_law]"
+                      dataType="numeric"
+                      lineageId="Package\DFT - Load fact_country_governance_annual\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[rule_of_law]"
+                      name="rule_of_law"
+                      precision="6"
+                      scale="3" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_country_governance_annual\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[control_of_corruption]"
+                      dataType="numeric"
+                      lineageId="Package\DFT - Load fact_country_governance_annual\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[control_of_corruption]"
+                      name="control_of_corruption"
+                      precision="6"
+                      scale="3" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_country_governance_annual\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[regulatory_quality]"
+                      dataType="numeric"
+                      lineageId="Package\DFT - Load fact_country_governance_annual\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[regulatory_quality]"
+                      name="regulatory_quality"
+                      precision="6"
+                      scale="3" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_country_governance_annual\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_country_governance_annual\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_country_governance_annual\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_country_governance_annual\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DFT - Load fact_country_governance_annual.Paths[OLE DB Source Output]"
+              endId="Package\DFT - Load fact_country_governance_annual\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\DFT - Load fact_country_governance_annual\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{B8E2A027-DEAC-4F18-BFEE-AA121FFA89E3}"
+      DTS:From="Package\DFT - Load fact_company_esg_rating"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\DFT - Load fact_country_governance_annual" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="256,42.6666666666667"
+          Id="Package\DFT - Load fact_company_esg_rating"
+          TopLeft="136.749994132668,117.949994637966" />
+        <NodeLayout
+          Size="292,42.6666666666667"
+          Id="Package\DFT - Load fact_country_governance_annual"
+          TopLeft="124.999994412065,206.049990174771" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="267.874994272366,160.616661304633">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,45.4333288701376"
+              Start="0,0"
+              End="0,37.9333288701376">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,37.9333288701376" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\DFT - Load fact_company_esg_rating">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="194.666666666667,42.6666666666667"
+          Id="Package\DFT - Load fact_company_esg_rating\SRC - Sustainalytics ESG"
+          TopLeft="233.124989578501,133.899993615151" />
+        <NodeLayout
+          Size="230.666666666667,42.6666666666667"
+          Id="Package\DFT - Load fact_company_esg_rating\DST - fact_company_esg_rating"
+          TopLeft="222.499990053475,233.349988873005" />
+        <EdgeLayout
+          Id="Package\DFT - Load fact_company_esg_rating.Paths[OLE DB Source Output]"
+          TopLeft="334.145823149321,176.566660281817">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,56.783328591188"
+              Start="0,0"
+              End="0,49.283328591188">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,49.283328591188" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT - Load fact_company_esg_rating\SRC - Sustainalytics ESG">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT - Load fact_company_esg_rating\DST - fact_company_esg_rating">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\DFT - Load fact_country_governance_annual">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="150.666666666667,42.6666666666667"
+          Id="Package\DFT - Load fact_country_governance_annual\OLE DB Source"
+          TopLeft="300.499991044402,108.499996766448" />
+        <NodeLayout
+          Size="172,42.6666666666667"
+          Id="Package\DFT - Load fact_country_governance_annual\OLE DB Destination"
+          TopLeft="290.999991327525,230.499993130565" />
+        <EdgeLayout
+          Id="Package\DFT - Load fact_country_governance_annual.Paths[OLE DB Source Output]"
+          TopLeft="376.41665785263,151.166663433115">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,79.3333296974501"
+              Start="0,0"
+              End="0,71.8333296974501">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,71.8333296974501" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT - Load fact_country_governance_annual\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT - Load fact_country_governance_annual\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
 </DTS:Executable>
