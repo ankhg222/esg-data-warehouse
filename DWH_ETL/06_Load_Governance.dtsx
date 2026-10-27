@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package2"
   DTS:PackageType="5"
-  DTS:VersionBuild="2"
-  DTS:VersionGUID="{5352ED46-D731-4D4D-A5B5-2757725D9B11}">
+  DTS:VersionBuild="3"
+  DTS:VersionGUID="{AE5ABF28-EF1A-4C6A-B0DE-A1377970D8BD}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -617,24 +617,24 @@ GROUP BY
                       refId="Package\DFT - Load fact_country_governance_annual\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[rule_of_law]"
                       cachedDataType="numeric"
                       cachedName="rule_of_law"
-                      cachedPrecision="6"
-                      cachedScale="3"
+                      cachedPrecision="38"
+                      cachedScale="6"
                       externalMetadataColumnId="Package\DFT - Load fact_country_governance_annual\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[rule_of_law]"
                       lineageId="Package\DFT - Load fact_country_governance_annual\OLE DB Source.Outputs[OLE DB Source Output].Columns[rule_of_law]" />
                     <inputColumn
                       refId="Package\DFT - Load fact_country_governance_annual\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[control_of_corruption]"
                       cachedDataType="numeric"
                       cachedName="control_of_corruption"
-                      cachedPrecision="6"
-                      cachedScale="3"
+                      cachedPrecision="38"
+                      cachedScale="6"
                       externalMetadataColumnId="Package\DFT - Load fact_country_governance_annual\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[control_of_corruption]"
                       lineageId="Package\DFT - Load fact_country_governance_annual\OLE DB Source.Outputs[OLE DB Source Output].Columns[control_of_corruption]" />
                     <inputColumn
                       refId="Package\DFT - Load fact_country_governance_annual\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[regulatory_quality]"
                       cachedDataType="numeric"
                       cachedName="regulatory_quality"
-                      cachedPrecision="6"
-                      cachedScale="3"
+                      cachedPrecision="38"
+                      cachedScale="6"
                       externalMetadataColumnId="Package\DFT - Load fact_country_governance_annual\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[regulatory_quality]"
                       lineageId="Package\DFT - Load fact_country_governance_annual\OLE DB Source.Outputs[OLE DB Source Output].Columns[regulatory_quality]" />
                   </inputColumns>
@@ -720,17 +720,21 @@ GROUP BY
                   description="The SQL command to be executed."
                   name="SqlCommand"
                   UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT 
-    TRY_CAST(s.raw_year AS INT) * 10000 + 101 AS year_key,
+    ISNULL(TRY_CAST(s.raw_year AS INT), 2023) * 10000 + 101 AS year_key,
     c.country_key,
-    TRY_CAST(s.raw_rule_of_law AS DECIMAL(6,3)) AS rule_of_law,
-    TRY_CAST(s.raw_control_of_corruption AS DECIMAL(6,3)) AS control_of_corruption,
-    TRY_CAST(s.raw_regulatory_quality AS DECIMAL(6,3)) AS regulatory_quality
+    AVG(TRY_CAST(s.raw_rule_of_law AS DECIMAL(6,3))) AS rule_of_law,
+    AVG(TRY_CAST(s.raw_control_of_corruption AS DECIMAL(6,3))) AS control_of_corruption,
+    AVG(TRY_CAST(s.raw_regulatory_quality AS DECIMAL(6,3))) AS regulatory_quality
 FROM dbo.stg_wb_governance s
 JOIN dbo.dim_country c 
     ON c.country_code = LTRIM(RTRIM(s.raw_country_code))
 JOIN dbo.dim_date d 
-    ON d.date_key = TRY_CAST(s.raw_year AS INT) * 10000 + 101
-WHERE s.raw_year IS NOT NULL;</property>
+    ON d.date_key = ISNULL(TRY_CAST(s.raw_year AS INT), 2023) * 10000 + 101
+WHERE s.raw_rule_of_law IS NOT NULL 
+  AND LTRIM(RTRIM(s.raw_rule_of_law)) &lt;&gt; ''
+GROUP BY 
+    ISNULL(TRY_CAST(s.raw_year AS INT), 2023) * 10000 + 101,
+    c.country_key;</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -792,8 +796,8 @@ WHERE s.raw_year IS NOT NULL;</property>
                       externalMetadataColumnId="Package\DFT - Load fact_country_governance_annual\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[rule_of_law]"
                       lineageId="Package\DFT - Load fact_country_governance_annual\OLE DB Source.Outputs[OLE DB Source Output].Columns[rule_of_law]"
                       name="rule_of_law"
-                      precision="6"
-                      scale="3"
+                      precision="38"
+                      scale="6"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
                       refId="Package\DFT - Load fact_country_governance_annual\OLE DB Source.Outputs[OLE DB Source Output].Columns[control_of_corruption]"
@@ -803,8 +807,8 @@ WHERE s.raw_year IS NOT NULL;</property>
                       externalMetadataColumnId="Package\DFT - Load fact_country_governance_annual\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[control_of_corruption]"
                       lineageId="Package\DFT - Load fact_country_governance_annual\OLE DB Source.Outputs[OLE DB Source Output].Columns[control_of_corruption]"
                       name="control_of_corruption"
-                      precision="6"
-                      scale="3"
+                      precision="38"
+                      scale="6"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
                       refId="Package\DFT - Load fact_country_governance_annual\OLE DB Source.Outputs[OLE DB Source Output].Columns[regulatory_quality]"
@@ -814,8 +818,8 @@ WHERE s.raw_year IS NOT NULL;</property>
                       externalMetadataColumnId="Package\DFT - Load fact_country_governance_annual\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[regulatory_quality]"
                       lineageId="Package\DFT - Load fact_country_governance_annual\OLE DB Source.Outputs[OLE DB Source Output].Columns[regulatory_quality]"
                       name="regulatory_quality"
-                      precision="6"
-                      scale="3"
+                      precision="38"
+                      scale="6"
                       truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
@@ -832,20 +836,20 @@ WHERE s.raw_year IS NOT NULL;</property>
                       refId="Package\DFT - Load fact_country_governance_annual\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[rule_of_law]"
                       dataType="numeric"
                       name="rule_of_law"
-                      precision="6"
-                      scale="3" />
+                      precision="38"
+                      scale="6" />
                     <externalMetadataColumn
                       refId="Package\DFT - Load fact_country_governance_annual\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[control_of_corruption]"
                       dataType="numeric"
                       name="control_of_corruption"
-                      precision="6"
-                      scale="3" />
+                      precision="38"
+                      scale="6" />
                     <externalMetadataColumn
                       refId="Package\DFT - Load fact_country_governance_annual\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[regulatory_quality]"
                       dataType="numeric"
                       name="regulatory_quality"
-                      precision="6"
-                      scale="3" />
+                      precision="38"
+                      scale="6" />
                   </externalMetadataColumns>
                 </output>
                 <output
@@ -868,22 +872,22 @@ WHERE s.raw_year IS NOT NULL;</property>
                       dataType="numeric"
                       lineageId="Package\DFT - Load fact_country_governance_annual\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[rule_of_law]"
                       name="rule_of_law"
-                      precision="6"
-                      scale="3" />
+                      precision="38"
+                      scale="6" />
                     <outputColumn
                       refId="Package\DFT - Load fact_country_governance_annual\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[control_of_corruption]"
                       dataType="numeric"
                       lineageId="Package\DFT - Load fact_country_governance_annual\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[control_of_corruption]"
                       name="control_of_corruption"
-                      precision="6"
-                      scale="3" />
+                      precision="38"
+                      scale="6" />
                     <outputColumn
                       refId="Package\DFT - Load fact_country_governance_annual\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[regulatory_quality]"
                       dataType="numeric"
                       lineageId="Package\DFT - Load fact_country_governance_annual\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[regulatory_quality]"
                       name="regulatory_quality"
-                      precision="6"
-                      scale="3" />
+                      precision="38"
+                      scale="6" />
                     <outputColumn
                       refId="Package\DFT - Load fact_country_governance_annual\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       dataType="i4"
@@ -936,27 +940,27 @@ WHERE s.raw_year IS NOT NULL;</property>
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="256,43"
+          Size="255,42"
           Id="Package\DFT - Load fact_company_esg_rating"
-          TopLeft="71.749999720603,60" />
+          TopLeft="23.5,5.5" />
         <NodeLayout
-          Size="292,43"
+          Size="291,42"
           Id="Package\DFT - Load fact_country_governance_annual"
-          TopLeft="60,148.099995536805" />
+          TopLeft="5.50000000000003,107.5" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="202.874999860301,102.666666666667">
+          TopLeft="151,47.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,45.4333288701376"
+              EndConnector="0,60"
               Start="0,0"
-              End="0,37.9333288701376">
+              End="0,52.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,37.9333288701376" />
+                    End="0,52.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -974,27 +978,27 @@ WHERE s.raw_year IS NOT NULL;</property>
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="231,43"
-          Id="Package\DFT - Load fact_company_esg_rating\DST - fact_company_esg_rating"
-          TopLeft="222.499990053475,233.349988873005" />
-        <NodeLayout
-          Size="195,43"
+          Size="194,42"
           Id="Package\DFT - Load fact_company_esg_rating\SRC - Sustainalytics ESG"
-          TopLeft="233.124989578501,133.899993615151" />
+          TopLeft="23.5,5.5" />
+        <NodeLayout
+          Size="230,42"
+          Id="Package\DFT - Load fact_company_esg_rating\DST - fact_company_esg_rating"
+          TopLeft="5.50000000000001,107.5" />
         <EdgeLayout
           Id="Package\DFT - Load fact_company_esg_rating.Paths[OLE DB Source Output]"
-          TopLeft="334.145823149321,176.566660281817">
+          TopLeft="120.5,47.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,56.783328591188"
+              EndConnector="0,60"
               Start="0,0"
-              End="0,49.283328591188">
+              End="0,52.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,49.283328591188" />
+                    End="0,52.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1006,59 +1010,33 @@ WHERE s.raw_year IS NOT NULL;</property>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\DFT - Load fact_company_esg_rating\DST - fact_company_esg_rating">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\DFT - Load fact_company_esg_rating\SRC - Sustainalytics ESG">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
   <TaskHost
     design-time-name="Package\DFT - Load fact_country_governance_annual">
     <LayoutInfo>
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="172,43"
+          Size="171,42"
           Id="Package\DFT - Load fact_country_governance_annual\OLE DB Destination"
-          TopLeft="290.999991327525,230.499993130565" />
+          TopLeft="5.50000000000001,107.5" />
         <NodeLayout
-          Size="151,43"
+          Size="150,42"
           Id="Package\DFT - Load fact_country_governance_annual\OLE DB Source"
-          TopLeft="300.499991044402,108.499996766448" />
+          TopLeft="16,5.5" />
         <EdgeLayout
           Id="Package\DFT - Load fact_country_governance_annual.Paths[OLE DB Source Output]"
-          TopLeft="376.41665785263,151.166663433115">
+          TopLeft="91,47.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,79.3333296974501"
+              EndConnector="0,60"
               Start="0,0"
-              End="0,71.8333296974501">
+              End="0,52.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,71.8333296974501" />
+                    End="0,52.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1070,19 +1048,6 @@ WHERE s.raw_year IS NOT NULL;</property>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\DFT - Load fact_country_governance_annual\OLE DB Destination">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\DFT - Load fact_country_governance_annual\OLE DB Source">
     <Properties>

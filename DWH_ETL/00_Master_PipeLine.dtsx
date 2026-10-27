@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="4"
-  DTS:VersionGUID="{3EE041D1-CD81-4E28-AEAD-BFC9A1D85888}">
+  DTS:VersionBuild="5"
+  DTS:VersionGUID="{84BF1039-9CC8-4A64-8A8E-C740070E08F9}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -305,33 +305,45 @@
       <GraphLayout
         Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
+          Size="207,42"
+          Id="Package\Clean All Facts Before Load"
+          TopLeft="209,22" />
+        <NodeLayout
           Size="183,42"
           Id="Package\EPT - Load All Staging"
           TopLeft="454,22" />
-        <NodeLayout
-          Size="219,42"
-          Id="Package\EPT - Load Shared Dimension"
-          TopLeft="433,137" />
-        <NodeLayout
-          Size="208,42"
-          Id="Package\EPT - Load Core Dimension"
-          TopLeft="442,230" />
         <NodeLayout
           Size="168,42"
           Id="Package\EPT - Load Bridges"
           TopLeft="463,299" />
         <NodeLayout
+          Size="208,42"
+          Id="Package\EPT - Load Core Dimension"
+          TopLeft="442,230" />
+        <NodeLayout
           Size="193,42"
           Id="Package\EPT - Load Environment"
           TopLeft="247,391" />
+        <NodeLayout
+          Size="189,42"
+          Id="Package\EPT - Load Governance"
+          TopLeft="684,389" />
+        <NodeLayout
+          Size="219,42"
+          Id="Package\EPT - Load Shared Dimension"
+          TopLeft="433,137" />
         <NodeLayout
           Size="161,42"
           Id="Package\EPT - Load Social"
           TopLeft="467,390" />
         <NodeLayout
-          Size="189,42"
-          Id="Package\EPT - Load Governance"
-          TopLeft="684,389" />
+          Size="117,42"
+          Id="Package\Log End"
+          TopLeft="490,543" />
+        <NodeLayout
+          Size="122,42"
+          Id="Package\Log Start"
+          TopLeft="46,21" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
           TopLeft="544,64">
@@ -368,6 +380,28 @@
                   Capacity="5">
                   <mssgle:LineSegment
                     End="0,43.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 10]"
+          TopLeft="168,42.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="41,0"
+              Start="0,0"
+              End="33.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="33.5,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -488,14 +522,28 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="122,42"
-          Id="Package\Log Start"
-          TopLeft="46,21" />
-        <NodeLayout
-          Size="117,42"
-          Id="Package\Log End"
-          TopLeft="490,543" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 6]"
+          TopLeft="416,43">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="38,0"
+              Start="0,0"
+              End="30.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="30.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 7]"
           TopLeft="343.5,433">
@@ -578,54 +626,6 @@
                     Point3="-202.75,77.0027855153203" />
                   <mssgle:LineSegment
                     End="-202.75,104.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="207,42"
-          Id="Package\Clean All Facts Before Load"
-          TopLeft="209,22" />
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 10]"
-          TopLeft="168,42.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="41,0"
-              Start="0,0"
-              End="33.5,0">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="33.5,0" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 6]"
-          TopLeft="416,43">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="38,0"
-              Start="0,0"
-              End="30.5,0">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="30.5,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
