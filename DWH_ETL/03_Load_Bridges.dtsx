@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="11"
-  DTS:VersionGUID="{42B84E0D-F7DF-47D2-A847-39B0DFAAD556}">
+  DTS:VersionBuild="12"
+  DTS:VersionGUID="{DD9551C6-3D21-41CF-B11D-6D8CB91D8EAA}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -25,7 +25,7 @@
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=.\MSSQLSERVER2022;Initial Catalog=DW_TRAIN;Provider=SQLOLEDB.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-01_Load_Shared_Dimension-{B43EF373-F2EB-441D-BF82-44E179CA9F9F}localhost;" />
+          DTS:ConnectionString="Data Source=.;Initial Catalog=DW_TRAIN;Provider=SQLOLEDB.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-01_Load_Shared_Dimension-{B43EF373-F2EB-441D-BF82-44E179CA9F9F}localhost;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
@@ -230,7 +230,7 @@
     ) AS ownership_pct
 FROM dbo.stg_ghgrp_parent_company p
 JOIN dbo.bridge_plant_ghgrp_facility b 
-    ON b.ghgrp_facility_id = TRY_CAST(REPLACE(p.raw_facility_id, '"', '') AS INT)
+    ON b.ghgrp_facility_id = CAST(TRY_CAST(REPLACE(p.raw_facility_id, '"', '') AS FLOAT) AS INT)
 JOIN dbo.dim_plant dp 
     ON dp.oris_code = b.oris_code AND dp.is_current = 1
 JOIN dbo.dim_parent_company c 
@@ -554,13 +554,13 @@ GROUP BY
                   description="The SQL command to be executed."
                   name="SqlCommand"
                   UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT DISTINCT
-    TRY_CAST(c.raw_oris_code AS INT) AS oris_code,
-    TRY_CAST(c.raw_ghgrp_id AS INT) AS ghgrp_facility_id
+    CAST(TRY_CAST(c.raw_oris_code AS FLOAT) AS INT) AS oris_code,
+    CAST(TRY_CAST(c.raw_ghgrp_id AS FLOAT) AS INT) AS ghgrp_facility_id
 FROM dbo.stg_oris_crosswalk c
 INNER JOIN dbo.stg_ghgrp_facility f
-    ON TRY_CAST(c.raw_ghgrp_id AS INT) = TRY_CAST(f.raw_facility_id AS INT)
-WHERE TRY_CAST(c.raw_oris_code AS INT) IS NOT NULL 
-  AND TRY_CAST(c.raw_ghgrp_id AS INT) IS NOT NULL;</property>
+    ON CAST(TRY_CAST(c.raw_ghgrp_id AS FLOAT) AS INT) = CAST(TRY_CAST(f.raw_facility_id AS FLOAT) AS INT)
+WHERE CAST(TRY_CAST(c.raw_oris_code AS FLOAT) AS INT) IS NOT NULL 
+  AND CAST(TRY_CAST(c.raw_ghgrp_id AS FLOAT) AS INT) IS NOT NULL;</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -694,13 +694,13 @@ WHERE TRY_CAST(c.raw_oris_code AS INT) IS NOT NULL
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="262.666666666667,42.6666666666667"
-          Id="Package\DFT - Load bridge_plant_ghgrp_facility"
-          TopLeft="416.249981392176,184.599991197586" />
-        <NodeLayout
-          Size="242.666666666667,42.6666666666667"
+          Size="243,43"
           Id="Package\DFT - Load bridge_plant_company"
           TopLeft="419.999981224537,291.199986114502" />
+        <NodeLayout
+          Size="263,43"
+          Id="Package\DFT - Load bridge_plant_ghgrp_facility"
+          TopLeft="416.249981392176,184.599991197586" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
           TopLeft="544.45831464169,227.266657864253">
@@ -727,69 +727,10 @@ WHERE TRY_CAST(c.raw_oris_code AS INT) IS NOT NULL
     </LayoutInfo>
   </Package>
   <TaskHost
-    design-time-name="Package\DFT - Load bridge_plant_ghgrp_facility">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="196.666666666667,42.6666666666667"
-          Id="Package\DFT - Load bridge_plant_ghgrp_facility\SRC - stg_oris_crosswalk"
-          TopLeft="467.499979101122,106.599994916916" />
-        <NodeLayout
-          Size="237.333333333334,42.6666666666667"
-          Id="Package\DFT - Load bridge_plant_ghgrp_facility\DST - bridge_plant_ghgrp_facility"
-          TopLeft="453.124979743735,224.249989306927" />
-        <EdgeLayout
-          Id="Package\DFT - Load bridge_plant_ghgrp_facility.Paths[OLE DB Source Output]"
-          TopLeft="568.812479422428,149.266661583583">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,74.9833277233444"
-              Start="0,0"
-              End="0,67.4833277233444">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,67.4833277233444" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-      </GraphLayout>
-    </LayoutInfo>
-  </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\DFT - Load bridge_plant_ghgrp_facility\SRC - stg_oris_crosswalk">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\DFT - Load bridge_plant_ghgrp_facility\DST - bridge_plant_ghgrp_facility">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <TaskHost
     design-time-name="Package\DFT - Load bridge_plant_company">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="213.333333333334,42.6666666666667"
           Id="Package\DFT - Load bridge_plant_company\SRC - Bridge Plant Company"
@@ -817,20 +758,14 @@ WHERE TRY_CAST(c.raw_oris_code AS INT) IS NOT NULL
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\DFT - Load bridge_plant_company\SRC - Bridge Plant Company">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\DFT - Load bridge_plant_company\DST - bridge_plant_company">
     <Properties>
@@ -841,6 +776,75 @@ WHERE TRY_CAST(c.raw_oris_code AS INT) IS NOT NULL
         <Name>TableInfoObjectType</Name>
         <Value
           type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT - Load bridge_plant_company\SRC - Bridge Plant Company">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\DFT - Load bridge_plant_ghgrp_facility">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="196.666666666667,42.6666666666667"
+          Id="Package\DFT - Load bridge_plant_ghgrp_facility\SRC - stg_oris_crosswalk"
+          TopLeft="467.499979101122,106.599994916916" />
+        <NodeLayout
+          Size="237.333333333334,42.6666666666667"
+          Id="Package\DFT - Load bridge_plant_ghgrp_facility\DST - bridge_plant_ghgrp_facility"
+          TopLeft="453.124979743735,224.249989306927" />
+        <EdgeLayout
+          Id="Package\DFT - Load bridge_plant_ghgrp_facility.Paths[OLE DB Source Output]"
+          TopLeft="568.812479422428,149.266661583583">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,74.9833277233444"
+              Start="0,0"
+              End="0,67.4833277233444">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,67.4833277233444" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT - Load bridge_plant_ghgrp_facility\DST - bridge_plant_ghgrp_facility">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT - Load bridge_plant_ghgrp_facility\SRC - stg_oris_crosswalk">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
       </Property>
     </Properties>
   </PipelineComponentMetadata>

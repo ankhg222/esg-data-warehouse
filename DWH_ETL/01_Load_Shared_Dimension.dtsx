@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="32"
-  DTS:VersionGUID="{10E5F8D9-AE87-43E5-ABCB-35D44D2DBB74}">
+  DTS:VersionBuild="37"
+  DTS:VersionGUID="{30EB41CB-8E1C-4BBD-A92F-034938BD3ABD}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -25,7 +25,7 @@
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=.\MSSQLSERVER2022;Initial Catalog=DW_TRAIN;Provider=SQLOLEDB.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-Package1-{9C983A6A-8C21-40CD-9162-5A77E4193F91}localhost;" />
+          DTS:ConnectionString="Data Source=.;Initial Catalog=DW_TRAIN;Provider=SQLOLEDB.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-Package1-{9C983A6A-8C21-40CD-9162-5A77E4193F91}localhost;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
@@ -37,7 +37,7 @@
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="0"
           DTS:ConnectRetryInterval="0"
-          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\FourthYear\DOT1\DataWarehouse\esg-data-warehouse\data\eia930\Balancing Authority\PJM.xlsx;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\DWH\FinalProject\dataset\new_data\eia930\Balancing Authority\PJM.xlsx;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
@@ -57,7 +57,7 @@
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{9C983A6A-8C21-40CD-9162-5A77E4193F91}"
-          SQLTask:SqlStatementSource="DELETE FROM dbo.dim_hour;&#xA;DELETE FROM dbo.dim_date;&#xA;DELETE FROM dbo.dim_ba;&#xA;DBCC CHECKIDENT ('dbo.dim_ba', RESEED, 0);" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="-- 1. Tạm tắt ràng buộc khóa ngoại tham chiếu đến các chiều dùng chung&#xA;ALTER TABLE dbo.dim_plant NOCHECK CONSTRAINT FK_dim_plant_ba;&#xA;ALTER TABLE dbo.dim_parent_company NOCHECK CONSTRAINT FK_dim_parent_company_country;&#xA;&#xA;-- 2. Dọn dẹp sạch dữ liệu cũ&#xA;DELETE FROM dbo.dim_hour;&#xA;DELETE FROM dbo.dim_date;&#xA;DELETE FROM dbo.dim_ba;&#xA;DBCC CHECKIDENT ('dbo.dim_ba', RESEED, 0);&#xA;&#xA;DELETE FROM dbo.dim_country;&#xA;DBCC CHECKIDENT ('dbo.dim_country', RESEED, 0);&#xA;&#xA;-- 3. Bật lại ràng buộc khóa ngoại&#xA;ALTER TABLE dbo.dim_plant CHECK CONSTRAINT FK_dim_plant_ba;&#xA;ALTER TABLE dbo.dim_parent_company CHECK CONSTRAINT FK_dim_parent_company_country;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -1271,9 +1271,7 @@ where [refTable].[sector_code] = ?</property>
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT DISTINCT UPPER(LTRIM(RTRIM(raw_sector_code))) AS sector_code
-FROM [dbo].[stg_eia861_sales]
-WHERE raw_sector_code IS NOT NULL AND LTRIM(RTRIM(raw_sector_code)) &lt;&gt; '';</property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT DISTINCT CAST(UPPER(LTRIM(RTRIM(raw_sector_code))) AS VARCHAR(15)) AS sector_code FROM [dbo].[stg_eia861_sales] WHERE raw_sector_code IS NOT NULL;</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -1836,11 +1834,9 @@ where [refTable].[state_code] = ?</property>
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT DISTINCT UPPER(LTRIM(RTRIM(raw_state))) AS state_code
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT DISTINCT CAST(UPPER(LTRIM(RTRIM(raw_state))) AS VARCHAR(2)) AS state_code
 FROM [dbo].[stg_eia861_sales]
-WHERE raw_state IS NOT NULL 
-  AND LTRIM(RTRIM(raw_state)) &lt;&gt; ''
-  AND LEN(LTRIM(RTRIM(raw_state))) = 2;</property>
+WHERE raw_state IS NOT NULL AND LEN(LTRIM(RTRIM(raw_state))) &lt;= 2</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -2016,6 +2012,22 @@ WHERE raw_state IS NOT NULL
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 3"
       DTS:To="Package\Execute SQL Task Seed Dim Data Source" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{BA9B1001-0DE8-4552-B84F-99C01188A724}"
+      DTS:From="Package\Execute SQL Task Seed Dim Data Source"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\DFT - Load dim_state" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{73C0E2E8-2644-4AE0-B06D-85F3328F3275}"
+      DTS:From="Package\DFT - Load dim_state"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\DFT - Load dim_customer_sector" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
@@ -2030,39 +2042,47 @@ WHERE raw_state IS NOT NULL
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="228,42.6666666666667"
+          Size="228,42"
           Id="Package\Clean Shared Dims Before Load"
-          TopLeft="251.62500086613,120" />
+          TopLeft="37,5.5" />
         <NodeLayout
-          Size="214.666666666667,42"
+          Size="215,42"
           Id="Package\Data Flow Task Load Dim BA"
-          TopLeft="263,223" />
+          TopLeft="43.5,107.5" />
         <NodeLayout
-          Size="234,42"
+          Size="193,42"
+          Id="Package\DFT - Load dim_country"
+          TopLeft="54.5,311.5" />
+        <NodeLayout
+          Size="235,42"
           Id="Package\DFT - Load dim_customer_sector"
-          TopLeft="442.214286194772,403.382352935144" />
+          TopLeft="33.5000000000001,617.5" />
         <NodeLayout
-          Size="181.333333333334,42.6666666666667"
+          Size="181,42"
           Id="Package\DFT - Load dim_state"
-          TopLeft="222,402" />
+          TopLeft="60.5000000000001,515.5" />
         <NodeLayout
-          Size="292,42.6666666666667"
+          Size="291,42"
           Id="Package\Execute SQL Task Populate Dim Date &amp; Hour"
-          TopLeft="222,300" />
+          TopLeft="5.50000000000003,209.5" />
+        <NodeLayout
+          Size="272,42"
+          Id="Package\Execute SQL Task Seed Dim Data Source"
+          TopLeft="15.0000000000001,413.5" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="369.166666666667,265">
+          TopLeft="151,149.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,35"
+              EndConnector="0,60"
               Start="0,0"
-              End="0,27.5">
+              End="0,52.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,27.5" />
+                    End="0,52.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2073,18 +2093,18 @@ WHERE raw_state IS NOT NULL
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="367.979167099732,162.666666666667">
+          TopLeft="151,47.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,60.3333333333333"
+              EndConnector="0,60"
               Start="0,0"
-              End="0,52.8333333333333">
+              End="0,52.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,52.8333333333333" />
+                    End="0,52.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2093,24 +2113,20 @@ WHERE raw_state IS NOT NULL
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="193.333333333334,42.6666666666667"
-          Id="Package\DFT - Load dim_country"
-          TopLeft="584.999973848463,302.249985587597" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="514,322.458326127132">
+          TopLeft="151,251.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="70.9999738484628,0"
+              EndConnector="0,60"
               Start="0,0"
-              End="63.4999738484628,0">
+              End="0,52.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="63.4999738484628,0" />
+                    End="0,52.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2119,24 +2135,64 @@ WHERE raw_state IS NOT NULL
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="273.333333333334,42.6666666666667"
-          Id="Package\Execute SQL Task Seed Dim Data Source"
-          TopLeft="854.999961778522,304.199985494614" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3]"
-          TopLeft="778.333307181796,324.558318874439">
+          TopLeft="151,353.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="76.6666545967262,0"
+              EndConnector="0,60"
               Start="0,0"
-              End="69.1666545967262,0">
+              End="0,52.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="69.1666545967262,0" />
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="151,455.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="151,557.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2152,164 +2208,150 @@ WHERE raw_state IS NOT NULL
     design-time-name="Package\Data Flow Task Load Dim BA">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="170.666666666667,42"
+          Size="NaN,NaN"
           Id="Package\Data Flow Task Load Dim BA\OLE DB Destination"
-          TopLeft="599,79" />
+          TopLeft="NaN,NaN" />
         <NodeLayout
-          Size="138.666666666667,42"
+          Size="NaN,NaN"
           Id="Package\Data Flow Task Load Dim BA\Excel Source"
-          TopLeft="102,74" />
+          TopLeft="NaN,NaN" />
         <NodeLayout
-          Size="156,42"
+          Size="NaN,NaN"
           Id="Package\Data Flow Task Load Dim BA\Data Conversion"
-          TopLeft="320,84" />
+          TopLeft="NaN,NaN" />
         <EdgeLayout
           Id="Package\Data Flow Task Load Dim BA.Paths[Excel Source Output]"
-          TopLeft="241,95">
+          TopLeft="NaN,NaN">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="79,10"
+              EndConnector="{assembly:Null}"
               Start="0,0"
-              End="71.5,10">
+              End="0,0">
               <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="35.5,0" />
-                  <mssgle:CubicBezierSegment
-                    Point1="35.5,0"
-                    Point2="39.5,0"
-                    Point3="39.5,4" />
-                  <mssgle:LineSegment
-                    End="39.5,6" />
-                  <mssgle:CubicBezierSegment
-                    Point1="39.5,6"
-                    Point2="39.5,10"
-                    Point3="43.5,10" />
-                  <mssgle:LineSegment
-                    End="71.5,10" />
-                </mssgle:SegmentCollection>
+                <assembly:Null />
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Data Flow Task Load Dim BA.Paths[Data Conversion Output]"
-          TopLeft="476,102.5">
+          TopLeft="NaN,NaN">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="123,0"
+              EndConnector="{assembly:Null}"
               Start="0,0"
-              End="115.5,0">
+              End="0,0">
               <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="115.5,0" />
-                </mssgle:SegmentCollection>
+                <assembly:Null />
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\Data Flow Task Load Dim BA\OLE DB Destination">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Data Flow Task Load Dim BA\Excel Source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\DFT - Load dim_country">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="NaN,NaN"
+          Id="Package\DFT - Load dim_country\OLE DB Source"
+          TopLeft="NaN,NaN" />
+        <NodeLayout
+          Size="NaN,NaN"
+          Id="Package\DFT - Load dim_country\OLE DB Destination"
+          TopLeft="NaN,NaN" />
+        <EdgeLayout
+          Id="Package\DFT - Load dim_country.Paths[OLE DB Source Output]"
+          TopLeft="NaN,NaN">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="{assembly:Null}"
+              Start="0,0"
+              End="0,0">
+              <mssgle:Curve.Segments>
+                <assembly:Null />
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
   <TaskHost
     design-time-name="Package\DFT - Load dim_customer_sector">
     <LayoutInfo>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="112.8,41.6"
+          Size="NaN,NaN"
           Id="Package\DFT - Load dim_customer_sector\Lookup"
-          TopLeft="280.999995812774,287.999995708466" />
+          TopLeft="NaN,NaN" />
         <NodeLayout
-          Size="152.8,41.6"
+          Size="NaN,NaN"
           Id="Package\DFT - Load dim_customer_sector\Derived Column"
-          TopLeft="261.499996185303,206.499997004867" />
+          TopLeft="NaN,NaN" />
         <NodeLayout
-          Size="149.6,41.6"
+          Size="NaN,NaN"
           Id="Package\DFT - Load dim_customer_sector\OLE DB Source"
-          TopLeft="256.999996170402,125.999998122454" />
+          TopLeft="NaN,NaN" />
         <NodeLayout
-          Size="170.4,41.6"
+          Size="NaN,NaN"
           Id="Package\DFT - Load dim_customer_sector\OLE DB Destination"
-          TopLeft="244.499996885657,381.499994844198" />
+          TopLeft="NaN,NaN" />
         <EdgeLayout
           Id="Package\DFT - Load dim_customer_sector.Paths[Lookup No Match Output]"
-          TopLeft="333.549996349215,329.599995708466">
+          TopLeft="NaN,NaN">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,51.8999991357326"
+              EndConnector="{assembly:Null}"
               Start="0,0"
-              End="0,44.3999991357326">
+              End="0,0">
               <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,44.3999991357326" />
-                </mssgle:SegmentCollection>
+                <assembly:Null />
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-55.80638671875,16.3953120678663,111.6127734375,11.609375"
+              BoundingBox="0,0,0,0"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\DFT - Load dim_customer_sector.Paths[Derived Column Output]"
-          TopLeft="337.649995999038,248.099997004867">
+          TopLeft="NaN,NaN">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,39.8999987035989"
+              EndConnector="{assembly:Null}"
               Start="0,0"
-              End="0,32.3999987035989">
+              End="0,0">
               <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,32.3999987035989" />
-                </mssgle:SegmentCollection>
+                <assembly:Null />
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
@@ -2321,19 +2363,15 @@ WHERE raw_state IS NOT NULL
         </EdgeLayout>
         <EdgeLayout
           Id="Package\DFT - Load dim_customer_sector.Paths[OLE DB Source Output]"
-          TopLeft="334.849996177852,167.599998122454">
+          TopLeft="NaN,NaN">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,38.899998882413"
+              EndConnector="{assembly:Null}"
               Start="0,0"
-              End="0,31.399998882413">
+              End="0,0">
               <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,31.399998882413" />
-                </mssgle:SegmentCollection>
+                <assembly:Null />
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
@@ -2352,187 +2390,83 @@ WHERE raw_state IS NOT NULL
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="170.666666666667,41.3333333333334"
+          Size="NaN,NaN"
           Id="Package\DFT - Load dim_state\OLE DB Destination"
-          TopLeft="58.0324677623435,349.783417137141" />
+          TopLeft="NaN,NaN" />
         <NodeLayout
-          Size="149.333333333334,41.3333333333334"
+          Size="NaN,NaN"
           Id="Package\DFT - Load dim_state\OLE DB Source"
-          TopLeft="76.214284332127,57.1470565202945" />
+          TopLeft="NaN,NaN" />
         <NodeLayout
-          Size="152.666666666667,41.3333333333334"
+          Size="NaN,NaN"
           Id="Package\DFT - Load dim_state\Derived Column"
-          TopLeft="54.2142855540222,274.147054180812" />
+          TopLeft="NaN,NaN" />
         <NodeLayout
-          Size="112.666666666667,41.3333333333334"
+          Size="NaN,NaN"
           Id="Package\DFT - Load dim_state\Lookup"
-          TopLeft="89.2142845854465,160.14705543251" />
+          TopLeft="NaN,NaN" />
         <EdgeLayout
           Id="Package\DFT - Load dim_state.Paths[Lookup No Match Output]"
-          TopLeft="145.614284585447,201.74705543251">
+          TopLeft="NaN,NaN">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-14.9999990314246,72.3999987483026"
+              EndConnector="{assembly:Null}"
               Start="0,0"
-              End="-14.9999990314246,64.8999987483026">
+              End="0,0">
               <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,32.1999993741513" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,32.1999993741513"
-                    Point2="0,36.1999993741513"
-                    Point3="-4,36.1999993741513" />
-                  <mssgle:LineSegment
-                    End="-10.9999990314246,36.1999993741513" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-10.9999990314246,36.1999993741513"
-                    Point2="-14.9999990314246,36.1999993741513"
-                    Point3="-14.9999990314246,40.1999993741513" />
-                  <mssgle:LineSegment
-                    End="-14.9999990314246,64.8999987483026" />
-                </mssgle:SegmentCollection>
+                <assembly:Null />
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-63.3063862344623,41.1999993741513,111.6127734375,11.609375"
+              BoundingBox="0,0,0,0"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\DFT - Load dim_state.Paths[Derived Column Output]"
-          TopLeft="130.614285554023,315.747054180812">
+          TopLeft="NaN,NaN">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="12.6181822083213,34.0363629563288"
+              EndConnector="{assembly:Null}"
               Start="0,0"
-              End="12.6181822083213,26.5363629563288">
+              End="0,0">
               <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,13.0181814781644" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,13.0181814781644"
-                    Point2="0,17.0181814781644"
-                    Point3="4,17.0181814781644" />
-                  <mssgle:LineSegment
-                    End="8.61818220832131,17.0181814781644" />
-                  <mssgle:CubicBezierSegment
-                    Point1="8.61818220832131,17.0181814781644"
-                    Point2="12.6181822083213,17.0181814781644"
-                    Point3="12.6181822083213,21.0181814781644" />
-                  <mssgle:LineSegment
-                    End="12.6181822083213,26.5363629563288" />
-                </mssgle:SegmentCollection>
+                <assembly:Null />
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\DFT - Load dim_state.Paths[OLE DB Source Output]"
-          TopLeft="148.314284458786,98.7470565202945">
+          TopLeft="NaN,NaN">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,61.3999989122152"
+              EndConnector="{assembly:Null}"
               Start="0,0"
-              End="0,53.8999989122152">
+              End="0,0">
               <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,53.8999989122152" />
-                </mssgle:SegmentCollection>
+                <assembly:Null />
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\DFT - Load dim_state\OLE DB Destination">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <TaskHost
-    design-time-name="Package\DFT - Load dim_country">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="150.666666666667,42.6666666666667"
-          Id="Package\DFT - Load dim_country\OLE DB Source"
-          TopLeft="404.99998793006,350.999989539385" />
-        <NodeLayout
-          Size="172,42.6666666666667"
-          Id="Package\DFT - Load dim_country\OLE DB Destination"
-          TopLeft="390.999988347292,455.999986410141" />
-        <EdgeLayout
-          Id="Package\DFT - Load dim_country.Paths[OLE DB Source Output]"
-          TopLeft="478.666654805343,393.666656206052">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,62.3333302040896"
-              Start="0,0"
-              End="0,54.8333302040896">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,54.8333302040896" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-      </GraphLayout>
-    </LayoutInfo>
-  </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\DFT - Load dim_country\OLE DB Source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\DFT - Load dim_country\OLE DB Destination">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
 </Objects>]]></DTS:DesignTimeProperties>
 </DTS:Executable>

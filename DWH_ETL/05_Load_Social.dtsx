@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="05_Load_Social"
   DTS:PackageType="5"
-  DTS:VersionBuild="29"
-  DTS:VersionGUID="{AD504C96-9764-43CD-9AD1-148D2FFF2C72}">
+  DTS:VersionBuild="30"
+  DTS:VersionGUID="{42382F9F-8517-47B3-BB0E-7034DA25EC15}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -1297,17 +1297,21 @@ GROUP BY
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="222.4,41.6"
+          Size="222,42"
           Id="Package\Clean Social Facts Before Load"
           TopLeft="201.42857185736,43.5882352559108" />
         <NodeLayout
-          Size="249.6,41.6"
-          Id="Package\DFT - Load fact_utility_sales_annual"
-          TopLeft="17.1428571793497,179.705882195422" />
+          Size="262,42"
+          Id="Package\DFT - Load fact_country_social_annual"
+          TopLeft="168.571428930273,292.882352684454" />
         <NodeLayout
-          Size="268,41.6"
+          Size="268,42"
           Id="Package\DFT - Load fact_utility_reliability_annual"
           TopLeft="375.000000798277,178.941176313739" />
+        <NodeLayout
+          Size="250,42"
+          Id="Package\DFT - Load fact_utility_sales_annual"
+          TopLeft="17.1428571793497,179.705882195422" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
           TopLeft="312.62857185736,85.1882352559108">
@@ -1364,10 +1368,6 @@ GROUP BY
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="261.6,41.6"
-          Id="Package\DFT - Load fact_country_social_annual"
-          TopLeft="168.571428930273,292.882352684454" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
           TopLeft="509.000000798277,220.541176313739">
@@ -1406,134 +1406,16 @@ GROUP BY
     </LayoutInfo>
   </Package>
   <TaskHost
-    design-time-name="Package\DFT - Load fact_utility_sales_annual">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="245.6,41.6"
-          Id="Package\DFT - Load fact_utility_sales_annual\SRC - stg_eia861_sales Aggregated"
-          TopLeft="27.4999995902181,53.3846145891226" />
-        <NodeLayout
-          Size="221.6,41.6"
-          Id="Package\DFT - Load fact_utility_sales_annual\DST - fact_utility_sales_annua"
-          TopLeft="33.0769225840385,175.384612771181" />
-        <EdgeLayout
-          Id="Package\DFT - Load fact_utility_sales_annual.Paths[OLE DB Source Output]"
-          TopLeft="147.088461087128,94.9846145891226">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,80.3999981820584"
-              Start="0,0"
-              End="0,72.8999981820584">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,72.8999981820584" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-      </GraphLayout>
-    </LayoutInfo>
-  </TaskHost>
-  <TaskHost
-    design-time-name="Package\DFT - Load fact_utility_reliability_annual">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="248,41.6"
-          Id="Package\DFT - Load fact_utility_reliability_annual\SRC - stg_eia861_reliability Cleaned"
-          TopLeft="85.9999987185001,31.9999995231628" />
-        <NodeLayout
-          Size="242.4,41.6"
-          Id="Package\DFT - Load fact_utility_reliability_annual\DST - fact_utility_reliability_annual"
-          TopLeft="88.4999987632036,170.499997541308" />
-        <EdgeLayout
-          Id="Package\DFT - Load fact_utility_reliability_annual.Paths[OLE DB Source Output]"
-          TopLeft="209.849998740852,73.5999995231628">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,96.8999980181456"
-              Start="0,0"
-              End="0,89.3999980181456">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,89.3999980181456" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-      </GraphLayout>
-    </LayoutInfo>
-  </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\DFT - Load fact_utility_sales_annual\SRC - stg_eia861_sales Aggregated">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\DFT - Load fact_utility_sales_annual\DST - fact_utility_sales_annua">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\DFT - Load fact_utility_reliability_annual\SRC - stg_eia861_reliability Cleaned">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\DFT - Load fact_utility_reliability_annual\DST - fact_utility_reliability_annual">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <TaskHost
     design-time-name="Package\DFT - Load fact_country_social_annual">
     <LayoutInfo>
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="214.4,41.6"
+          Size="214,42"
           Id="Package\DFT - Load fact_country_social_annual\SRC - stg_wb_social Cleaned"
           TopLeft="353.999994724989,154.99999769032" />
         <NodeLayout
-          Size="236,41.6"
+          Size="236,42"
           Id="Package\DFT - Load fact_country_social_annual\DST - fact_country_social_annual"
           TopLeft="347.499994903803,295.499995678663" />
         <EdgeLayout
@@ -1562,14 +1444,6 @@ GROUP BY
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\DFT - Load fact_country_social_annual\SRC - stg_wb_social Cleaned">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
     design-time-name="Package\DFT - Load fact_country_social_annual\DST - fact_country_social_annual">
     <Properties>
       <Property>
@@ -1579,6 +1453,136 @@ GROUP BY
         <Name>TableInfoObjectType</Name>
         <Value
           type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT - Load fact_country_social_annual\SRC - stg_wb_social Cleaned">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\DFT - Load fact_utility_reliability_annual">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="242.4,41.6"
+          Id="Package\DFT - Load fact_utility_reliability_annual\DST - fact_utility_reliability_annual"
+          TopLeft="88.4999987632036,170.499997541308" />
+        <NodeLayout
+          Size="248,41.6"
+          Id="Package\DFT - Load fact_utility_reliability_annual\SRC - stg_eia861_reliability Cleaned"
+          TopLeft="85.9999987185001,31.9999995231628" />
+        <EdgeLayout
+          Id="Package\DFT - Load fact_utility_reliability_annual.Paths[OLE DB Source Output]"
+          TopLeft="209.849998740852,73.5999995231628">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,96.8999980181456"
+              Start="0,0"
+              End="0,89.3999980181456">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,89.3999980181456" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT - Load fact_utility_reliability_annual\DST - fact_utility_reliability_annual">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT - Load fact_utility_reliability_annual\SRC - stg_eia861_reliability Cleaned">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\DFT - Load fact_utility_sales_annual">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="245.6,41.6"
+          Id="Package\DFT - Load fact_utility_sales_annual\SRC - stg_eia861_sales Aggregated"
+          TopLeft="27.4999995902181,53.3846145891226" />
+        <NodeLayout
+          Size="221.6,41.6"
+          Id="Package\DFT - Load fact_utility_sales_annual\DST - fact_utility_sales_annua"
+          TopLeft="33.0769225840385,175.384612771181" />
+        <EdgeLayout
+          Id="Package\DFT - Load fact_utility_sales_annual.Paths[OLE DB Source Output]"
+          TopLeft="147.088461087128,94.9846145891226">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,80.3999981820584"
+              Start="0,0"
+              End="0,72.8999981820584">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,72.8999981820584" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT - Load fact_utility_sales_annual\DST - fact_utility_sales_annua">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT - Load fact_utility_sales_annual\SRC - stg_eia861_sales Aggregated">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
       </Property>
     </Properties>
   </PipelineComponentMetadata>

@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0"?>
 <DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
   DTS:refId="Package"
   DTS:CreationDate="9/29/2026 11:51:55 PM"
@@ -9,11 +9,119 @@
   DTS:ExecutableType="Microsoft.Package"
   DTS:LastModifiedProductVersion="17.0.1016.0"
   DTS:LocaleID="1033"
-  DTS:ObjectName="Package1"
+  DTS:ObjectName="04_Load_Enviroment"
   DTS:PackageType="5"
-  DTS:VersionGUID="{8044ECA2-28A8-425D-AAE3-084B54D3BFFD}">
+  DTS:VersionBuild="1"
+  DTS:VersionGUID="{104F931C-8DFA-4E22-BA82-E2B7DD9CA7A5}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[localhost]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{9ECDA1BB-0D67-4D47-BCA0-AFE26D22D191}"
+      DTS:ObjectName="localhost">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=DW_TRAIN;Provider=SQLOLEDB.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-04_Load_Enviroment-{9ECDA1BB-0D67-4D47-BCA0-AFE26D22D191}localhost;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
   <DTS:Variables />
-  <DTS:Executables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Load fact_country_environment_annual"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{3D2F7E41-C6D2-4C1B-8B56-5E013C7B5D11}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load fact_country_environment_annual"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{9ECDA1BB-0D67-4D47-BCA0-AFE26D22D191}"
+          SQLTask:SqlStatementSource="INSERT INTO fact_country_environment_annual&#xA;    (year_key, country_key, co2_mt, co2_per_capita, renewable_energy_pct, pm25_exposure)&#xA;SELECT&#xA;    dd.year_key,&#xA;    dc.country_key,&#xA;    TRY_CAST(s.raw_co2_mt          AS DECIMAL(18,4)),&#xA;    TRY_CAST(s.raw_co2_per_capita  AS DECIMAL(18,4)),&#xA;    NULL,&#xA;    NULL&#xA;FROM stg_owid_co2 s&#xA;JOIN dim_country dc&#xA;    ON dc.country_code = UPPER(LTRIM(RTRIM(s.raw_iso_code)))&#xA;JOIN (&#xA;    SELECT MIN(date_key) AS year_key, year&#xA;    FROM dim_date GROUP BY year&#xA;) dd ON dd.year = TRY_CAST(s.raw_year AS INT)&#xA;WHERE NULLIF(LTRIM(RTRIM(s.raw_iso_code)), '') IS NOT NULL&#xA;  AND LEN(LTRIM(RTRIM(s.raw_iso_code))) = 3&#xA;  AND NULLIF(s.raw_year, '') IS NOT NULL&#xA;  AND NOT EXISTS (&#xA;      SELECT 1 FROM fact_country_environment_annual f&#xA;      WHERE f.year_key    = dd.year_key&#xA;        AND f.country_key = dc.country_key&#xA;  );" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Load fact_plant_annual"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{8F5C9B32-A1E4-4D2A-9876-4C1029E3FA22}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load fact_plant_annual"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{9ECDA1BB-0D67-4D47-BCA0-AFE26D22D191}"
+          SQLTask:SqlStatementSource="INSERT INTO fact_plant_annual&#xA;    (year_key, plant_key, net_generation_mwh,&#xA;     co2_annual, ch4_annual, n2o_annual, nox_annual, so2_annual)&#xA;SELECT&#xA;    dd.year_key,&#xA;    dp.plant_key,&#xA;    TRY_CAST(s.raw_net_generation_mwh  AS DECIMAL(18,3)),&#xA;    TRY_CAST(s.raw_co2_emissions_tons  AS DECIMAL(18,3)),&#xA;    TRY_CAST(s.raw_ch4_emissions_kg    AS DECIMAL(18,3)) / 1000.0,&#xA;    TRY_CAST(s.raw_n2o_emissions_kg    AS DECIMAL(18,3)) / 1000.0,&#xA;    TRY_CAST(s.raw_nox_emissions_tons  AS DECIMAL(18,3)),&#xA;    TRY_CAST(s.raw_so2_emissions_tons  AS DECIMAL(18,3))&#xA;FROM stg_egrid_plant s&#xA;JOIN dim_plant dp&#xA;    ON  dp.oris_code   = TRY_CAST(s.raw_oris_code AS INT)&#xA;    AND dp.is_current  = 1&#xA;JOIN (&#xA;    SELECT MIN(date_key) AS year_key, year&#xA;    FROM dim_date GROUP BY year&#xA;) dd ON dd.year = TRY_CAST(s.raw_year AS INT)&#xA;WHERE NULLIF(s.raw_oris_code, '') IS NOT NULL&#xA;  AND NULLIF(s.raw_year,      '') IS NOT NULL&#xA;  AND NOT EXISTS (&#xA;      SELECT 1 FROM fact_plant_annual f&#xA;      WHERE f.year_key  = dd.year_key&#xA;        AND f.plant_key = dp.plant_key&#xA;  );" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Load fact_company_environment_annual"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{6C8A4D23-E5B7-4F91-B098-7D32E5014C33}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load fact_company_environment_annual"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{9ECDA1BB-0D67-4D47-BCA0-AFE26D22D191}"
+          SQLTask:SqlStatementSource="INSERT INTO fact_company_environment_annual&#xA;    (year_key, company_key, ghgrp_direct_emissions_t,&#xA;     allocated_net_generation_mwh, allocated_co2)&#xA;SELECT&#xA;    dd.year_key,&#xA;    dpc.company_key,&#xA;    SUM(TRY_CAST(f.raw_total_emissions AS DECIMAL(18,3))),&#xA;    NULL,&#xA;    NULL&#xA;FROM stg_ghgrp_parent_company p&#xA;JOIN stg_ghgrp_facility f&#xA;    ON  TRY_CAST(f.raw_facility_id AS DECIMAL(18,0))&#xA;      = TRY_CAST(p.raw_facility_id AS DECIMAL(18,0))&#xA;    AND f.raw_year = p.raw_year&#xA;JOIN dim_parent_company dpc&#xA;    ON UPPER(LTRIM(RTRIM(p.raw_parent_name)))&#xA;     = UPPER(LTRIM(RTRIM(dpc.company_name_std)))&#xA;JOIN (&#xA;    SELECT MIN(date_key) AS year_key, year&#xA;    FROM dim_date GROUP BY year&#xA;) dd ON dd.year = TRY_CAST(p.raw_year AS INT)&#xA;WHERE NULLIF(LTRIM(RTRIM(p.raw_parent_name)), '') IS NOT NULL&#xA;  AND NULLIF(p.raw_year, '') IS NOT NULL&#xA;  AND NULLIF(LTRIM(RTRIM(p.raw_facility_id)), '') IS NOT NULL&#xA;  AND NULLIF(LTRIM(RTRIM(f.raw_facility_id)), '') IS NOT NULL&#xA;  AND NOT EXISTS (&#xA;      SELECT 1 FROM fact_company_environment_annual ce&#xA;      WHERE ce.year_key    = dd.year_key&#xA;        AND ce.company_key = dpc.company_key&#xA;  )&#xA;GROUP BY dd.year_key, dpc.company_key;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Load fact_ba_hourly"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{1A7E9F45-C2B3-4A88-8765-9F43A6125D44}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load fact_ba_hourly"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{9ECDA1BB-0D67-4D47-BCA0-AFE26D22D191}"
+          SQLTask:SqlStatementSource="INSERT INTO fact_ba_hourly&#xA;    (hour_key, ba_key, demand_mw, net_generation_mw,&#xA;     total_interchange_mw, co2_emissions_generated,&#xA;     co2_emissions_consumed, co2_intensity_generated)&#xA;SELECT&#xA;    hk.hour_key,&#xA;    db.ba_key,&#xA;    TRY_CAST(s.raw_demand_mw             AS DECIMAL(18,2)),&#xA;    TRY_CAST(s.raw_net_generation_mw     AS DECIMAL(18,2)),&#xA;    TRY_CAST(s.raw_total_interchange_mw  AS DECIMAL(18,2)),&#xA;    TRY_CAST(s.raw_co2_generated         AS DECIMAL(18,4)),&#xA;    TRY_CAST(s.raw_co2_consumed          AS DECIMAL(18,4)),&#xA;    NULL&#xA;FROM stg_eia930_hourly s&#xA;CROSS APPLY (&#xA;    SELECT CAST(&#xA;        FORMAT(TRY_CAST(s.raw_datetime_utc AS DATETIME), 'yyyyMMddHH')&#xA;    AS INT) AS hour_key&#xA;) hk&#xA;JOIN dim_ba db ON db.ba_code = LTRIM(RTRIM(s.raw_ba_code))&#xA;JOIN dim_hour dh ON dh.hour_key = hk.hour_key&#xA;WHERE NULLIF(LTRIM(RTRIM(s.raw_ba_code)), '') IS NOT NULL&#xA;  AND NULLIF(s.raw_datetime_utc, '') IS NOT NULL&#xA;  AND TRY_CAST(s.raw_datetime_utc AS DATETIME) IS NOT NULL&#xA;  AND NOT EXISTS (&#xA;      SELECT 1 FROM fact_ba_hourly f&#xA;      WHERE f.hour_key = hk.hour_key&#xA;        AND f.ba_key   = db.ba_key&#xA;  );" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{A8EB233B-27C3-41E7-B29B-AE0ABD6659AB}"
+      DTS:From="Package\Load fact_country_environment_annual"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Load fact_plant_annual" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{902DE903-EE90-4FCF-B175-162A9ACF418B}"
+      DTS:From="Package\Load fact_plant_annual"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Load fact_company_environment_annual" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{527E58C3-B462-4C15-8E4B-8E4D51765D92}"
+      DTS:From="Package\Load fact_company_environment_annual"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Load fact_ba_hourly" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties />
 </DTS:Executable>
