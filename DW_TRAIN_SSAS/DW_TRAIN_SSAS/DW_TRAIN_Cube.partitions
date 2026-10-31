@@ -1,0 +1,185 @@
+﻿<Cube xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="e7f70be9-c5dc-4d6f-a062-5b3fbe5d24e3" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+  <ID>DW_TRAIN_Cube</ID>
+  <MeasureGroups>
+    <MeasureGroup>
+      <ID>Fact Utility Sales Annual</ID>
+      <Partitions>
+        <Partition dwd:design-time-name="36d8d1a9-95bc-4524-8147-b24b9050fa46">
+          <ID>Fact Utility Sales Annual</ID>
+          <Name>Fact Utility Sales Annual</Name>
+          <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+          <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+          <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+          <State>Unprocessed</State>
+          <Source xsi:type="DsvTableBinding" dwd:design-time-name="6b6a7146-1ff7-4801-a0b7-e29bd279b16f">
+            <DataSourceViewID>DW_TRAIN_DSV</DataSourceViewID>
+            <TableID>dbo_fact_utility_sales_annual</TableID>
+          </Source>
+          <StorageMode>Molap</StorageMode>
+          <CurrentStorageMode>Molap</CurrentStorageMode>
+          <ProcessingMode>Regular</ProcessingMode>
+        </Partition>
+      </Partitions>
+    </MeasureGroup>
+    <MeasureGroup>
+      <ID>Fact Company Environment Annual</ID>
+      <Partitions>
+        <Partition dwd:design-time-name="7d09256f-2dc0-4b3c-b1df-707787671d3e">
+          <ID>Fact Company Environment Annual</ID>
+          <Name>Fact Company Environment Annual</Name>
+          <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+          <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+          <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+          <State>Unprocessed</State>
+          <Source xsi:type="DsvTableBinding" dwd:design-time-name="f093c9b3-7318-4ebe-854e-80c6494baf43">
+            <DataSourceViewID>DW_TRAIN_DSV</DataSourceViewID>
+            <TableID>dbo_fact_company_environment_annual</TableID>
+          </Source>
+          <StorageMode>Molap</StorageMode>
+          <CurrentStorageMode>Molap</CurrentStorageMode>
+          <ProcessingMode>Regular</ProcessingMode>
+        </Partition>
+      </Partitions>
+    </MeasureGroup>
+    <MeasureGroup>
+      <ID>Fact Country Social Annual</ID>
+      <Partitions>
+        <Partition dwd:design-time-name="933c1973-c59a-4357-a9a3-33b1c598a848">
+          <ID>Fact Country Social Annual</ID>
+          <Name>Fact Country Social Annual</Name>
+          <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+          <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+          <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+          <State>Unprocessed</State>
+          <Source xsi:type="DsvTableBinding" dwd:design-time-name="0f762d64-bc50-4680-a47b-16e67c17024a">
+            <DataSourceViewID>DW_TRAIN_DSV</DataSourceViewID>
+            <TableID>dbo_fact_country_social_annual</TableID>
+          </Source>
+          <StorageMode>Molap</StorageMode>
+          <CurrentStorageMode>Molap</CurrentStorageMode>
+          <ProcessingMode>Regular</ProcessingMode>
+        </Partition>
+      </Partitions>
+    </MeasureGroup>
+    <MeasureGroup>
+      <ID>Fact Ba Hourly</ID>
+      <Partitions>
+        <Partition dwd:design-time-name="f43d3920-e9dd-4bc3-9c10-8992210498aa">
+          <ID>Fact Ba Hourly</ID>
+          <Name>Fact Ba Hourly</Name>
+          <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+          <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+          <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+          <State>Unprocessed</State>
+          <Source xsi:type="DsvTableBinding" dwd:design-time-name="3ada9f1d-fcac-4095-9b2b-0d01326ec048">
+            <DataSourceViewID>DW_TRAIN_DSV</DataSourceViewID>
+            <TableID>dbo_fact_ba_hourly</TableID>
+          </Source>
+          <StorageMode>Molap</StorageMode>
+          <CurrentStorageMode>Molap</CurrentStorageMode>
+          <ProcessingMode>Regular</ProcessingMode>
+        </Partition>
+      </Partitions>
+    </MeasureGroup>
+    <MeasureGroup>
+      <ID>Fact Utility Reliability Annual</ID>
+      <Partitions>
+        <Partition dwd:design-time-name="24b8830e-e99d-4ec5-9717-d71309933e7c">
+          <ID>Fact Utility Reliability Annual</ID>
+          <Name>Fact Utility Reliability Annual</Name>
+          <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+          <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+          <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+          <State>Unprocessed</State>
+          <Source xsi:type="DsvTableBinding" dwd:design-time-name="0f0e32f6-c8b5-4921-b9cf-0c893973623c">
+            <DataSourceViewID>DW_TRAIN_DSV</DataSourceViewID>
+            <TableID>dbo_fact_utility_reliability_annual</TableID>
+          </Source>
+          <StorageMode>Molap</StorageMode>
+          <CurrentStorageMode>Molap</CurrentStorageMode>
+          <ProcessingMode>Regular</ProcessingMode>
+        </Partition>
+      </Partitions>
+    </MeasureGroup>
+    <MeasureGroup>
+      <ID>Fact Country Environment Annual</ID>
+      <Partitions>
+        <Partition dwd:design-time-name="16e5f413-5234-4aa0-b29a-e53d13501989">
+          <ID>Fact Country Environment Annual</ID>
+          <Name>Fact Country Environment Annual</Name>
+          <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+          <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+          <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+          <State>Unprocessed</State>
+          <Source xsi:type="DsvTableBinding" dwd:design-time-name="c4476d82-0607-4678-ada9-c47809b4617e">
+            <DataSourceViewID>DW_TRAIN_DSV</DataSourceViewID>
+            <TableID>dbo_fact_country_environment_annual</TableID>
+          </Source>
+          <StorageMode>Molap</StorageMode>
+          <CurrentStorageMode>Molap</CurrentStorageMode>
+          <ProcessingMode>Regular</ProcessingMode>
+        </Partition>
+      </Partitions>
+    </MeasureGroup>
+    <MeasureGroup>
+      <ID>Fact Plant Annual</ID>
+      <Partitions>
+        <Partition dwd:design-time-name="435ecc26-d971-4cda-b144-3da907bc97cd">
+          <ID>Fact Plant Annual</ID>
+          <Name>Fact Plant Annual</Name>
+          <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+          <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+          <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+          <State>Unprocessed</State>
+          <Source xsi:type="DsvTableBinding" dwd:design-time-name="7e3a9114-6e3a-4d48-8c3e-a61c63cfe7bf">
+            <DataSourceViewID>DW_TRAIN_DSV</DataSourceViewID>
+            <TableID>dbo_fact_plant_annual</TableID>
+          </Source>
+          <StorageMode>Molap</StorageMode>
+          <CurrentStorageMode>Molap</CurrentStorageMode>
+          <ProcessingMode>Regular</ProcessingMode>
+        </Partition>
+      </Partitions>
+    </MeasureGroup>
+    <MeasureGroup>
+      <ID>Fact Country Governance Annual</ID>
+      <Partitions>
+        <Partition dwd:design-time-name="2a9d3db5-cd68-446e-a10b-eafe7d245092">
+          <ID>Fact Country Governance Annual</ID>
+          <Name>Fact Country Governance Annual</Name>
+          <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+          <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+          <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+          <State>Unprocessed</State>
+          <Source xsi:type="DsvTableBinding" dwd:design-time-name="0ed12f50-b53a-40df-8fd1-7a1f76675ba5">
+            <DataSourceViewID>DW_TRAIN_DSV</DataSourceViewID>
+            <TableID>dbo_fact_country_governance_annual</TableID>
+          </Source>
+          <StorageMode>Molap</StorageMode>
+          <CurrentStorageMode>Molap</CurrentStorageMode>
+          <ProcessingMode>Regular</ProcessingMode>
+        </Partition>
+      </Partitions>
+    </MeasureGroup>
+    <MeasureGroup>
+      <ID>Fact Company Esg Rating</ID>
+      <Partitions>
+        <Partition dwd:design-time-name="6ee57a54-5590-425e-88cf-5e95c5adc731">
+          <ID>Fact Company Esg Rating</ID>
+          <Name>Fact Company Esg Rating</Name>
+          <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+          <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+          <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+          <State>Unprocessed</State>
+          <Source xsi:type="DsvTableBinding" dwd:design-time-name="03e266a2-b0ce-43b7-8d90-e60ade145cd5">
+            <DataSourceViewID>DW_TRAIN_DSV</DataSourceViewID>
+            <TableID>dbo_fact_company_esg_rating</TableID>
+          </Source>
+          <StorageMode>Molap</StorageMode>
+          <CurrentStorageMode>Molap</CurrentStorageMode>
+          <ProcessingMode>Regular</ProcessingMode>
+        </Partition>
+      </Partitions>
+    </MeasureGroup>
+  </MeasureGroups>
+</Cube>

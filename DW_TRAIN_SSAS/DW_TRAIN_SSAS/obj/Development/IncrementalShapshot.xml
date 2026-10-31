@@ -1,0 +1,138 @@
+﻿<DeploymentSnapshot xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0">
+  <Target>
+    <Database>DW_TRAIN_SSAS</Database>
+    <Server>localhost</Server>
+    <ConnectionString>Data Source=localhost;Timeout=0</ConnectionString>
+  </Target>
+  <Options>
+    <TransactionalDeployment>true</TransactionalDeployment>
+    <PartitionDeployment>DeployPartitions</PartitionDeployment>
+    <RoleDeployment>DeployRolesRetainMembers</RoleDeployment>
+    <ProcessingOption>DoNotProcess</ProcessingOption>
+    <OutputScript></OutputScript>
+    <ImpactAnalysisFile></ImpactAnalysisFile>
+    <ConfigurationSettingsDeployment>Deploy</ConfigurationSettingsDeployment>
+    <OptimizationSettingsDeployment>Deploy</OptimizationSettingsDeployment>
+    <WriteBackTableCreation>UseExisting</WriteBackTableCreation>
+  </Options>
+  <Snapshot>
+    <ObjectSnapshots>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.RelationalDataSource</Type>
+        <TimeStamp>Auu1DqGhtHkJfc3AVKJ0NKp6HhA=10/30/2026 11:08:13 PM10/30/2026 3:42:05 PM</TimeStamp>
+        <ID>
+          <String>DW TRAIN</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.DataSourceView</Type>
+        <TimeStamp>83lhjIzWtO3q1GRiloDIaaEwOiE=10/30/2026 9:51:16 PM10/30/2026 9:38:00 PM</TimeStamp>
+        <ID>
+          <String>DW_TRAIN_DSV</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>Kdjc7B9RRpvMt8UhdJJQrFYM1Ts=10/30/2026 11:34:55 PM10/30/2026 9:51:16 PM</TimeStamp>
+        <ID>
+          <String>Dim Date</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>MNMX1iTNcT26cHNkwtZYnlaKOsg=10/30/2026 9:56:46 PM10/30/2026 9:56:46 PM</TimeStamp>
+        <ID>
+          <String>Dim Hour</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>97YmvEqk92I4PEcaWxlW1bVAmW0=10/30/2026 9:59:20 PM10/30/2026 9:58:05 PM</TimeStamp>
+        <ID>
+          <String>Dim Fuel</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>JN5witNuaIEZ7hHflb6Gj8XpoNk=10/30/2026 10:02:56 PM10/30/2026 10:02:17 PM</TimeStamp>
+        <ID>
+          <String>Dim State</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>vdmezZAp5vUUd/vK2bX5ATlK+h4=10/30/2026 11:25:16 PM10/30/2026 10:02:56 PM</TimeStamp>
+        <ID>
+          <String>Dim Country</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>oTw53Ez/3cH07ExCep9tnFeZjFE=10/30/2026 10:05:40 PM10/30/2026 10:05:28 PM</TimeStamp>
+        <ID>
+          <String>Dim BA</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>XwldIaPfv/Bs5lW1V8mPQnmayn8=10/30/2026 11:31:24 PM10/30/2026 10:08:37 PM</TimeStamp>
+        <ID>
+          <String>Dim Plant</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>R9sDW4LyykV6RzA/aIwuL50IcfE=10/30/2026 11:30:38 PM10/30/2026 10:09:46 PM</TimeStamp>
+        <ID>
+          <String>Dim Utility</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>7YWngfiM4WLyuZeHQy0N4ljfKzQ=10/30/2026 10:11:46 PM10/30/2026 10:11:41 PM</TimeStamp>
+        <ID>
+          <String>Dim eGrid Subregion</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>Qbd+LphM/dnYt/uaqcVAMNr/e60=10/30/2026 10:12:39 PM10/30/2026 10:12:33 PM</TimeStamp>
+        <ID>
+          <String>Dim Customer Sector</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>Gwe77Z3Rski7oWc+mEZXBHe6UqE=10/30/2026 11:28:20 PM10/30/2026 10:16:41 PM</TimeStamp>
+        <ID>
+          <String>Dim Parent Company</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>qBrXnzQ3RfZ0Zp2h2+bQF08EfF4=10/30/2026 10:17:27 PM10/30/2026 10:17:20 PM</TimeStamp>
+        <ID>
+          <String>Dim Data Source</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Cube</Type>
+        <TimeStamp>vf1XXKAjkjslG1vPKzv9mjhCztU=10/30/2026 11:39:51 PM10/30/2026 10:23:11 PMkGnIwW1//zTmJnAOe02x2eSY460=10/30/2026 10:23:11 PM10/30/2026 10:23:11 PM</TimeStamp>
+        <ID>
+          <String>DW_TRAIN_Cube</String>
+        </ID>
+      </ObjectSnapshot>
+    </ObjectSnapshots>
+    <DatabaseSnapshot>
+      <Type>Microsoft.AnalysisServices.Database</Type>
+      <TimeStamp>U9Zsu0DwLM6e+QHAsfNtm0ZUbYs=10/30/2026 3:18:10 PM10/30/2026 3:18:09 PM</TimeStamp>
+      <ID>
+        <String>DW_TRAIN_SSAS</String>
+      </ID>
+    </DatabaseSnapshot>
+    <Granularity>Coarse</Granularity>
+  </Snapshot>
+  <AssemblyLocations />
+  <ProcessingComplete>true</ProcessingComplete>
+  <LastDeployed>2026-10-30T16:40:03.616667Z</LastDeployed>
+</DeploymentSnapshot>
