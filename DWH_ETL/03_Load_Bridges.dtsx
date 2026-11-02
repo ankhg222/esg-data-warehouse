@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="12"
-  DTS:VersionGUID="{DD9551C6-3D21-41CF-B11D-6D8CB91D8EAA}">
+  DTS:VersionBuild="13"
+  DTS:VersionGUID="{5B4DFFE4-BB87-4696-BC96-31DB273AA564}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -25,7 +25,7 @@
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=.;Initial Catalog=DW_TRAIN;Provider=SQLOLEDB.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-01_Load_Shared_Dimension-{B43EF373-F2EB-441D-BF82-44E179CA9F9F}localhost;" />
+          DTS:ConnectionString="Data Source=.\MSSQLSERVER2022;Initial Catalog=DW_TRAIN;Provider=SQLOLEDB.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-01_Load_Shared_Dimension-{B43EF373-F2EB-441D-BF82-44E179CA9F9F}localhost;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
@@ -694,11 +694,11 @@ WHERE CAST(TRY_CAST(c.raw_oris_code AS FLOAT) AS INT) IS NOT NULL
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="243,43"
+          Size="242.666666666667,42.6666666666667"
           Id="Package\DFT - Load bridge_plant_company"
           TopLeft="419.999981224537,291.199986114502" />
         <NodeLayout
-          Size="263,43"
+          Size="262.666666666667,42.6666666666667"
           Id="Package\DFT - Load bridge_plant_ghgrp_facility"
           TopLeft="416.249981392176,184.599991197586" />
         <EdgeLayout

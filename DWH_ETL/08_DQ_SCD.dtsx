@@ -1,0 +1,227 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="10/31/2026 11:51:09 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-O0NKBEF"
+  DTS:CreatorName="DESKTOP-O0NKBEF\ADMIN"
+  DTS:DTSID="{5C635DD0-D8C1-4BF3-884C-4D755934907F}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="17.0.1016.0"
+  DTS:LocaleID="1066"
+  DTS:ObjectName="08_DQ_SCD"
+  DTS:PackageType="5"
+  DTS:VersionBuild="5"
+  DTS:VersionGUID="{B6C6E493-C264-440A-8C98-1CBFB70FC360}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[localhost]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{9C983A6A-8C21-40CD-9162-5A77E4193F91}"
+      DTS:ObjectName="localhost">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=.\MSSQLSERVER2022;Initial Catalog=DW_TRAIN;Provider=SQLOLEDB.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-Package1-{9C983A6A-8C21-40CD-9162-5A77E4193F91}localhost;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\DQ - Reconciliation fact_plant_annual"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{78225708-7187-4220-96CB-AB82D6E6157A}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DQ - Reconciliation fact_plant_annual"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{9C983A6A-8C21-40CD-9162-5A77E4193F91}"
+          SQLTask:SqlStatementSource="DECLARE @StgCount INT, @FactCount INT, @DirtyCount INT;&#xA;DECLARE @OrphanPlantCount INT = 0, @OrphanYearCount INT = 0;&#xA;DECLARE @NegativeCO2Count INT = 0;&#xA;&#xA;-- 1. Đối soát số dòng (Reconciliation)&#xA;SELECT @StgCount = COUNT(*) FROM dbo.stg_egrid_plant;&#xA;SELECT @FactCount = COUNT(*) FROM dbo.fact_plant_annual;&#xA;SELECT @DirtyCount = COUNT(*) FROM dbo.stg_egrid_plant WHERE TRY_CAST(raw_oris_code AS INT) IS NULL OR TRY_CAST(raw_year AS INT) IS NULL;&#xA;&#xA;IF (@StgCount - @DirtyCount) &lt;&gt; @FactCount&#xA;BEGIN&#xA;    DECLARE @MsgRecon NVARCHAR(2048) = FORMATMESSAGE('DQ ERROR: Doi soat so dong that bai! Staging: %d, Dirty: %d, Fact: %d', @StgCount, @DirtyCount, @FactCount);&#xA;    THROW 52005, @MsgRecon, 1;&#xA;END;&#xA;&#xA;-- 2. Kiểm tra Orphan Plant Keys&#xA;SELECT @OrphanPlantCount = COUNT(*)&#xA;FROM dbo.fact_plant_annual f&#xA;LEFT JOIN dbo.dim_plant p ON f.plant_key = p.plant_key&#xA;WHERE p.plant_key IS NULL;&#xA;&#xA;IF @OrphanPlantCount &gt; 0&#xA;BEGIN&#xA;    DECLARE @MsgPlant NVARCHAR(2048) = FORMATMESSAGE('DQ ERROR: Phat hien %d dong Fact co plant_key mo coi!', @OrphanPlantCount);&#xA;    THROW 52006, @MsgPlant, 1;&#xA;END;&#xA;&#xA;-- 3. Kiểm tra Orphan Year Keys&#xA;SELECT @OrphanYearCount = COUNT(*)&#xA;FROM dbo.fact_plant_annual f&#xA;LEFT JOIN dbo.dim_date d ON f.year_key = d.date_key&#xA;WHERE d.date_key IS NULL;&#xA;&#xA;IF @OrphanYearCount &gt; 0&#xA;BEGIN&#xA;    DECLARE @MsgYear NVARCHAR(2048) = FORMATMESSAGE('DQ ERROR: Phat hien %d dong Fact co year_key mo coi!', @OrphanYearCount);&#xA;    THROW 52007, @MsgYear, 1;&#xA;END;&#xA;&#xA;-- 4. Kiểm tra phát thải âm bất thường&#xA;SELECT @NegativeCO2Count = COUNT(*)&#xA;FROM dbo.fact_plant_annual&#xA;WHERE co2_annual &lt; 0;&#xA;&#xA;IF @NegativeCO2Count &gt; 0&#xA;BEGIN&#xA;    DECLARE @MsgCO2 NVARCHAR(2048) = FORMATMESSAGE('DQ ERROR: Phat hien %d ban ghi co phat thai CO2 &lt; 0!', @NegativeCO2Count);&#xA;    THROW 52008, @MsgCO2, 1;&#xA;END;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\DQ - Validate bridge_plant_ghgrp_facility"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{BF2BC774-9BA0-48AD-8371-04E770B3EA63}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DQ - Validate bridge_plant_ghgrp_facility"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{9C983A6A-8C21-40CD-9162-5A77E4193F91}"
+          SQLTask:SqlStatementSource="DECLARE @NullMappingCount INT = 0;&#xA;DECLARE @TotalBridgeRows INT = 0;&#xA;&#xA;-- 1. Kiểm tra không có cặp mapping nào bị NULL khóa&#xA;SELECT @NullMappingCount = COUNT(*)&#xA;FROM dbo.bridge_plant_ghgrp_facility&#xA;WHERE oris_code IS NULL OR ghgrp_facility_id IS NULL;&#xA;&#xA;IF @NullMappingCount &gt; 0&#xA;BEGIN&#xA;    DECLARE @MsgNull NVARCHAR(2048) = FORMATMESSAGE('DQ ERROR: Phat hien %d cap mapping bi NULL khoa trong bridge_plant_ghgrp_facility!', @NullMappingCount);&#xA;    THROW 52009, @MsgNull, 1;&#xA;END;&#xA;&#xA;-- 2. Kiểm tra bảng bridge không bị rỗng&#xA;SELECT @TotalBridgeRows = COUNT(*) FROM dbo.bridge_plant_ghgrp_facility;&#xA;&#xA;IF @TotalBridgeRows = 0&#xA;BEGIN&#xA;    THROW 52010, 'DQ ERROR: Bang bridge_plant_ghgrp_facility bi rong (0 dong)!', 1;&#xA;END;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SCD1 - UPSERT dim_parent_company"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{AB5FAFC4-9977-4A3F-90BA-95891B6AECB3}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SCD1 - UPSERT dim_parent_company"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{9C983A6A-8C21-40CD-9162-5A77E4193F91}"
+          SQLTask:SqlStatementSource="-- 1. Thực thi MERGE ghi đè SCD Type 1&#xA;WITH SourceCompanies AS (&#xA;    SELECT &#xA;        LEFT(UPPER(LTRIM(RTRIM(REPLACE(raw_company_name, '&quot;', '')))), 200) AS company_name_std,&#xA;        LEFT(LTRIM(RTRIM(REPLACE(raw_ticker, '&quot;', ''))), 10) AS ticker&#xA;    FROM dbo.stg_sustainalytics_esg&#xA;    WHERE raw_company_name IS NOT NULL &#xA;      AND LTRIM(RTRIM(raw_company_name)) &lt;&gt; ''&#xA;      AND LTRIM(RTRIM(raw_company_name)) &lt;&gt; 'N/A'&#xA;    UNION ALL&#xA;    SELECT &#xA;        LEFT(UPPER(LTRIM(RTRIM(REPLACE(raw_parent_name, '&quot;', '')))), 200) AS company_name_std,&#xA;        CAST(NULL AS VARCHAR(10)) AS ticker&#xA;    FROM dbo.stg_ghgrp_parent_company&#xA;    WHERE raw_parent_name IS NOT NULL &#xA;      AND LTRIM(RTRIM(REPLACE(raw_parent_name, '&quot;', ''))) &lt;&gt; ''&#xA;      AND LTRIM(RTRIM(REPLACE(raw_parent_name, '&quot;', ''))) &lt;&gt; 'N/A'&#xA;),&#xA;CleanSource AS (&#xA;    SELECT &#xA;        sc.company_name_std,&#xA;        MAX(sc.ticker) AS ticker,&#xA;        (SELECT TOP 1 country_key FROM dbo.dim_country WHERE country_code = 'USA') AS country_key&#xA;    FROM SourceCompanies sc&#xA;    GROUP BY sc.company_name_std&#xA;)&#xA;MERGE INTO dbo.dim_parent_company AS target&#xA;USING CleanSource AS src&#xA;ON (target.company_name_std = src.company_name_std)&#xA;WHEN MATCHED AND (&#xA;    ISNULL(target.ticker, '') &lt;&gt; ISNULL(src.ticker, '')&#xA;    OR ISNULL(target.country_key, -1) &lt;&gt; ISNULL(src.country_key, -1)&#xA;) THEN &#xA;    UPDATE SET &#xA;        target.ticker = src.ticker,&#xA;        target.country_key = src.country_key&#xA;WHEN NOT MATCHED BY TARGET THEN&#xA;    INSERT (company_name_std, ticker, country_key)&#xA;    VALUES (src.company_name_std, src.ticker, src.country_key);&#xA;&#xA;-- 2. Chốt chặn: Kiểm tra nếu bị nhân bản tên công ty thì báo lỗi&#xA;DECLARE @DupCompanyCount INT = 0;&#xA;SELECT @DupCompanyCount = COUNT(*)&#xA;FROM (&#xA;    SELECT company_name_std &#xA;    FROM dbo.dim_parent_company &#xA;    GROUP BY company_name_std &#xA;    HAVING COUNT(*) &gt; 1&#xA;) t;&#xA;&#xA;IF @DupCompanyCount &gt; 0&#xA;BEGIN&#xA;    DECLARE @Msg NVARCHAR(2048) = FORMATMESSAGE('SCD1 ERROR: Phat hien %d cong ty bi trung lap ten sau khi MERGE!', @DupCompanyCount);&#xA;    THROW 52004, @Msg, 1;&#xA;END;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SCD2 - Validate dim_plant"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{DB972C97-61E1-46C2-98C5-E82F936FCCE3}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SCD2 - Validate dim_plant"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{9C983A6A-8C21-40CD-9162-5A77E4193F91}"
+          SQLTask:SqlStatementSource="DECLARE @DupActiveCount INT = 0;&#xA;DECLARE @InvalidEndDateCount INT = 0;&#xA;DECLARE @TimeGapOverlapCount INT = 0;&#xA;&#xA;-- 1. Kiểm tra 1 nhà máy có nhiều hơn 1 bản ghi active&#xA;SELECT @DupActiveCount = COUNT(*)&#xA;FROM (&#xA;    SELECT oris_code &#xA;    FROM dbo.dim_plant &#xA;    WHERE is_current = 1 &#xA;    GROUP BY oris_code &#xA;    HAVING COUNT(*) &gt; 1&#xA;) t;&#xA;&#xA;IF @DupActiveCount &gt; 0&#xA;BEGIN&#xA;    DECLARE @Msg1 NVARCHAR(2048) = FORMATMESSAGE('SCD2 ERROR: Phat hien %d nha may co hon 1 ban ghi active (is_current=1) trong dim_plant!', @DupActiveCount);&#xA;    THROW 52001, @Msg1, 1;&#xA;END;&#xA;&#xA;-- 2. Kiểm tra bản ghi active có effective_to chuẩn 9999-12-31 (bắt cả lỗi NULL)&#xA;SELECT @InvalidEndDateCount = COUNT(*)&#xA;FROM dbo.dim_plant&#xA;WHERE is_current = 1 AND (effective_to IS NULL OR effective_to &lt;&gt; '9999-12-31');&#xA;&#xA;IF @InvalidEndDateCount &gt; 0&#xA;BEGIN&#xA;    DECLARE @Msg2 NVARCHAR(2048) = FORMATMESSAGE('SCD2 ERROR: Phat hien %d ban ghi active co effective_to khong phai 9999-12-31 (hoac bi NULL)!', @InvalidEndDateCount);&#xA;    THROW 52002, @Msg2, 1;&#xA;END;&#xA;&#xA;-- 3. Kiểm tra tính liền mạch thời gian (Không bị gap hay overlap giữa các version)&#xA;WITH PlantVersions AS (&#xA;    SELECT &#xA;        oris_code,&#xA;        effective_from,&#xA;        effective_to,&#xA;        LEAD(effective_from) OVER (PARTITION BY oris_code ORDER BY effective_from) AS next_effective_from&#xA;    FROM dbo.dim_plant&#xA;)&#xA;SELECT @TimeGapOverlapCount = COUNT(*)&#xA;FROM PlantVersions&#xA;WHERE next_effective_from IS NOT NULL AND effective_to &lt;&gt; next_effective_from;&#xA;&#xA;IF @TimeGapOverlapCount &gt; 0&#xA;BEGIN&#xA;    DECLARE @Msg3 NVARCHAR(2048) = FORMATMESSAGE('SCD2 ERROR: Phat hien %d vi pham gian doan/chong lan thoi gian trong dim_plant!', @TimeGapOverlapCount);&#xA;    THROW 52003, @Msg3, 1;&#xA;END;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{18900BEE-3332-458E-8301-F6B266C5B718}"
+      DTS:From="Package\SCD2 - Validate dim_plant"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\SCD1 - UPSERT dim_parent_company" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{D8A8789B-36A5-45EC-805B-0512061BE858}"
+      DTS:From="Package\SCD1 - UPSERT dim_parent_company"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\DQ - Reconciliation fact_plant_annual" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{64A49113-93DE-4168-8B3E-73C8B5D7D378}"
+      DTS:From="Package\DQ - Reconciliation fact_plant_annual"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\DQ - Validate bridge_plant_ghgrp_facility" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="202.666666666667,42.6666666666667"
+          Id="Package\SCD2 - Validate dim_plant"
+          TopLeft="334.374985052273,99.4499952578546" />
+        <NodeLayout
+          Size="258.666666666667,42.6666666666667"
+          Id="Package\SCD1 - UPSERT dim_parent_company"
+          TopLeft="307.499986253679,193.699990763665" />
+        <NodeLayout
+          Size="257.333333333334,42.6666666666667"
+          Id="Package\DQ - Reconciliation fact_plant_annual"
+          TopLeft="306.249986309558,271.699987044335" />
+        <NodeLayout
+          Size="273.333333333334,42.6666666666667"
+          Id="Package\DQ - Validate bridge_plant_ghgrp_facility"
+          TopLeft="299.374986616895,352.299983201028" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="436.27081898631,142.116661924521">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,51.5833288391433"
+              Start="0,0"
+              End="0,44.0833288391433">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,44.0833288391433" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="435.874986281619,236.366657430331">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,35.3333296140035"
+              Start="0,0"
+              End="0,27.8333296140035">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,27.8333296140035" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="435.479153129893,314.366653711001">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,37.9333294900261"
+              Start="0,0"
+              End="0,30.4333294900261">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.4333294900261" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

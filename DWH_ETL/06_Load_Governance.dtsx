@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package2"
   DTS:PackageType="5"
-  DTS:VersionBuild="3"
-  DTS:VersionGUID="{AE5ABF28-EF1A-4C6A-B0DE-A1377970D8BD}">
+  DTS:VersionBuild="4"
+  DTS:VersionGUID="{98F8D62B-1E42-430E-8E91-C75185124572}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -25,7 +25,7 @@
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=localhost;Initial Catalog=DW_TRAIN;Provider=SQLOLEDB.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-Package2-{41E450E3-4FC5-45E2-B33D-362BC7A20DE2}localhost;" />
+          DTS:ConnectionString="Data Source=localhost\MSSQLSERVER2022;Initial Catalog=DW_TRAIN;Provider=SQLOLEDB.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-Package2-{41E450E3-4FC5-45E2-B33D-362BC7A20DE2}localhost;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
@@ -940,11 +940,11 @@ GROUP BY
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="255,42"
+          Size="254.666666666667,42"
           Id="Package\DFT - Load fact_company_esg_rating"
           TopLeft="23.5,5.5" />
         <NodeLayout
-          Size="291,42"
+          Size="290.666666666667,42"
           Id="Package\DFT - Load fact_country_governance_annual"
           TopLeft="5.50000000000003,107.5" />
         <EdgeLayout

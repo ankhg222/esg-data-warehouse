@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="37"
-  DTS:VersionGUID="{30EB41CB-8E1C-4BBD-A92F-034938BD3ABD}">
+  DTS:VersionBuild="38"
+  DTS:VersionGUID="{93CBE16B-E4FA-4CC4-9BA3-4B3F36DECA9D}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -25,7 +25,7 @@
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=.;Initial Catalog=DW_TRAIN;Provider=SQLOLEDB.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-Package1-{9C983A6A-8C21-40CD-9162-5A77E4193F91}localhost;" />
+          DTS:ConnectionString="Data Source=.\MSSQLSERVER2022;Initial Catalog=DW_TRAIN;Provider=SQLOLEDB.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-Package1-{9C983A6A-8C21-40CD-9162-5A77E4193F91}localhost;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
@@ -37,7 +37,7 @@
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="0"
           DTS:ConnectRetryInterval="0"
-          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\DWH\FinalProject\dataset\new_data\eia930\Balancing Authority\PJM.xlsx;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\FourthYear\DOT1\DataWarehouse\esg-data-warehouse\data\eia930\Balancing Authority\PJM.xlsx;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
@@ -2046,23 +2046,23 @@ WHERE raw_state IS NOT NULL AND LEN(LTRIM(RTRIM(raw_state))) &lt;= 2</property>
           Id="Package\Clean Shared Dims Before Load"
           TopLeft="37,5.5" />
         <NodeLayout
-          Size="215,42"
+          Size="214.666666666667,42"
           Id="Package\Data Flow Task Load Dim BA"
           TopLeft="43.5,107.5" />
         <NodeLayout
-          Size="193,42"
+          Size="193.333333333334,42"
           Id="Package\DFT - Load dim_country"
           TopLeft="54.5,311.5" />
         <NodeLayout
-          Size="235,42"
+          Size="234.666666666667,42"
           Id="Package\DFT - Load dim_customer_sector"
           TopLeft="33.5000000000001,617.5" />
         <NodeLayout
-          Size="181,42"
+          Size="181.333333333334,42"
           Id="Package\DFT - Load dim_state"
           TopLeft="60.5000000000001,515.5" />
         <NodeLayout
-          Size="291,42"
+          Size="290.666666666667,42"
           Id="Package\Execute SQL Task Populate Dim Date &amp; Hour"
           TopLeft="5.50000000000003,209.5" />
         <NodeLayout

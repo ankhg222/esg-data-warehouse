@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="02_Load_Core_Dimension"
   DTS:PackageType="5"
-  DTS:VersionBuild="19"
-  DTS:VersionGUID="{B456B039-BEEA-46C8-A70B-060AADA53AC2}">
+  DTS:VersionBuild="20"
+  DTS:VersionGUID="{C93BB442-4C98-43C5-BBA7-B6B5C297CF7D}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -25,7 +25,7 @@
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="0"
           DTS:ConnectRetryInterval="0"
-          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\DWH\FinalProject\dataset\new_data\egrid2018_2023\egrid2023_data_rev2.xlsx;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\FourthYear\DOT1\DataWarehouse\esg-data-warehouse\data\egrid2018_2023\egrid2023_data_rev2.xlsx;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
@@ -37,7 +37,7 @@
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="0"
           DTS:ConnectRetryInterval="0"
-          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\DWH\FinalProject\dataset\new_data\eia923\f923_2023\EIA923_Schedules_2_3_4_5_M_12_2023_Final_Revision.xlsx;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\FourthYear\DOT1\DataWarehouse\esg-data-warehouse\data\eia923\f923_2023\EIA923_Schedules_2_3_4_5_M_12_2023_Final_Revision.xlsx;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
@@ -49,7 +49,7 @@
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=.;Initial Catalog=DW_TRAIN;Provider=SQLOLEDB.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-02_Load_Core_Dimension-{8BDA3026-F034-43CA-BFC6-D67A438DBE94}localhost;" />
+          DTS:ConnectionString="Data Source=.\MSSQLSERVER2022;Initial Catalog=DW_TRAIN;Provider=SQLOLEDB.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-02_Load_Core_Dimension-{8BDA3026-F034-43CA-BFC6-D67A438DBE94}localhost;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
@@ -61,7 +61,7 @@
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=localhost;Initial Catalog=DW_TRAIN;Provider=SQLOLEDB.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-Package1-{9C983A6A-8C21-40CD-9162-5A77E4193F91}localhost;" />
+          DTS:ConnectionString="Data Source=localhost\MSSQLSERVER2022;Initial Catalog=DW_TRAIN;Provider=SQLOLEDB.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-Package1-{9C983A6A-8C21-40CD-9162-5A77E4193F91}localhost;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
@@ -1335,7 +1335,7 @@ GROUP BY cc.company_name_std;</property>
         </pipeline>
       </DTS:ObjectData>
     </DTS:Executable>
-        <DTS:Executable
+    <DTS:Executable
       DTS:refId="Package\DFT - Load dim_utility SCD2"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
@@ -1349,7 +1349,7 @@ GROUP BY cc.company_name_std;</property>
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{8BDA3026-F034-43CA-BFC6-D67A438DBE94}"
-          SQLTask:SqlStatementSource="-- 1. Dọn dẹp dim_utility cũ nếu cần&#xA;DELETE FROM dbo.dim_utility;&#xA;DBCC CHECKIDENT (&apos;dbo.dim_utility&apos;, RESEED, 0);&#xA;&#xA;-- 2. Nạp dữ liệu dim_utility chuẩn SCD Type 2 từ staging sales&#xA;INSERT INTO dbo.dim_utility (&#xA;    eia_utility_id,&#xA;    utility_name,&#xA;    ownership_type,&#xA;    state_key,&#xA;    rto_iso,&#xA;    effective_from,&#xA;    effective_to,&#xA;    is_current&#xA;)&#xA;SELECT &#xA;    t.eia_utility_id,&#xA;    t.utility_name,&#xA;    &apos;Electric Utility&apos; AS ownership_type,&#xA;    ISNULL(s.state_key, (SELECT TOP 1 state_key FROM dbo.dim_state WHERE state_key IS NOT NULL)) AS state_key,&#xA;    &apos;UNKNOWN&apos; AS rto_iso,&#xA;    CAST(&apos;2018-01-01&apos; AS DATE) AS effective_from,&#xA;    CAST(&apos;9999-12-31&apos; AS DATE) AS effective_to,&#xA;    1 AS is_current&#xA;FROM (&#xA;    SELECT &#xA;        TRY_CAST(raw_utility_id AS INT) AS eia_utility_id,&#xA;        MAX(LTRIM(RTRIM(raw_utility_name))) AS utility_name,&#xA;        MAX(UPPER(LTRIM(RTRIM(raw_state)))) AS state_code&#xA;    FROM dbo.stg_eia861_sales&#xA;    WHERE TRY_CAST(raw_utility_id AS INT) IS NOT NULL&#xA;      AND raw_utility_name IS NOT NULL&#xA;      AND LTRIM(RTRIM(raw_utility_name)) &lt;&gt; &apos;&apos;&#xA;    GROUP BY TRY_CAST(raw_utility_id AS INT)&#xA;) t&#xA;LEFT JOIN dbo.dim_state s ON s.state_code = t.state_code;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="-- 1. Dọn dẹp dim_utility cũ nếu cần&#xA;DELETE FROM dbo.dim_utility;&#xA;DBCC CHECKIDENT ('dbo.dim_utility', RESEED, 0);&#xA;&#xA;-- 2. Nạp dữ liệu dim_utility chuẩn SCD Type 2 từ staging sales&#xA;INSERT INTO dbo.dim_utility (&#xA;    eia_utility_id,&#xA;    utility_name,&#xA;    ownership_type,&#xA;    state_key,&#xA;    rto_iso,&#xA;    effective_from,&#xA;    effective_to,&#xA;    is_current&#xA;)&#xA;SELECT &#xA;    t.eia_utility_id,&#xA;    t.utility_name,&#xA;    'Electric Utility' AS ownership_type,&#xA;    ISNULL(s.state_key, (SELECT TOP 1 state_key FROM dbo.dim_state WHERE state_key IS NOT NULL)) AS state_key,&#xA;    'UNKNOWN' AS rto_iso,&#xA;    CAST('2018-01-01' AS DATE) AS effective_from,&#xA;    CAST('9999-12-31' AS DATE) AS effective_to,&#xA;    1 AS is_current&#xA;FROM (&#xA;    SELECT &#xA;        TRY_CAST(raw_utility_id AS INT) AS eia_utility_id,&#xA;        MAX(LTRIM(RTRIM(raw_utility_name))) AS utility_name,&#xA;        MAX(UPPER(LTRIM(RTRIM(raw_state)))) AS state_code&#xA;    FROM dbo.stg_eia861_sales&#xA;    WHERE TRY_CAST(raw_utility_id AS INT) IS NOT NULL&#xA;      AND raw_utility_name IS NOT NULL&#xA;      AND LTRIM(RTRIM(raw_utility_name)) &lt;&gt; ''&#xA;    GROUP BY TRY_CAST(raw_utility_id AS INT)&#xA;) t&#xA;LEFT JOIN dbo.dim_state s ON s.state_code = t.state_code;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -1450,7 +1450,7 @@ GROUP BY cc.company_name_std;</property>
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="217,42"
+          Size="217.333333333334,42"
           Id="Package\Clean Core Dims Before Load"
           TopLeft="198.124998519197,24.8999991941452" />
         <NodeLayout
@@ -1458,19 +1458,19 @@ GROUP BY cc.company_name_std;</property>
           Id="Package\Data Flow Task Load Dim eGRID Subregion"
           TopLeft="162.25000083819,272.250001084805" />
         <NodeLayout
-          Size="277,42"
+          Size="277.333333333334,42"
           Id="Package\Data Flow Task Load Dim Fuel From Excel"
           TopLeft="165.249999273568,104.949999907017" />
         <NodeLayout
-          Size="237,43"
+          Size="237.333333333334,42.6666666666667"
           Id="Package\DFT - Load dim_parent_company"
           TopLeft="185.624991701916,501.799976072313" />
         <NodeLayout
-          Size="211,42"
+          Size="210.666666666667,42"
           Id="Package\DFT - Load dim_utility SCD2"
           TopLeft="202.125005224719,425.050004432201" />
         <NodeLayout
-          Size="268,43"
+          Size="268,42.6666666666667"
           Id="Package\Execute SQL Task Load Dim Plant SCD2"
           TopLeft="170.250001285225,350.100001425743" />
         <NodeLayout
@@ -1871,273 +1871,5 @@ GROUP BY cc.company_name_std;</property>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
-  <TaskHost
-    design-time-name="Package\DFT - Load dim_utility SCD2">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
-        <NodeLayout
-          Size="162.4,41.6"
-          Id="Package\DFT - Load dim_utility SCD2\Derived Column 1"
-          TopLeft="149.7,615.099999999999" />
-        <NodeLayout
-          Size="208,41.6"
-          Id="Package\DFT - Load dim_utility SCD2\Slowly Changing Dimension"
-          TopLeft="126.9,208.7" />
-        <NodeLayout
-          Size="164.8,41.6"
-          Id="Package\DFT - Load dim_utility SCD2\OLE DB Command"
-          TopLeft="5.50000000000003,411.9" />
-        <NodeLayout
-          Size="149.6,41.6"
-          Id="Package\DFT - Load dim_utility SCD2\OLE DB Source"
-          TopLeft="156.1,5.49999999999995" />
-        <NodeLayout
-          Size="120,41.6"
-          Id="Package\DFT - Load dim_utility SCD2\Union All"
-          TopLeft="170.9,513.5" />
-        <NodeLayout
-          Size="162.4,41.6"
-          Id="Package\DFT - Load dim_utility SCD2\Insert Destination"
-          TopLeft="149.7,716.699999999999" />
-        <NodeLayout
-          Size="152.8,41.6"
-          Id="Package\DFT - Load dim_utility SCD2\Derived Column"
-          TopLeft="17.5,310.3" />
-        <NodeLayout
-          Size="112.8,41.6"
-          Id="Package\DFT - Load dim_utility SCD2\Lookup"
-          TopLeft="174.5,107.1" />
-        <EdgeLayout
-          Id="Package\DFT - Load dim_utility SCD2.Paths[Union All Output 1]"
-          TopLeft="230.9,555.1">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,59.9999999999999"
-              Start="0,0"
-              End="0,52.4999999999999">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.4999999999999" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\DFT - Load dim_utility SCD2.Paths[OLE DB Source Output]"
-          TopLeft="230.9,47.1">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,59.9999999999999"
-              Start="0,0"
-              End="0,52.4999999999999">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.4999999999999" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\DFT - Load dim_utility SCD2.Paths[OLE DB Command Output]"
-          TopLeft="87.9,453.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="124.333333333333,59.9999999999999"
-              Start="0,0"
-              End="124.333333333333,52.4999999999999">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,31.5263157894736" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,31.5263157894736"
-                    Point2="0,35.5263157894736"
-                    Point3="4,35.5263157894736" />
-                  <mssgle:LineSegment
-                    End="120.333333333333,35.5263157894736" />
-                  <mssgle:CubicBezierSegment
-                    Point1="120.333333333333,35.5263157894736"
-                    Point2="124.333333333333,35.5263157894736"
-                    Point3="124.333333333333,39.5263157894736" />
-                  <mssgle:LineSegment
-                    End="124.333333333333,52.4999999999999" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\DFT - Load dim_utility SCD2.Paths[New Output]"
-          TopLeft="264.233333333333,250.3">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-14.6666666666666,263.2"
-              Start="0,0"
-              End="-14.6666666666666,255.7">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,126.695815115553" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,126.695815115553"
-                    Point2="0,130.695815115553"
-                    Point3="-4,130.695815115553" />
-                  <mssgle:LineSegment
-                    End="-10.6666666666666,130.695815115553" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-10.6666666666666,130.695815115553"
-                    Point2="-14.6666666666666,130.695815115553"
-                    Point3="-14.6666666666666,134.695815115553" />
-                  <mssgle:LineSegment
-                    End="-14.6666666666666,255.7" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-34.4247200520833,135.695815115553,54.1827734375,11.43359375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\DFT - Load dim_utility SCD2.Paths[Lookup Match Output]"
-          TopLeft="230.9,148.7">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,59.9999999999999"
-              Start="0,0"
-              End="0,52.4999999999999">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.4999999999999" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-48.19138671875,20.4453124999999,96.3827734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\DFT - Load dim_utility SCD2.Paths[Historical Attribute Inserts Output]"
-          TopLeft="197.566666666667,250.3">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-103.666666666667,59.9999999999999"
-              Start="0,0"
-              End="-103.666666666667,52.4999999999999">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,20.2748091603053" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,20.2748091603053"
-                    Point2="0,24.2748091603053"
-                    Point3="-4,24.2748091603053" />
-                  <mssgle:LineSegment
-                    End="-99.6666666666667,24.2748091603053" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-99.6666666666667,24.2748091603053"
-                    Point2="-103.666666666667,24.2748091603053"
-                    Point3="-103.666666666667,28.2748091603053" />
-                  <mssgle:LineSegment
-                    End="-103.666666666667,52.4999999999999" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-126.889720052083,29.2748091603053,150.1127734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\DFT - Load dim_utility SCD2.Paths[Derived Column Output1]"
-          TopLeft="230.9,656.699999999999">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,59.9999999999999"
-              Start="0,0"
-              End="0,52.4999999999999">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.4999999999999" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\DFT - Load dim_utility SCD2.Paths[Derived Column Output]"
-          TopLeft="90.9,351.9">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,59.9999999999999"
-              Start="0,0"
-              End="0,52.4999999999999">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.4999999999999" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-      </GraphLayout>
-    </LayoutInfo>
-  </TaskHost>
 </Objects>]]></DTS:DesignTimeProperties>
 </DTS:Executable>

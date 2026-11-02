@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="05_Load_Social"
   DTS:PackageType="5"
-  DTS:VersionBuild="30"
-  DTS:VersionGUID="{42382F9F-8517-47B3-BB0E-7034DA25EC15}">
+  DTS:VersionBuild="31"
+  DTS:VersionGUID="{436DD0A6-262F-473E-970E-2A847E220879}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -25,7 +25,7 @@
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="0"
           DTS:ConnectRetryInterval="0"
-          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.16.0;Data Source=D:\DWH\FinalProject\dataset\new_data\eia861\f8612023\Sales_Ult_Cust_2023.xlsx;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.16.0;Data Source=D:\FourthYear\DOT1\DataWarehouse\esg-data-warehouse\data\eia861\f8612023\Sales_Ult_Cust_2023.xlsx;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
@@ -37,7 +37,7 @@
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=localhost;Initial Catalog=DW_TRAIN;Provider=SQLOLEDB.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-Package-{FE71D1CE-6C8B-4D83-A8AF-7FB156010ED4}localhost;" />
+          DTS:ConnectionString="Data Source=localhost\MSSQLSERVER2022;Initial Catalog=DW_TRAIN;Provider=SQLOLEDB.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-Package-{FE71D1CE-6C8B-4D83-A8AF-7FB156010ED4}localhost;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
