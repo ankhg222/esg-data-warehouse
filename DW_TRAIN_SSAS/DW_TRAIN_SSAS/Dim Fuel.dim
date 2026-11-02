@@ -1,0 +1,263 @@
+﻿<Dimension xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="1049afe8-5a31-4153-a20d-1fb475cda50a" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+  <ID>Dim Fuel</ID>
+  <Name>Dim Fuel</Name>
+  <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+  <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+  <Annotations>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramLayout</Name>
+      <Value>
+        <dds xmlns="">
+          <diagram fontclsid="{0BE35203-8F91-11CE-9DE3-00AA004BB851}" mouseiconclsid="{0BE35204-8F91-11CE-9DE3-00AA004BB851}" defaultlayout="MSDDS.Rectilinear" defaultlineroute="MSDDS.Rectilinear" version="7" nextobject="2" scale="100" pagebreakanchorx="0" pagebreakanchory="0" pagebreaksizex="0" pagebreaksizey="0" scrollleft="-4764" scrolltop="-7673" gridx="150" gridy="150" marginx="5000" marginy="5000" zoom="100" x="12568" y="18918" backcolor="16119285" defaultpersistence="2" PrintPageNumbersMode="3" PrintMarginTop="0" PrintMarginBottom="635" PrintMarginLeft="0" PrintMarginRight="0" marqueeselectionmode="0" mousepointer="0" snaptogrid="0" autotypeannotation="1" showscrollbars="0" viewpagebreaks="0" donotforceconnectorsbehindshapes="1" backpictureclsid="{00000000-0000-0000-0000-000000000000}">
+            <font>
+              <ddsxmlobjectstreamwrapper binary="01000000900144420100065461686f6d61" />
+            </font>
+            <mouseicon>
+              <ddsxmlobjectstreamwrapper binary="6c74000000000000" />
+            </mouseicon>
+          </diagram>
+          <layoutmanager>
+            <ddsxmlobj />
+          </layoutmanager>
+          <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge" tooltip="dim_fuel" left="20" top="0" logicalid="1" controlid="1" masterid="0" hint1="0" hint2="0" width="3000" height="3572" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobjectstreaminitwrapper binary="000e0000b80b0000f40d0000" />
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="dbo_dim_fuel" vartype="8" />
+              </ddsxmlobj>
+            </layoutobject>
+            <shape groupshapeid="0" groupnode="0" />
+          </ddscontrol>
+        </dds>
+      </Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowFriendlyNames</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowRelationshipNames</Name>
+      <Value>false</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:UseDiagramDefaultLayout</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortLeft</Name>
+      <Value>-4764</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortTop</Name>
+      <Value>-7673</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingLeft</Name>
+      <Value>20</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingTop</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramZoom</Name>
+      <Value>100</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ARDiagramLayout</Name>
+      <Value>
+        <DiagramLayout ZoomPercent="100" ViewPortX="0" ViewPortY="0" xmlns="">
+          <Shapes NodeWidth="120">
+            <Shape Id="Fuel Key" Expanded="false">
+              <Attributes>
+                <Attribute Id="Fuel Key" />
+                <Attribute Id="Fuel Code" />
+                <Attribute Id="Is Fossil" />
+                <Attribute Id="Is Renewable" />
+              </Attributes>
+              <Position x="20" y="20" />
+            </Shape>
+            <Shape Id="Fuel Name" Expanded="false">
+              <Attributes>
+                <Attribute Id="Fuel Name" />
+              </Attributes>
+              <Position x="175" y="20" />
+            </Shape>
+            <Shape Id="Fuel Category" Expanded="false">
+              <Attributes>
+                <Attribute Id="Fuel Category" />
+              </Attributes>
+              <Position x="330" y="20" />
+            </Shape>
+          </Shapes>
+        </DiagramLayout>
+      </Value>
+    </Annotation>
+  </Annotations>
+  <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+  <State>Unprocessed</State>
+  <Source xsi:type="DataSourceViewBinding" dwd:design-time-name="c2c9ff95-e641-4fce-89e6-f859412787ed">
+    <DataSourceViewID>DW_TRAIN_DSV</DataSourceViewID>
+  </Source>
+  <UnknownMember>Visible</UnknownMember>
+  <ErrorConfiguration dwd:design-time-name="382703ae-9e9b-4cad-a2e1-2e6ba6e956bc">
+    <KeyNotFound>ReportAndStop</KeyNotFound>
+    <KeyDuplicate>ReportAndStop</KeyDuplicate>
+    <NullKeyNotAllowed>ReportAndStop</NullKeyNotAllowed>
+  </ErrorConfiguration>
+  <CurrentStorageMode>Molap</CurrentStorageMode>
+  <Attributes>
+    <Attribute dwd:design-time-name="241cd8a6-4058-48e9-ac3e-13057fd27c0e">
+      <ID>Fuel Key</ID>
+      <Name>Fuel Key</Name>
+      <Usage>Key</Usage>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="eb7079a6-1c4d-4a96-99ce-c4b60c7a4d67">
+          <DataType>Integer</DataType>
+          <NullProcessing>UnknownMember</NullProcessing>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="747ef927-307e-4343-be2b-40a0e69ed8e3">
+            <TableID>dbo_dim_fuel</TableID>
+            <ColumnID>fuel_key</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <NameColumn dwd:design-time-name="3318161c-c27a-466d-a7dc-5b9fe8a37fcb">
+        <DataType>WChar</DataType>
+        <DataSize>250</DataSize>
+        <Source xsi:type="ColumnBinding" dwd:design-time-name="7e308978-27aa-4226-9864-025154258cc3">
+          <TableID>dbo_dim_fuel</TableID>
+          <ColumnID>fuel_name</ColumnID>
+        </Source>
+      </NameColumn>
+      <AttributeRelationships>
+        <AttributeRelationship dwd:design-time-name="c7544f4e-6321-45ec-bff4-9ad1f72954f8">
+          <AttributeID>Fuel Code</AttributeID>
+          <Name>Fuel Code</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="918cbfb7-32bc-4a64-a570-75d04845a4ed">
+          <AttributeID>Is Fossil</AttributeID>
+          <Name>Is Fossil</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="89ccd57a-468c-420f-bf26-ba7afb96d17f">
+          <AttributeID>Is Renewable</AttributeID>
+          <Name>Is Renewable</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="1e1f156e-0eb4-4d86-a9b4-69cbf05a2a68">
+          <AttributeID>Fuel Name</AttributeID>
+          <Name>Fuel Name</Name>
+        </AttributeRelationship>
+      </AttributeRelationships>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="68badc2d-40e4-403b-a9d1-65e7069ea68d">
+      <ID>Fuel Code</ID>
+      <Name>Fuel Code</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="30cdbf01-997e-4db5-9c50-ae1daf4f5635">
+          <DataType>WChar</DataType>
+          <DataSize>10</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="6e3cfffc-aff4-4ed7-a59e-658f0210fdde">
+            <TableID>dbo_dim_fuel</TableID>
+            <ColumnID>fuel_code</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="1257bcbe-7f02-4609-ab96-8b6a29c17976">
+      <ID>Fuel Category</ID>
+      <Name>Fuel Category</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="5b9afc8e-84b6-481f-9cc9-5505fafca3ba">
+          <DataType>WChar</DataType>
+          <DataSize>30</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="095c990a-e3a5-4653-865a-00b23c28669c">
+            <TableID>dbo_dim_fuel</TableID>
+            <ColumnID>fuel_category</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="2353fc8b-acb8-46e2-b46a-5cf93be06dec">
+      <ID>Is Fossil</ID>
+      <Name>Is Fossil</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="c0720553-3f4a-4ef3-9a83-57cb6c9eff01">
+          <DataType>Boolean</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="256da693-22ca-45a6-95ff-af375c4dc33a">
+            <TableID>dbo_dim_fuel</TableID>
+            <ColumnID>is_fossil</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="3b258b8c-3b37-4ba9-b2d1-eccff86c0213">
+      <ID>Is Renewable</ID>
+      <Name>Is Renewable</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="d65362d2-cd3a-4e68-86ee-519f9842765e">
+          <DataType>Boolean</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="f93b8576-7572-4fc2-9f93-996ed78ea1ca">
+            <TableID>dbo_dim_fuel</TableID>
+            <ColumnID>is_renewable</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="c4668d39-a1ef-4366-85c6-6bda51e6a917">
+      <ID>Fuel Name</ID>
+      <Name>Fuel Name</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="491cfb20-f16c-4f19-9cf5-991fd45997a8">
+          <DataType>WChar</DataType>
+          <DataSize>250</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="ef1812a8-8ddf-4382-b7b1-463d101ae9e2">
+            <TableID>dbo_dim_fuel</TableID>
+            <ColumnID>fuel_name</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <AttributeRelationships>
+        <AttributeRelationship dwd:design-time-name="96e91bea-1ab5-49db-8e23-3ed199cf0994">
+          <AttributeID>Fuel Category</AttributeID>
+          <Name>Fuel Category</Name>
+        </AttributeRelationship>
+      </AttributeRelationships>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+  </Attributes>
+  <Hierarchies>
+    <Hierarchy dwd:design-time-name="a00a3d7e-26fa-4687-9962-d119d854bcac">
+      <ID>Hierarchy</ID>
+      <Name>Fuel</Name>
+      <Levels>
+        <Level dwd:design-time-name="23c40153-44d1-4633-a1af-c1694a007c01">
+          <ID>Fuel Category</ID>
+          <Name>Fuel Category</Name>
+          <SourceAttributeID>Fuel Category</SourceAttributeID>
+        </Level>
+        <Level dwd:design-time-name="132bb444-3059-4410-93f6-97078c69b0a2">
+          <ID>Fuel Name</ID>
+          <Name>Fuel Name</Name>
+          <SourceAttributeID>Fuel Name</SourceAttributeID>
+        </Level>
+      </Levels>
+    </Hierarchy>
+  </Hierarchies>
+  <ddl300:ProcessingState>Unprocessed</ddl300:ProcessingState>
+</Dimension>
