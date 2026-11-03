@@ -232,10 +232,14 @@ FROM dbo.stg_ghgrp_parent_company p
 JOIN dbo.bridge_plant_ghgrp_facility b 
     ON b.ghgrp_facility_id = CAST(TRY_CAST(REPLACE(p.raw_facility_id, '"', '') AS FLOAT) AS INT)
 JOIN dbo.dim_plant dp 
-    ON dp.oris_code = b.oris_code AND dp.is_current = 1
+    ON dp.oris_code = b.oris_code
+    AND CASE WHEN TRY_CAST(NULLIF(LTRIM(RTRIM(REPLACE(p.raw_year, '"', ''))), '') AS INT) BETWEEN 1900 AND 2100 THEN DATEFROMPARTS(TRY_CAST(REPLACE(p.raw_year, '"', '') AS INT), 7, 1) END
+        BETWEEN dp.effective_from AND ISNULL(dp.effective_to, '9999-12-31')
 JOIN dbo.dim_parent_company c 
     ON c.company_name_std = LEFT(UPPER(LTRIM(RTRIM(REPLACE(p.raw_parent_name, '"', '')))), 200)
-WHERE TRY_CAST(REPLACE(p.raw_year, '"', '') AS INT) IS NOT NULL
+WHERE NULLIF(LTRIM(RTRIM(REPLACE(p.raw_year, '"', ''))), '') IS NOT NULL
+  AND TRY_CAST(REPLACE(p.raw_year, '"', '') AS INT) BETWEEN 1900 AND 2100
+  AND TRY_CAST(REPLACE(p.raw_year, '"', '') AS INT) &lt;= (SELECT last_load_year FROM dbo.etl_watermark WHERE table_name = 'bridge_plant_company')
 GROUP BY 
     TRY_CAST(REPLACE(p.raw_year, '"', '') AS INT) * 10000 + 101,
     dp.plant_key,

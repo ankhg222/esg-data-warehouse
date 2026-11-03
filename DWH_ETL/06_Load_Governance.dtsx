@@ -289,6 +289,7 @@ INNER JOIN dbo.dim_parent_company c
 INNER JOIN dbo.dim_date d 
     ON d.date_key = s.r_date_key
 WHERE s.r_date_key IS NOT NULL
+  AND s.r_date_key / 10000 &lt;= (SELECT last_load_year FROM dbo.etl_watermark WHERE table_name = 'fact_company_esg_rating')
 GROUP BY 
     d.date_key,
     c.company_key;</property>
@@ -732,6 +733,7 @@ JOIN dbo.dim_date d
     ON d.date_key = ISNULL(TRY_CAST(s.raw_year AS INT), 2023) * 10000 + 101
 WHERE s.raw_rule_of_law IS NOT NULL 
   AND LTRIM(RTRIM(s.raw_rule_of_law)) &lt;&gt; ''
+  AND ISNULL(TRY_CAST(s.raw_year AS INT), 2023) &lt;= (SELECT last_load_year FROM dbo.etl_watermark WHERE table_name = &apos;fact_country_governance_annual&apos;)
 GROUP BY 
     ISNULL(TRY_CAST(s.raw_year AS INT), 2023) * 10000 + 101,
     c.country_key;</property>

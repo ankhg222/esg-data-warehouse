@@ -57,7 +57,7 @@
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{FE71D1CE-6C8B-4D83-A8AF-7FB156010ED4}"
-          SQLTask:SqlStatementSource="DELETE FROM dbo.fact_utility_sales_annual;&#xA;DELETE FROM dbo.fact_utility_reliability_annual;&#xA;DELETE FROM dbo.fact_country_social_annual;&#xA;&#xA;-- Chuan bi du lieu cho stg_wb_social neu dang trong&#xA;IF NOT EXISTS (SELECT 1 FROM dbo.stg_wb_social)&#xA;BEGIN&#xA;    INSERT INTO dbo.stg_wb_social (raw_country_code, raw_year, raw_access_electricity, raw_clean_cooking)&#xA;    SELECT &#xA;        c.country_code,&#xA;        CAST(y.yr AS VARCHAR(10)),&#xA;        CAST(&#xA;            CASE &#xA;                WHEN c.income_group LIKE '%High%' THEN 100.00&#xA;                WHEN c.income_group LIKE '%Upper middle%' THEN 98.50 - (2023 - y.yr)*0.3&#xA;                WHEN c.income_group LIKE '%Lower middle%' THEN 85.00 - (2023 - y.yr)*0.8&#xA;                ELSE 65.00 - (2023 - y.yr)*1.2&#xA;            END AS VARCHAR(50)&#xA;        ),&#xA;        CAST(&#xA;            CASE &#xA;                WHEN c.income_group LIKE '%High%' THEN 100.00&#xA;                WHEN c.income_group LIKE '%Upper middle%' THEN 88.00 - (2023 - y.yr)*0.4&#xA;                WHEN c.income_group LIKE '%Lower middle%' THEN 62.00 - (2023 - y.yr)*0.9&#xA;                ELSE 35.00 - (2023 - y.yr)*1.1&#xA;            END AS VARCHAR(50)&#xA;        )&#xA;    FROM dbo.dim_country c&#xA;    CROSS JOIN (VALUES (2018), (2019), (2020), (2021), (2022), (2023)) AS y(yr)&#xA;    WHERE c.country_code &lt;&gt; 'UNKNOWN';&#xA;END;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="-- Master Pipeline da xoa facts truoc khi chay.&amp;#xA;-- Package con KHONG tu xoa lai de tranh xung dot.&amp;#xA;-- Neu stg_wb_social trong, DFT se khong nap gi (0 rows).&amp;#xA;SELECT 1 AS placeholder;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -258,7 +258,8 @@
 FROM dbo.stg_wb_social s
 INNER JOIN dbo.dim_country c 
     ON s.raw_country_code = c.country_code
-WHERE TRY_CAST(s.raw_year AS INT) IS NOT NULL;</property>
+WHERE TRY_CAST(s.raw_year AS INT) IS NOT NULL
+  AND TRY_CAST(s.raw_year AS INT) &lt;= (SELECT last_load_year FROM dbo.etl_watermark WHERE table_name = 'fact_country_social_annual');</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -625,10 +626,12 @@ WHERE TRY_CAST(s.raw_year AS INT) IS NOT NULL;</property>
 FROM dbo.stg_eia861_reliability r
 INNER JOIN dbo.dim_utility u 
     ON TRY_CAST(r.raw_utility_id AS INT) = u.eia_utility_id 
-    AND u.is_current = 1
+    AND DATEFROMPARTS(TRY_CAST(r.raw_year AS INT), 7, 1)
+        BETWEEN u.effective_from AND ISNULL(u.effective_to, '9999-12-31')
 INNER JOIN dbo.dim_state st 
     ON r.raw_state = st.state_code
-WHERE TRY_CAST(r.raw_year AS INT) IS NOT NULL;</property>
+WHERE TRY_CAST(r.raw_year AS INT) IS NOT NULL
+  AND TRY_CAST(r.raw_year AS INT) &lt;= (SELECT last_load_year FROM dbo.etl_watermark WHERE table_name = 'fact_utility_reliability_annual');</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -1035,12 +1038,14 @@ WHERE TRY_CAST(r.raw_year AS INT) IS NOT NULL;</property>
 FROM dbo.stg_eia861_sales s
 INNER JOIN dbo.dim_utility u 
     ON TRY_CAST(s.raw_utility_id AS INT) = u.eia_utility_id 
-    AND u.is_current = 1
+    AND DATEFROMPARTS(TRY_CAST(s.raw_year AS INT), 7, 1)
+        BETWEEN u.effective_from AND ISNULL(u.effective_to, '9999-12-31')
 INNER JOIN dbo.dim_state st 
     ON s.raw_state = st.state_code
 INNER JOIN dbo.dim_customer_sector sec 
     ON s.raw_sector_code = sec.sector_code
 WHERE TRY_CAST(s.raw_year AS INT) IS NOT NULL
+  AND TRY_CAST(s.raw_year AS INT) &lt;= (SELECT last_load_year FROM dbo.etl_watermark WHERE table_name = 'fact_utility_sales_annual')
 GROUP BY 
     TRY_CAST(s.raw_year AS INT) * 10000 + 101,
     u.utility_key,
